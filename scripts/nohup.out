@@ -1,0 +1,35 @@
+  File "plotlyhtml.py", line 29
+    )'''
+       ^
+SyntaxError: invalid syntax
+/usr/local/lib/python2.7/site-packages/plotly/offline/offline.py:259: UserWarning:
+
+Your filename `lines` didn't end with .html. Adding .html to the end of your file.
+
+localeq
+Traceback (most recent call last):
+  File "plotlyhtml.py", line 23, in <module>
+    opacity=0.1
+  File "/usr/local/lib/python2.7/site-packages/plotly/graph_objs/graph_objs.py", line 375, in __init__
+    self.__setitem__(key, val, _raise=_raise)
+  File "/usr/local/lib/python2.7/site-packages/plotly/graph_objs/graph_objs.py", line 430, in __setitem__
+    value = self._value_to_graph_object(key, value, _raise=_raise)
+  File "/usr/local/lib/python2.7/site-packages/plotly/graph_objs/graph_objs.py", line 541, in _value_to_graph_object
+    _parent=self, _parent_key=key)
+  File "/usr/local/lib/python2.7/site-packages/plotly/graph_objs/graph_objs.py", line 797, in create
+    return PlotlyDict(*args, **kwargs)
+  File "/usr/local/lib/python2.7/site-packages/plotly/graph_objs/graph_objs.py", line 375, in __init__
+    self.__setitem__(key, val, _raise=_raise)
+  File "/usr/local/lib/python2.7/site-packages/plotly/graph_objs/graph_objs.py", line 426, in __setitem__
+    raise exceptions.PlotlyDictKeyError(self, path)
+plotly.exceptions.PlotlyDictKeyError: 'opacity' is not allowed in 'line'
+
+Path To Error: ['line']['opacity']
+
+Valid attributes for 'line' at path ['line'] under parents ['scatter3d']:
+
+    ['reversescale', 'autocolorscale', 'cmin', 'colorscale', 'color',
+    'dash', 'width', 'cauto', 'showscale', 'cmax', 'colorsrc']
+
+Run `<line-object>.help('attribute')` on any of the above.
+'<line-object>' is the object at ['line']
