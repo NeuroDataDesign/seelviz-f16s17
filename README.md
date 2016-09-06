@@ -1,2 +1,2 @@
 # seelviz
-Undergraduate repository for Albert, Luke, and Tony 
+Seelviz repository for Clarity data analysis
