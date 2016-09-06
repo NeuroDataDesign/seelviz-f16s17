@@ -390,11 +390,11 @@ hr.small {
 }
 
 .header-pcb {
-    background-image: url(../img/illuminati.png);
+    background-image: url(../img/neuron.png);
 }
 
 .header-bg {
-    background: url(../img/640.png) repeat 0 0 scroll;
+    background: url(../img/clarity3d2background.png) repeat 0 0 scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -550,15 +550,15 @@ hr.small {
 }
 
 
-/* About */
-.About {
-    background-color: #efefef;
+/* Project */
+.Project {
+    background-color: #fcfcf4;
     padding: 60px 0;
 }
 
 @media all and (max-width:700px) {
 
-    .about {
+    .project {
         padding: 20px 0;
     }
 }
@@ -575,8 +575,8 @@ hr.small {
 
 /* Register */
 .Presentations {
-    background-color: #5097727;
-    color: #fff;
+    background-color: #4393c3;
+    color: #ffffff;
     overflow: hidden;
     padding: 80px 0;
     position: relative;
@@ -628,12 +628,13 @@ hr.small {
 }
 
 .About {
-    background-color: #efefef;
+    background-color: #fcfcf4;
     padding: 48px 12%;
 }
 
 .Acknowledgments {
-    background-color: #785098;
+    /* old color: #785098 */
+    background-color: #e4988b;
     color: #fff;
     padding-bottom: 128px;
 }
