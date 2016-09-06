@@ -413,6 +413,7 @@ hr.small {
    width: 100%;
 }
 
+/*Seelviz header*/
 .header-text-headline,
 .header-text-byline {
    color: #fff;
@@ -552,7 +553,7 @@ hr.small {
 
 /* Project */
 .Project {
-    background-color: #885EAD;
+    background-color: #E7DEEE;
     padding: 60px 0;
 }
 
@@ -575,8 +576,8 @@ hr.small {
 
 /* Register */
 .Presentations {
-    background-color: #4393c3;
-    color: #ffffff;
+    background-color: #B9B9FF;
+    color: #193d56;
     overflow: hidden;
     padding: 80px 0;
     position: relative;
@@ -603,8 +604,8 @@ hr.small {
 }
 
 .action-btn-light {
-   border: 3px solid #fff;
-   color: #fff;
+   border: 3px solid #19198c;
+   color: #19198c;
    display: inline-block;
    font-size: 20px;
    line-height: 24px;
@@ -617,7 +618,7 @@ hr.small {
 .action-btn-light:hover,
 .action-btn-light:active,
 .action-btn-light:focus {
-   background-color: #fff;
+   background-color: #19198c;
    color: #193e53;
    text-decoration: none;
    transform: scale(1);
@@ -628,14 +629,14 @@ hr.small {
 }
 
 .About {
-    background-color: #885EAD;
+    background-color: #E7DEEE;
     padding: 48px 12%;
 }
 
 .Acknowledgments {
     /* old color: #785098 */
-    background-color: #e4988b;
-    color: #fff;
+    background-color: #DDA7BB;
+    color: #E7DEEE;
     padding-bottom: 128px;
 }
 
