@@ -1,6 +1,6 @@
 import json
 import networkx as nx
-G = nx.read_graphml('Fear199localeq.graphml')
+G = nx.read_graphml('Fear199localeq.5000.graphml')
 # add nodes, edges, etc to G ...
 
 def save(G, fname):
@@ -15,4 +15,4 @@ def load(fname):
     G.add_edges_from(d['edges'])
     return G
 
-save(G, 'Fear199.json')
+save(G, 'Fear199.5000.json')
