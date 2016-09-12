@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Seelviz - Visualizing Clarity</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section data-background="#FCFCF4">
+            <h1>Seelviz - Visualizing Clarity</h1>
+            <h2>Albert Lee, Tony Sun, Luke Zhu</h2>
+        </section>
+
+        <section data-background="#FCFCF4">
+            <h2>Weekly Objectives</h2>
+            <ul>
+                <li>Send email to Ailey Crow containing a representative Clarity html plotly file</li>
+                <li>Use Greg Kiar's Happyplotter code to plot our data</li>
+                <li>Ask Greg for help regarding downsampling our data</li>
+                <li>Find out the units for the size of the sphere that we used to connect the edges</li>
+                <li>Find out how hard it would be to overlay an atlas</li>
+                <li>Research different ways to overlay - consider the centroid, blocks, boundaries</li>
+            </ul>
+        </section>
+
+        <section data-background="#FCFCF4">
+            <h2>Deliverables</h2>
+            <ul>
+                <li>CC'd Jovo to our Ailey email</li>
+                <li><a href="https://raw.githubusercontent.com/Upward-Spiral-Science/seelviz/gh-pages/csv/Fear199biglocaleq.brightest.csv">Happyplotter</a></li>
+                <li>Messaged Greg about downsampling, will figure out a time to meet after class</li>
+                <li>Units for Sphere are voxels</li>
+                <li><a herf = ""> Overlay research</a></li>
+            </ul>
+        </section>
+
+    </div>
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+</body>
+</html>
