@@ -5,7 +5,7 @@ __author__ = 'david'
 import numpy as np
 import nibabel as nib
 import resources as rs
-from vispy import app
+# from vispy import app
 from plot import Canvas
 import matplotlib.pyplot as plt
 import gc

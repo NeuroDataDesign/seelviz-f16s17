@@ -4,10 +4,10 @@ __author__ = 'david'
 from __builtin__ import *
 
 import numpy as np
-from vispy import gloo,app,scene,visuals
-from vispy.util.transforms import perspective, translate, rotate
-from vispy.visuals import transforms
-from vispy.scene.canvas import SceneCanvas
+#from vispy import gloo,app,scene,visuals
+#from vispy.util.transforms import perspective, translate, rotate
+#from vispy.visuals import transforms
+#from vispy.scene.canvas import SceneCanvas
 vert = """
 #version 120
 
