@@ -11798,20 +11798,27 @@ $$<p>For the analysis, we must first choose $k$ starting mean µ's.  This is oft
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">
-**Pseudocode for K-Means:**  
+<p><img src="clusteringassets/kmeanspseudo.png" alt="Image of K-Means Pseudo"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<!-- <span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">
+**Pseudocode for K-Means:**
 **Algorithm 1:** $k_{means}$ - designate and find $k$ means in a dataset  
 **Input:** $k$ number of clusters, $n$ in x, y, z Euclidean-space data, $T$ tolerance for step size.  
-**Output:** x, y, z coordinates of $k_{means}$  </span></p>
-<ol>
-<li><span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">
-**procedure** $k_{means}(k, n, T)$</span></li>
-<li><span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ \ \mu_i =$ random_select$(k, n) \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ $ Randomly select k elements from n and assign them to set µ.</span></li>
-<li><span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ \ \mu_i = \min_{µ_j \subseteq C} ||(x_j - µ_i)||^2 \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  \ \ \ \ \ \ \ \ \ \ \ \ \ \ $  Assign each $n$ to $\mu_i$ to the minimum values.</span></li>
-<li><span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ \ \mu_i = \sum\limits_{i=0}^n \min_{µ_j \subseteq C} average(n_i \ in \ C)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ $ Move $\mu$ to average of x, y, z for all n in c.</span></li>
-<li><span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ $ when $\Delta$ in $\mu_i$ between steps 3/4 is $T$, return all $\mu_i \ \ \ \ \ \ $Repeat until $T$ tolerance change between average and assign.</span></li>
-</ol>
-
+**Output:** x, y, z coordinates of $k_{means}$  </span>
+1.  <span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">
+**procedure** $k_{means}(k, n, T)$</span>
+2.  <span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ \ \mu_i =$ random_select$(k, n) \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ $ Randomly select k elements from n and assign them to set µ.</span>
+3.  <span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ \ \mu_i = \min_{µ_j \subseteq C} ||(x_j - µ_i)||^2 \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  \ \ \ \ \ \ \ \ \ \ \ \ \ \ $  Assign each $n$ to $\mu_i$ to the minimum values.</span>
+4.  <span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ \ \mu_i = \sum\limits_{i=0}^n \min_{µ_j \subseteq C} average(n_i \ in \ C)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ $ Move $\mu$ to average of x, y, z for all n in c.</span>
+5.  <span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ $ when $\Delta$ in $\mu_i$ between steps 3/4 is $T$, return all $\mu_i \ \ \ \ \ \ $Repeat until $T$ tolerance change between average and assign.</span> -->
 </div>
 </div>
 </div>
@@ -11844,19 +11851,26 @@ $$<p>For the analysis, we must first choose $k$ starting mean µ's.  This is oft
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">
+<p><img src="clusteringassets/kmedoidpseudo.png" alt="Image of K-Medoid Pseudo"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<!-- <span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">
 **Pseudocode for K-Medoids:**  
 **Algorithm 2:** $k_{medoids}$ - designate and find $k$ medoids in a dataset  
 **Input:** $k$ number of clusters, $n$ in x, y, z Euclidean-space data  
-**Output:** x, y, z coordinates of $k_{medoids}$</span></p>
-<ol>
-<li><span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">**procedure** $k_{medoids}(k, n, T)$</span></li>
-<li><span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ \ \mu_i =$ random_select$(k, n) \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ $ Randomly select k elements from n and assign them to set µ.</span></li>
-<li><span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ $ Similarity = distance($x_j - µ_i$) $\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  \ \ \ \ \ \ \ \ \ \ $  Calculate 'similarity' value by finding distance between point and $\mu$</span></li>
-<li><span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ $ Swap($\mu_i, \ x_j$) $\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ $ Set $x_j$ to $\mu_i$.</span></li>
-<li><span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ $ when $\Delta$ Similarity is $T$, repeat for $\mu_{i + 1}$ and $x_j + 1 \ \ \ \ \ \ \ \ $Repeat until $T$ tolerance change between average and assign.</span></li>
-</ol>
-
+**Output:** x, y, z coordinates of $k_{medoids}$</span>  
+1.  <span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">**procedure** $k_{medoids}(k, n, T)$</span>
+2.  <span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ \ \mu_i =$ random_select$(k, n) \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ $ Randomly select k elements from n and assign them to set µ.</span>
+3.  <span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ $ Similarity = distance($x_j - µ_i$) $\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  \ \ \ \ \ \ \ \ \ \ $  Calculate 'similarity' value by finding distance between point and $\mu$</span>
+4.  <span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ $ Swap($\mu_i, \ x_j$) $\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ $ Set $x_j$ to $\mu_i$.</span>
+5.  <span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ $ when $\Delta$ Similarity is $T$, repeat for $\mu_{i + 1}$ and $x_j + 1 \ \ \ \ \ \ \ \ $Repeat until $T$ tolerance change between average and assign.</span>) -->
 </div>
 </div>
 </div>
@@ -11891,20 +11905,27 @@ Charles Martin blog: <a href="https://charlesmartin14.wordpress.com/2012/10/09/s
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">
+<p><img src="clusteringassets/spectralpseudo.png" alt="Image of Spectral Pseudo"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<!-- <span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">
 **Pseudocode for Spectral Clustering:**  
 **Algorithm 3:** $spectral$ - designate and find $k$ means in a dataset  
 **Input:** $k$ number of clusters, $n$ in x, y, z Euclidean-space data  
-**Output:** x, y, z coordinates of $spectral$</span></p>
-<ol>
-<li><span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">**procedure** $spectral(k, n, T)$</span></li>
-<li><span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ \ \mu_i =$ random_select$(k, n) \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ $ Randomly select k elements from n and assign them to set µ.</span></li>
-<li><span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ $ Similarity = distance($x_j, \ µ_i$) $\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  \ \ \ \ \ \ \ \ \ \ $  Calculate 'similarity' value as a function of distance, and assign as adjacency matrix</span></li>
-<li><span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ $ D = degrees(A) $\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ $ Find degrees of similarity (adjacency) matrix A.</span></li>
-<li><span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ $ Find sparse matrix representation of D. $\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ $ Ranks are the eigenvectors/values of the clusters.  </li>
-<li><span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ $ Perform $k_{means}$ on eigenvalues/vectors $\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ $Repeat until $T$ tolerance change between average and assign.</span></li>
-</ol>
-
+**Output:** x, y, z coordinates of $spectral$</span>  
+1.  <span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">**procedure** $spectral(k, n, T)$</span>
+2.  <span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ \ \mu_i =$ random_select$(k, n) \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ $ Randomly select k elements from n and assign them to set µ.</span>
+3.  <span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ $ Similarity = distance($x_j, \ µ_i$) $\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  \ \ \ \ \ \ \ \ \ \ $  Calculate 'similarity' value as a function of distance, and assign as adjacency matrix</span>
+4.  <span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ $ D = degrees(A) $\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ $ Find degrees of similarity (adjacency) matrix A.</span>
+5.  <span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ $ Find sparse matrix representation of D. $\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ $ Ranks are the eigenvectors/values of the clusters.  
+6.  <span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ $ Perform $k_{means}$ on eigenvalues/vectors $\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ $Repeat until $T$ tolerance change between average and assign.</span> -->
 </div>
 </div>
 </div>
@@ -11948,19 +11969,26 @@ $$<p>A similar equation is provided for the removal of a node $i$ from the neigh
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">
+<p><img src="clusteringassets/louvainpseudo.png" alt="Image of Louvain"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<!-- <span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">
 **Pseudocode for Louvain:**  
 **Algorithm 4:** $Louvain$ - designate and find $k$ means using Louvains in a dataset  
 **Input:** $k$ number of clusters, $n$ in x, y, z Euclidean-space data  
-**Output:** x, y, z coordinates of $Louvain$</span></p>
-<ol>
-<li><span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">**procedure** $k_{medoids}(k, n, T)$</span></li>
-<li><span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ \ \mu_i =$ random_select$(k, n) \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ $ Randomly select k elements from n and assign them to set µ.</span></li>
-<li><span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ $ Similarity = distance($x_j - µ_i$) $\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  \ \ \ \ \ \ \ \ \ \ $  Calculate 'similarity' value by finding distance between point and $\mu$</span></li>
-<li><span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ $ Swap($\mu_i, \ x_j$) $\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ $ Set $x_j$ to $\mu_i$ and measure change in $\Delta Q$.</span></li>
-<li><span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ $ when $\Delta Q$ decreases to $T$, repeat for $\mu_{i + 1}$ and $x_j + 1 \ \ \ \ \ \ $Repeat until $T$ tolerance in $\Delta Q$ change after adding/removing point from community.</li>
-</ol>
-
+**Output:** x, y, z coordinates of $Louvain$</span>  
+1.  <span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">**procedure** $k_{medoids}(k, n, T)$</span>
+2.  <span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ \ \mu_i =$ random_select$(k, n) \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ $ Randomly select k elements from n and assign them to set µ.</span>
+3.  <span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ $ Similarity = distance($x_j - µ_i$) $\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  \ \ \ \ \ \ \ \ \ \ $  Calculate 'similarity' value by finding distance between point and $\mu$</span>
+4.  <span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ $ Swap($\mu_i, \ x_j$) $\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ $ Set $x_j$ to $\mu_i$ and measure change in $\Delta Q$.</span>
+5.  <span style="color: #000000; font-family: Computer Modern Roman; font-size: 12pt;">$\ \ \ $ when $\Delta Q$ decreases to $T$, repeat for $\mu_{i + 1}$ and $x_j + 1 \ \ \ \ \ \ $Repeat until $T$ tolerance in $\Delta Q$ change after adding/removing point from community. -->
 </div>
 </div>
 </div>
