@@ -11816,8 +11816,10 @@ div#notebook {
 <a href="https://neurodatadesign.github.io/seelviz/reveal/html/modularCLAHE.html">https://neurodatadesign.github.io/seelviz/reveal/html/modularCLAHE.html</a></p>
 <p>Additional Notes: The larger concern we have is that the atlas aligned images seem to be different than the original brains - this is likely due to a theoretical misunderstanding we have about the aligned brains. They look different both in terms of how the original images look and in terms of the bright points. We define aligned brains to be the input for registration, so these are the pre-registered brains. Currently we are under the notion that the aligned images are simply transformed versions of the original brains - our assumption seems to be wrong because the images seem to have different brightness regions.</p>
 <h1 id="Questions:">Questions:<a class="anchor-link" href="#Questions:">&#182;</a></h1><p><span style="color: #000000; font-family: ; font-size: 14pt;">
-1)  What is the best approach towards making the CLAHE tile size perfectly accurate for each image size?  
-2)  What do you suggest that we base the tile size off of - perhaps we should create a range of different tile sizes and look at the graph statistics for each one?  
+1)  What is the best approach towards making the CLAHE tile size perfectly accurate for each image size?  </span></p>
+<p><span style="color: #000000; font-family: ; font-size: 14pt;">
+2)  What do you suggest that we base the tile size off of - perhaps we should create a range of different tile sizes and look at the graph statistics for each one?  </span></p>
+<p><span style="color: #000000; font-family: ; font-size: 14pt;">
 3)  Why do the atlas aligned images seem different in behavior from the original brains - both in how the original images look and in terms of the brightest points?   </span></p>
 <p><center> **Histogram Equalized Before Alignment** </center>
 <img src="jovoseptember30pngs/img3.png" alt="image3(histeqnonaligned)"></p>
@@ -11828,7 +11830,8 @@ div#notebook {
 <p><center> **Raw Image of Histogram Equalization After Alignment** </center>
 <img src="jovoseptember30pngs/img7.png" alt="image7(histeqaligned)"></p>
 <h1 id="Questions-(cont):">Questions (cont):<a class="anchor-link" href="#Questions-(cont):">&#182;</a></h1><p><span style="color: #000000; font-family: ; font-size: 14pt;">
-4)  After we finish the first prototype of the pipeline, what do you suggest we work on improving?  
+4)  After we finish the first prototype of the pipeline, what do you suggest we work on improving?  </span></p>
+<p><span style="color: #000000; font-family: ; font-size: 14pt;">
 5)  Are there supposed to be around 368 regions in the brain?</span></p>
 <h2 id="Issue-2:-Pipeline">Issue 2: Pipeline<a class="anchor-link" href="#Issue-2:-Pipeline">&#182;</a></h2><p>Currently outputs all files and intermediaries into a folder.  Can be pip installed.
 <img src="jovoseptember30pngs/pipinstallclarityviz.jpg" alt="imagePipelineOutputs"></p>
