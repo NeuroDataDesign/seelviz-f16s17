@@ -11760,9 +11760,9 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Background:">Background:<a class="anchor-link" href="#Background:">&#182;</a></h2><p>This is the Plot.ly chart is of the local histogram equalized Cocaine174 image:<br>
+<h2 id="Background:">Background:<a class="anchor-link" href="#Background:">&#182;</a></h2><p>This is the Plot.ly chart of the local histogram equalized Cocaine174 image:<br>
 <a href="https://neurodatadesign.github.io/seelviz/reveal/html/Cocaine174localeq.html">https://neurodatadesign.github.io/seelviz/reveal/html/Cocaine174localeq.html</a></p>
-<p>This is the Plot.ly chart is of the local histogram equalized atlas aligned Cocaine174 image:<br>
+<p>This is the Plot.ly chart of the local histogram equalized atlas aligned Cocaine174 image:<br>
 <a href="https://neurodatadesign.github.io/seelviz/reveal/html/alignedCocaine174localeq.40000.brightest.html">https://neurodatadesign.github.io/seelviz/reveal/html/alignedCocaine174localeq.40000.brightest.html</a></p>
 
 </div>
@@ -11773,9 +11773,8 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Issue-1:-Post-processing-brains-look-like-they-have-strange-'outline':">Issue 1: Post-processing brains look like they have strange 'outline':<a class="anchor-link" href="#Issue-1:-Post-processing-brains-look-like-they-have-strange-'outline':">&#182;</a></h2><p>After running histogram equalization on atlas-aligned brains, we get a significantly different shape (see Plotly charts above).</p>
-<p><strong>Reason:</strong> My current CLAHE tile size in my local histogram equalization is not modular - this is partly because the tile size requires an integer argument, so it’s not possible to perfectly fit differently sized data. We have a function that calculates the best tile size depending on image size.
-<img src="jovoseptember30pngs/img10error.png" alt="error1"></p>
+<h2 id="Issue-1:-Post-processing-brains-look-like-they-have-strange-'outline':">Issue 1: Post-processing brains look like they have strange 'outline':<a class="anchor-link" href="#Issue-1:-Post-processing-brains-look-like-they-have-strange-'outline':">&#182;</a></h2><p>After running histogram equalization on atlas-aligned brains, we get a significantly different shape (see Plot.ly charts above).</p>
+<p><strong>Reason:</strong> My current CLAHE tile size in my local histogram equalization is not modular - this is partly because the tile size requires an integer argument, so it’s not possible to perfectly fit differently sized data. We have a function that calculates the best tile size depending on image size.</p>
 <p>Currently our method (see code snippet below) finds the volume of the brightest points and scales the tile size depending on that - the problem is that it rounds to the nearest integer.  We can think of a lot of fringe cases where this is not a standardized method; specifically for cases where the volume scaling unit is around 0.5, the scaling is <strong>not</strong> necessarily appropriate.  Our method for scaling the tile size depends on a “baseline” case using the CLAHE tile size of Cocaine174 purely based off of “what looks good”.</p>
 
 </div>
@@ -11828,7 +11827,7 @@ div#notebook {
 <img src="jovoseptember30pngs/img2.png" alt="image2(histeqnonaligned)"></p>
 <p><center> **Raw Image of Histogram Equalization After Alignment** </center>
 <img src="jovoseptember30pngs/img7.png" alt="image7(histeqaligned)"></p>
-<p>4)  After we finish the first prototype of the pipeline, what do you suggest we work on improving?
+<p>4)  After we finish the first prototype of the pipeline, what do you suggest we work on improving?<br>
 5)  Are there supposed to be around 368 regions in the brain?</p>
 <h2 id="Issue-2:-Pipeline">Issue 2: Pipeline<a class="anchor-link" href="#Issue-2:-Pipeline">&#182;</a></h2><p>Currently outputs all files and intermediaries into a folder.  Can be pip installed.
 <img src="jovoseptember30pngs/pipinstallclarityviz.jpg" alt="imagePipelineOutputs"></p>
