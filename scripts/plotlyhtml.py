@@ -7,9 +7,10 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import axes3d
 import jgraph as ig
 
+from plotly.offline import download_plotlyjs, plot
+from plotly.graph_objs import *
+from plotly import tools
 import plotly
-import plotly.plotly as py
-import plotly.graph_objs as go
 
 ## Type in the path to your csv file here
 thedata = np.genfromtxt('../data/points/localeq.csv', delimiter=',', dtype='int', usecols = (0,1,2), names=['a','b','c'])
@@ -39,4 +40,4 @@ layout = go.Layout(
     
 fig = go.Figure(data=data, layout=layout)
 print "localeq"
-plotly.offline.plot(fig, filename= "localeq")
+plotly.offline.plot(fig, filename= "~/inlocaleq.brightest.40000.html")
