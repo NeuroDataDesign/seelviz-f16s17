@@ -1,11 +1,11 @@
-import clarity as cl  # I wrote this module for easier operations on data
-import clarity.resources as rs
+#import clarity as cl  # I wrote this module for easier operations on data
+#import clarity.resources as rs
 import csv,gc  # garbage memory collection :)
 
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import axes3d
-import jgraph as ig
+#import jgraph as ig
 
 from plotly.offline import download_plotlyjs, plot
 from plotly.graph_objs import *
@@ -13,9 +13,9 @@ from plotly import tools
 import plotly
 
 ## Type in the path to your csv file here
-thedata = np.genfromtxt('../data/points/localeq.csv', delimiter=',', dtype='int', usecols = (0,1,2), names=['a','b','c'])
+thedata = np.genfromtxt('../../atlas.csv', delimiter=',', dtype='int', usecols = (0,1,2), names=['a','b','c'])
 
-trace1 = go.Scatter3d(
+trace1 = Scatter3d(
     x = thedata['a'],
     y = thedata['b'],
     z = thedata['c'],
@@ -29,7 +29,7 @@ trace1 = go.Scatter3d(
 )
 
 data = [trace1]
-layout = go.Layout(
+layout = Layout(
     margin=dict(
         l=0,
         r=0,
@@ -38,6 +38,6 @@ layout = go.Layout(
     )
 )
     
-fig = go.Figure(data=data, layout=layout)
+fig = Figure(data=data, layout=layout)
 print "localeq"
-plotly.offline.plot(fig, filename= "~/inlocaleq.brightest.40000.html")
+plotly.offline.plot(fig)#, #filename= "~/atlas.html")
