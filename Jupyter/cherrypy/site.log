@@ -1,0 +1,6 @@
+[09/Oct/2016:00:58:44] ENGINE Listening for SIGTERM.
+[09/Oct/2016:00:58:44] ENGINE Bus STARTING
+[09/Oct/2016:00:58:44] ENGINE Set handler for console events.
+[09/Oct/2016:00:58:44] ENGINE Started monitor thread '_TimeoutMonitor'.
+[09/Oct/2016:00:58:44] ENGINE Serving on http://127.0.0.1:8080
+[09/Oct/2016:00:58:44] ENGINE Bus STARTED
