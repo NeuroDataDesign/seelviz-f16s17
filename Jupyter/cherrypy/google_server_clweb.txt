@@ -1,0 +1,16 @@
+sudo docker run -d -p 80:80 lkzhu1/ubuntu:clweb_test /bin/bash -c "cd /root/; python clviz_web.py"
+
+
+
+
+# testing some functions in google cloud server
+"""
+sudo docker run --name playground -p 80:80 -i -t lkzhu1/ubuntu:clweb_test bash
+$ (nohup) python clviz_web.py
+
+
+
+# cherryd -d -P /home/web -i server
+# ip addr list eth0 | grep "inet "
+# inet 172.17.0.11/16 scope global eth0
+"""
