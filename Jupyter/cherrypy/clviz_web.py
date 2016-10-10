@@ -4,43 +4,16 @@ import os.path
 import cherrypy
 from cherrypy.lib import static
 from cherrypy.lib.static import serve_file
-import math
-import clarityviz
+
+import shutil
+import tempfile
+import glob
+
+from clarityviz import claritybase
 
 localDir = os.path.dirname(__file__)
 absDir = os.path.join(os.getcwd(), localDir)
 # print absDir
-
-
-def plot3d(myFile, directory, name):
-    fname = name.split('.')
-    out = fname[0]
-    fnodes = absDir + '/' + out + 'nodes.csv'
-    fedges = absDir + '/' + out + 'edges.csv'
-    files = [fnodes, fedges]
-    points = []
-    for line in myFile:
-        line = line.strip().split(',')
-        points.append(str(line[0]) + "," + str(line[1]) + "," + str(line[2]))
-
-    with open(fnodes, 'w') as nodes:
-        with open(fedges, 'w') as edges:
-            for ind in range(len(points)):
-                temp = points[ind].strip().split(',')
-                x = temp[0]
-                y = temp[1]
-                z = temp[2]
-                radius = 25
-                nodes.write("s" + str(ind + 1) + "," + str(x) + "," + str(y) + "," + str(z) + "\n")
-                for index in range(ind + 1, len(points)):
-                    tmp = points[index].strip().split(',')
-                    distance = math.sqrt(math.pow(int(x) - int(tmp[0]), 2) + math.pow(int(y) - int(tmp[1]), 2) + math.pow(int(z) - int(tmp[2]), 2))
-                    if distance < radius:
-                        edgeweight = math.exp(-1 * distance)
-                        edges.write("s" + str(ind + 1) + "," + "s" + str(index + 1) + "," + str(edgeweight) + "\n")
-
-    return files
-
 
 class FileDemo(object):
 
@@ -53,48 +26,93 @@ class FileDemo(object):
             filename: <input type="file" name="myFile" /><br />
             <input type="submit" />
             </form>
-            <h2>Download a file</h2>
-            <a href='download'>This one</a>
         </body></html>
         """
 
     @cherrypy.expose
     def upload(self, myFile):
+#        destination = os.path.join('local/')
+#        print destination
+#        with open(destination + myFile.filename, 'wb') as f:
+#            shutil.copyfileobj(cherrypy.request.body, f)
+        # print os.path.dirname(os.path.realpath(myFile.file))
+        copy = 'local/' + myFile.filename
+        print copy
+        token = myFile.filename.split('.')[0]
 
-        out = plot3d(myFile.file, absDir, myFile.filename)
+        with open(copy, 'wb') as fcopy:
+            while True:
+                data = myFile.file.read(8192)
+                if not data:
+                    break
+                fcopy.write(data)
+
+        copydir = os.path.join(os.getcwd(), os.path.dirname('local/'))
+        print copydir
+        csv = claritybase.claritybase(token, copydir)
+        # out = plot3d(myFile.file, absDir, myFile.filename)
+        # out = plot3d('local/', myFile.filename)
+        csv.loadInitCsv(copydir + '/' + myFile.filename)
+        csv.plot3d()
+        csv.savePoints()
+        csv.generate_plotly_html()
+        csv.graphmlconvert()
+        fzip = shutil.make_archive(token, 'zip', token)
+        fzip_abs = os.path.abspath(fzip)
 
         html = """
         <html><body>
             <h2>Ouputs</h2>
-            <a href="index?directory=%s">Up</a><br />
-        """ % os.path.dirname(os.path.abspath("."))
+        """
+#            <a href="index?directory=%s">Up</a><br />
+#        """ % os.path.dirname(os.path.abspath("."))
         # print os.path.dirname(os.path.abspath("."))
 
-        for filename in out:
+        # for filename in out:
+        plotly = []
+        for filename in glob.glob(token + '/*'):
             absPath = os.path.abspath(filename)
             if os.path.isdir(absPath):
                 link = '<a href="/index?directory=' + absPath + '">' + os.path.basename(filename) + "</a> <br />"
                 html += link
             else:
+                if filename.endswith('html'):
+                    plotly.append(filename)
                 link = '<a href="/download/?filepath=' + absPath + '">' + os.path.basename(filename) + "</a> <br />"
                 html += link
+
+        for plot in plotly:
+            absPath = os.path.abspath(plot)
+            html += """
+              <form action="plotly" method="get">
+                <input type="text" value=""" + '"' + absPath + '" name="plot" ' + """/>
+                <button type="submit">View """ + os.path.basename(plot) + """</button>
+              </form>"""
+            # html += '<a href="file:///' + '//' + absPath + '">' + "View Plotly graph</a> <br />"
+
+        html += '<a href="/download/?filepath=' + fzip_abs + '">' + token + '.zip' + "</a> <br />"
         html += """</body></html>"""
 
         return html
 
-    index.exposed = True
+    @cherrypy.expose
+    def plotly(self, plot="test/testplotly.html"):
+        return file("test/testplotly.html")
+    # index.exposed = True
 
 
 class Download:
 
+    @cherrypy.expose
     def index(self, filepath):
         return serve_file(filepath, "application/x-download", "attachment")
 
-    index.exposed = True
+    # index.exposed = True
 
 
 tutconf = os.path.join(os.path.dirname('/usr/local/lib/python2.7/dist-packages/cherrypy/tutorial/'), 'tutorial.conf')
 # print tutconf
+
 
 if __name__ == '__main__':
     # CherryPy always starts with app.root when trying to map request URIs
