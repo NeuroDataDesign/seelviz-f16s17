@@ -97,7 +97,7 @@ class FileDemo(object):
 
     @cherrypy.expose
     def plotly(self, plot="test/testplotly.html"):
-        return file("test/testplotly.html")
+        return file(plot)
     # index.exposed = True
 
 
