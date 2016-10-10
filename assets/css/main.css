@@ -574,10 +574,10 @@ hr.small {
    line-height: 36px;
 }
 
-/* Register */
-.Presentations {
-    background-color: #B9B9FF;
-    color: #193d56;
+/* Graph */
+.Graph {
+    background-color: #000000;
+    color: #FFFFFF;
     overflow: hidden;
     padding: 80px 0;
     position: relative;
@@ -629,7 +629,7 @@ hr.small {
 }
 
 .About {
-    background-color: #E7DEEE;
+    background-color: #785098;
     padding: 48px 12%;
 }
 
