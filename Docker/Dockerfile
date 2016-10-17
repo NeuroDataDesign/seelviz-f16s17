@@ -36,7 +36,6 @@ RUN apt-get -y autoremove libopencv-dev python-opencv
 WORKDIR "/home"
 RUN git clone https://github.com/alee156/clviz.git
 WORKDIR "/home/clviz"
-RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 RUN bash opencv-docker.sh
 WORKDIR "/home"
 RUN git clone https://github.com/neurodata/ndreg.git
