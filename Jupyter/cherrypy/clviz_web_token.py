@@ -27,10 +27,10 @@ class FileDemo(object):
             <input type="submit" />
             </form>
 
-          <form action="neurodata" method="post" enctype="multipart/form-data">
-          Token name: <input type="text" name="myToken"/><br />
-          <input type="submit" />
-          </form>
+            <form action="neurodata" method="post" enctype="multipart/form-data">
+            Token name: <input type="text" name="myToken"/><br />
+            <input type="submit" />
+            </form>
             
         </body></html>
         """
