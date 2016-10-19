@@ -15,39 +15,66 @@ localDir = os.path.dirname(__file__)
 absDir = os.path.join(os.getcwd(), localDir)
 # print absDir
 
+def image_parse(filename):
+    copydir = os.path.join(os.getcwd(), os.path.dirname('img/'))
+    img = claritybase.claritybase(filename, copydir)
+    img.loadEqImg()
+    img.applyLocalEq()
+    img.loadGeneratedNii()
+    img.calculatePoints(threshold = 0.9, sample = 0.05)
+    img.generate_plotly_html()
+    img.plot3d()
+    img.savePoints()
+    img.graphmlconvert()
+
 class FileDemo(object):
+    
+    #def image_parse(filename):
+    #    copydir = os.path.join(os.getcwd(), os.path.dirname('img/'))
+    #    img = claritybase.claritybase(filename, copydir)
+    #    img.applyLocalEq()
+    #    img.loadGeneratedNii()
+    #    img.calculatePoints(threshold = 0.9, sample = 0.05)
+    #    img.generate_plotly_html()
+    #    img.plot3d()
+    #    img.savePoints()
+    #    img.graphmlconvert()
 
     @cherrypy.expose
     def index(self, directory="."):
-        return """
-        <html><body>
-            <h2>Upload a file</h2>
-            <form action="upload" method="post" enctype="multipart/form-data">
-            filename: <input type="file" name="myFile" /><br />
-            <input type="submit" />
-            </form>
-
-            <form action="neurodata" method="post" enctype="multipart/form-data">
-            Token name: <input type="text" name="myToken"/><br />
-            <input type="submit" />
-            </form>
-            
-        </body></html>
+        img = []
+        for filename in glob.glob('img/*'):
+            img.append(filename)
+        html = """
+        <html>
+        <body>
+          <h2>Upload a file</h2>
+          <form action="upload" method="post" enctype="multipart/form-data">
+          filename: <input type="file" name="myFile" /><br />
+          <input type="submit" />
+          </form>
+          <form action="neurodata" method="post" enctype="multipart/form-data">
+          Token name: <input type="text" name="myToken"/><br />
+          <input type="submit" />
+          </form> 
+        </html>
         """
-    
+        return html
+
     @cherrypy.expose
     def neurodata(self, myToken):
-        csv = claritybase(myToken, "./")
+        #copydir = os.path.join(os.getcwd(), os.path.dirname('local/'))
+        #csv = claritybase.claritybase(myToken, "./")
         # out = plot3d(myFile.file, absDir, myFile.filename)
         # out = plot3d('local/', myFile.filename)
-        csv.loadInitCsv('/Users/albert/seelviz/csv/' + myToken + "localeq.csv")
-        csv.plot3d()
-        csv.savePoints()
-        csv.generate_plotly_html()
-        csv.graphmlconvert()
-        fzip = shutil.make_archive(myToken, 'zip', myToken)
-        fzip_abs = os.path.abspath(fzip)
-
+        #csv.loadInitCsv(copydir + "/" + myToken + ".csv")
+        #csv.plot3d()
+        #csv.savePoints()
+        #csv.generate_plotly_html()
+        #csv.graphmlconvert()
+        #fzip = shutil.make_archive(myToken, 'zip', myToken)
+        #fzip_abs = os.path.abspath(fzip)
+        image_parse(myToken)
         html = """
         <html><body>
             <h2>Ouputs</h2>
@@ -58,7 +85,7 @@ class FileDemo(object):
 
         # for filename in out:
         plotly = []
-        for filename in glob.glob(token + '/*'):
+        for filename in glob.glob(myToken + '/*'):
             absPath = os.path.abspath(filename)
             if os.path.isdir(absPath):
                 link = '<a href="/index?directory=' + absPath + '">' + os.path.basename(filename) + "</a> <br />"
@@ -78,7 +105,7 @@ class FileDemo(object):
               </form>"""
             # html += '<a href="file:///' + '//' + absPath + '">' + "View Plotly graph</a> <br />"
 
-        html += '<a href="/download/?filepath=' + fzip_abs + '">' + token + '.zip' + "</a> <br />"
+        html += '<a href="/download/?filepath=' + fzip_abs + '">' + myToken + '.zip' + "</a> <br />"
         html += """</body></html>"""
 
         return html   
@@ -92,7 +119,7 @@ class FileDemo(object):
         # print os.path.dirname(os.path.realpath(myFile.file))
         copy = 'local/' + myFile.filename
         print copy
-        token = myFile.filename.split('.')[0]
+        token = myFile.filename.split('.')[:-1]
 
         with open(copy, 'wb') as fcopy:
             while True:
@@ -121,7 +148,6 @@ class FileDemo(object):
 #            <a href="index?directory=%s">Up</a><br />
 #        """ % os.path.dirname(os.path.abspath("."))
         # print os.path.dirname(os.path.abspath("."))
-
         # for filename in out:
         plotly = []
         for filename in glob.glob(token + '/*'):
@@ -164,7 +190,7 @@ class Download:
     # index.exposed = True
 
 
-tutconf = os.path.join(os.path.dirname('/usr/local/lib/python2.7/site-packages/cherrypy/tutorial/'), 'tutorial.conf')
+tutconf = os.path.join(os.path.dirname('/usr/local/lib/python2.7/dist-packages/cherrypy/tutorial/'), 'tutorial.conf')
 # print tutconf
 
 
