@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Welcome to clarityviz’s documentation! &#8212; clarityviz 0.0.6 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.6',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="clarityviz 0.0.6 documentation" href="../index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-clarityviz-s-documentation">
+<h1>Welcome to clarityviz&#8217;s documentation!<a class="headerlink" href="#welcome-to-clarityviz-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+</div>
+<span class="target" id="module-claritybase"></span><dl class="class">
+<dt id="claritybase.claritybase">
+<em class="property">class </em><code class="descclassname">claritybase.</code><code class="descname">claritybase</code><span class="sig-paren">(</span><em>token</em>, <em>source_directory=None</em><span class="sig-paren">)</span><a class="headerlink" href="#claritybase.claritybase" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class applies local equalizaiton to the img&#8217;s historgram, generates the points and graphml, and plots using plotly.</p>
+<dl class="method">
+<dt id="claritybase.claritybase.applyLocalEq">
+<code class="descname">applyLocalEq</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#claritybase.claritybase.applyLocalEq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies local equilization to the img&#8217;s histogram and outputs a .nii file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="claritybase.claritybase.calculatePoints">
+<code class="descname">calculatePoints</code><span class="sig-paren">(</span><em>threshold=0.1</em>, <em>sample=0.5</em>, <em>optimize=True</em><span class="sig-paren">)</span><a class="headerlink" href="#claritybase.claritybase.calculatePoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to extract points data from the img file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="claritybase.claritybase.discardImg">
+<code class="descname">discardImg</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#claritybase.claritybase.discardImg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function used to get rid of the img in memory.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="claritybase.claritybase.generate_plotly_html">
+<code class="descname">generate_plotly_html</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#claritybase.claritybase.generate_plotly_html" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the plotly from the csv file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="claritybase.claritybase.getMax">
+<code class="descname">getMax</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#claritybase.claritybase.getMax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function that returns the max.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="claritybase.claritybase.getShape">
+<code class="descname">getShape</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#claritybase.claritybase.getShape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function that returns the shape.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="claritybase.claritybase.get_brain_figure">
+<code class="descname">get_brain_figure</code><span class="sig-paren">(</span><em>path=None</em>, <em>plot_title=''</em><span class="sig-paren">)</span><a class="headerlink" href="#claritybase.claritybase.get_brain_figure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the plotly figure object for vizualizing a 3d brain network.</p>
+<p>g: networkX object of brain</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="claritybase.claritybase.graphmlconvert">
+<code class="descname">graphmlconvert</code><span class="sig-paren">(</span><em>nodefilename=None</em>, <em>edgefilename=None</em><span class="sig-paren">)</span><a class="headerlink" href="#claritybase.claritybase.graphmlconvert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method for extracting the data to a graphml file, based on the node and edge files</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="claritybase.claritybase.loadEdgeCsv">
+<code class="descname">loadEdgeCsv</code><span class="sig-paren">(</span><em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#claritybase.claritybase.loadEdgeCsv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method for loading the edges csv file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="claritybase.claritybase.loadEqImg">
+<code class="descname">loadEqImg</code><span class="sig-paren">(</span><em>path=None</em>, <em>info=False</em><span class="sig-paren">)</span><a class="headerlink" href="#claritybase.claritybase.loadEqImg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function for loading the img.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="claritybase.claritybase.loadGeneratedNii">
+<code class="descname">loadGeneratedNii</code><span class="sig-paren">(</span><em>path=None</em>, <em>info=False</em><span class="sig-paren">)</span><a class="headerlink" href="#claritybase.claritybase.loadGeneratedNii" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads a preexisting nii file.  This function is mainly used for testing</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="claritybase.claritybase.loadInitCsv">
+<code class="descname">loadInitCsv</code><span class="sig-paren">(</span><em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#claritybase.claritybase.loadInitCsv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method for loading the initial csv file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="claritybase.claritybase.loadNodeCsv">
+<code class="descname">loadNodeCsv</code><span class="sig-paren">(</span><em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#claritybase.claritybase.loadNodeCsv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method for loading the nodes csv file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="claritybase.claritybase.plot3d">
+<code class="descname">plot3d</code><span class="sig-paren">(</span><em>infile=None</em><span class="sig-paren">)</span><a class="headerlink" href="#claritybase.claritybase.plot3d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method for plotting the Nodes and Edges</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="claritybase.claritybase.savePoints">
+<code class="descname">savePoints</code><span class="sig-paren">(</span><em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#claritybase.claritybase.savePoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves the points to a file</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="../genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="../py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="../search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Welcome to clarityviz&#8217;s documentation!</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/clarityviz/index.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, seelviz.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="../_sources/clarityviz/index.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
