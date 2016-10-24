@@ -22,24 +22,13 @@ def image_parse(filename):
     img.applyLocalEq()
     img.loadGeneratedNii()
     img.calculatePoints(threshold = 0.9, sample = 0.05)
+    img.savePoints()
     img.generate_plotly_html()
     img.plot3d()
-    img.savePoints()
     img.graphmlconvert()
 
 class FileDemo(object):
     
-    #def image_parse(filename):
-    #    copydir = os.path.join(os.getcwd(), os.path.dirname('img/'))
-    #    img = claritybase.claritybase(filename, copydir)
-    #    img.applyLocalEq()
-    #    img.loadGeneratedNii()
-    #    img.calculatePoints(threshold = 0.9, sample = 0.05)
-    #    img.generate_plotly_html()
-    #    img.plot3d()
-    #    img.savePoints()
-    #    img.graphmlconvert()
-
     @cherrypy.expose
     def index(self, directory="."):
         img = []
@@ -63,17 +52,8 @@ class FileDemo(object):
 
     @cherrypy.expose
     def neurodata(self, myToken):
-        #copydir = os.path.join(os.getcwd(), os.path.dirname('local/'))
-        #csv = claritybase.claritybase(myToken, "./")
-        # out = plot3d(myFile.file, absDir, myFile.filename)
-        # out = plot3d('local/', myFile.filename)
-        #csv.loadInitCsv(copydir + "/" + myToken + ".csv")
-        #csv.plot3d()
-        #csv.savePoints()
-        #csv.generate_plotly_html()
-        #csv.graphmlconvert()
-        #fzip = shutil.make_archive(myToken, 'zip', myToken)
-        #fzip_abs = os.path.abspath(fzip)
+        fzip = shutil.make_archive(myToken, 'zip', myToken)
+        fzip_abs = os.path.abspath(fzip)
         image_parse(myToken)
         html = """
         <html><body>
