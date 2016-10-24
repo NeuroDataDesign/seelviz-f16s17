@@ -113,30 +113,37 @@ class FileDemo(object):
                     <div class="header-content-inner">
                         <h1 id="homeHeading">Select File</h1>
                         <hr>
-                        <form action="upload" method="post" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label for="myFile">Upload a File</label>
-                                <input type="file" id="myFile" name="myFile">
-                                <!-- <p class="help-block">Example block-level help text here.</p> -->
-                            </div>
-                            <!-- filename: <input type="file" name="myFile" /><br /> -->
-                            <input class="btn btn-default" type="submit" value="Submit">
-                        </form>
+                        <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
+                        <div class="row">
+                            <div class="col-xs-6 col-md-4"></div>
+                            <div class="col-xs-6 col-md-4">
+                                <form action="upload" method="post" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label for="myFile">Upload a File</label>
+                                        <div class="center-block"></div>
+                                        <input type="file" class="form-control" id="myFile" name="myFile">
+                                        <!-- <p class="help-block">Example block-level help text here.</p> -->
+                                    </div>
+                                    <!-- filename: <input type="file" name="myFile" /><br /> -->
+                                    <input class="btn btn-default" type="submit" value="Submit">
+                                </form>
 
-                        <h2>OR</h2>
+                                <h2>OR</h2>
 
-                        <form action="neurodata" method="post" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label for="myToken">Token</label>
-                                <input type="text" class="form-control" id="myToken" name="myToken" placeholder="Token">
+                                <form action="neurodata" method="post" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label for="myToken">Submit Token</label>
+                                        <input type="text" class="form-control" id="myToken" name="myToken" placeholder="Token">
+                                    </div>
+                                    <!-- Token name: <input type="text" name="myToken"/><br /> -->
+                                    <input class="btn btn-default" type="submit" value="Submit">
+                                </form> 
                             </div>
-                            <!-- Token name: <input type="text" name="myToken"/><br /> -->
-                            <input class="btn btn-default" type="submit" value="Submit">
-                        </form> 
+                            <div class="col-xs-6 col-md-4"></div>
+                        </div>
                     </div>
                 </div>
             </header>
-
 
             <section class="bg-primary" id="about">
                 <div class="container">
@@ -151,160 +158,11 @@ class FileDemo(object):
                 </div>
             </section>
 
-            <section id="services">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12 text-center">
-                            <h2 class="section-heading">At Your Service</h2>
-                            <hr class="primary">
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-6 text-center">
-                            <div class="service-box">
-                                <i class="fa fa-4x fa-diamond text-primary sr-icons"></i>
-                                <h3>Sturdy Templates</h3>
-                                <p class="text-muted">Our templates are updated regularly so they don't break.</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 text-center">
-                            <div class="service-box">
-                                <i class="fa fa-4x fa-paper-plane text-primary sr-icons"></i>
-                                <h3>Ready to Ship</h3>
-                                <p class="text-muted">You can use this theme as is, or you can make changes!</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 text-center">
-                            <div class="service-box">
-                                <i class="fa fa-4x fa-newspaper-o text-primary sr-icons"></i>
-                                <h3>Up to Date</h3>
-                                <p class="text-muted">We update dependencies to keep things fresh.</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 text-center">
-                            <div class="service-box">
-                                <i class="fa fa-4x fa-heart text-primary sr-icons"></i>
-                                <h3>Made with Love</h3>
-                                <p class="text-muted">You have to make your websites with love these days!</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="no-padding" id="portfolio">
-                <div class="container-fluid">
-                    <div class="row no-gutter popup-gallery">
-                        <div class="col-lg-4 col-sm-6">
-                            <a href="img/portfolio/fullsize/1.jpg" class="portfolio-box">
-                                <img src="img/portfolio/thumbnails/1.jpg" class="img-responsive" alt="">
-                                <div class="portfolio-box-caption">
-                                    <div class="portfolio-box-caption-content">
-                                        <div class="project-category text-faded">
-                                            Category
-                                        </div>
-                                        <div class="project-name">
-                                            Project Name
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <a href="img/portfolio/fullsize/2.jpg" class="portfolio-box">
-                                <img src="img/portfolio/thumbnails/2.jpg" class="img-responsive" alt="">
-                                <div class="portfolio-box-caption">
-                                    <div class="portfolio-box-caption-content">
-                                        <div class="project-category text-faded">
-                                            Category
-                                        </div>
-                                        <div class="project-name">
-                                            Project Name
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <a href="img/portfolio/fullsize/3.jpg" class="portfolio-box">
-                                <img src="img/portfolio/thumbnails/3.jpg" class="img-responsive" alt="">
-                                <div class="portfolio-box-caption">
-                                    <div class="portfolio-box-caption-content">
-                                        <div class="project-category text-faded">
-                                            Category
-                                        </div>
-                                        <div class="project-name">
-                                            Project Name
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <a href="img/portfolio/fullsize/4.jpg" class="portfolio-box">
-                                <img src="img/portfolio/thumbnails/4.jpg" class="img-responsive" alt="">
-                                <div class="portfolio-box-caption">
-                                    <div class="portfolio-box-caption-content">
-                                        <div class="project-category text-faded">
-                                            Category
-                                        </div>
-                                        <div class="project-name">
-                                            Project Name
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <a href="img/portfolio/fullsize/5.jpg" class="portfolio-box">
-                                <img src="img/portfolio/thumbnails/5.jpg" class="img-responsive" alt="">
-                                <div class="portfolio-box-caption">
-                                    <div class="portfolio-box-caption-content">
-                                        <div class="project-category text-faded">
-                                            Category
-                                        </div>
-                                        <div class="project-name">
-                                            Project Name
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <a href="img/portfolio/fullsize/6.jpg" class="portfolio-box">
-                                <img src="img/portfolio/thumbnails/6.jpg" class="img-responsive" alt="">
-                                <div class="portfolio-box-caption">
-                                    <div class="portfolio-box-caption-content">
-                                        <div class="project-category text-faded">
-                                            Category
-                                        </div>
-                                        <div class="project-name">
-                                            Project Name
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <aside class="bg-dark">
-                <div class="container text-center">
-                    <div class="call-to-action">
-                        <h2>Free Download at Start Bootstrap!</h2>
-                        <a href="http://startbootstrap.com/template-overviews/creative/" class="btn btn-default btn-xl sr-button">Download Now!</a>
-                    </div>
-                </div>
-            </aside>
-
             <section id="contact">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-8 col-lg-offset-2 text-center">
-                            <h2 class="section-heading">Let's Get In Touch!</h2>
+                            <h2 class="section-heading">Acknowledgements</h2>
                             <hr class="primary">
                             <p>Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
                         </div>
@@ -343,13 +201,16 @@ class FileDemo(object):
 
     @cherrypy.expose
     def neurodata(self, myToken):
-        image_parse(myToken)
         fzip = shutil.make_archive(myToken, 'zip', myToken)
         fzip_abs = os.path.abspath(fzip)
+        image_parse(myToken)
         html = """
         <html><body>
             <h2>Ouputs</h2>
         """
+#            <a href="index?directory=%s">Up</a><br />
+#        """ % os.path.dirname(os.path.abspath("."))
+        # print os.path.dirname(os.path.abspath("."))
 
         # for filename in out:
         plotly = []
@@ -380,6 +241,11 @@ class FileDemo(object):
 
     @cherrypy.expose
     def upload(self, myFile):
+#        destination = os.path.join('local/')
+#        print destination
+#        with open(destination + myFile.filename, 'wb') as f:
+#            shutil.copyfileobj(cherrypy.request.body, f)
+        # print os.path.dirname(os.path.realpath(myFile.file))
         copy = 'local/' + myFile.filename
         print copy
         token = myFile.filename.split('.')[:-1]
@@ -394,6 +260,8 @@ class FileDemo(object):
         copydir = os.path.join(os.getcwd(), os.path.dirname('local/'))
         print copydir
         csv = claritybase.claritybase(token, copydir)
+        # out = plot3d(myFile.file, absDir, myFile.filename)
+        # out = plot3d('local/', myFile.filename)
         csv.loadInitCsv(copydir + '/' + myFile.filename)
         csv.plot3d()
         csv.savePoints()
@@ -406,6 +274,10 @@ class FileDemo(object):
         <html><body>
             <h2>Ouputs</h2>
         """
+#            <a href="index?directory=%s">Up</a><br />
+#        """ % os.path.dirname(os.path.abspath("."))
+        # print os.path.dirname(os.path.abspath("."))
+        # for filename in out:
         plotly = []
         for filename in glob.glob(token + '/*'):
             absPath = os.path.abspath(filename)
@@ -435,6 +307,7 @@ class FileDemo(object):
     @cherrypy.expose
     def plotly(self, plot="test/testplotly.html"):
         return file(plot)
+    # index.exposed = True
 
 
 class Download:
@@ -442,6 +315,8 @@ class Download:
     @cherrypy.expose
     def index(self, filepath):
         return serve_file(filepath, "application/x-download", "attachment")
+
+    # index.exposed = True
 
 
 tutconf = os.path.join(os.path.dirname('/usr/local/lib/python2.7/site-packages/cherrypy/tutorial/'), 'tutorial.conf')
@@ -451,7 +326,6 @@ tutconf = os.path.join(os.path.dirname('/usr/local/lib/python2.7/site-packages/c
 if __name__ == '__main__':
     # CherryPy always starts with app.root when trying to map request URIs
     # to objects, so we need to mount a request handler root. A request
-<<<<<<< HEAD
     # to '/' will be mapped to HelloWorld().index().
 
     # On Startup
@@ -479,9 +353,6 @@ if __name__ == '__main__':
         },
     }
 # cherrypy.quickstart(Root(), '/', config)
-=======
-    # to '/' will be mapped to index().
->>>>>>> e0d3b15f0aa85d621492c273f2d392dd1df8d815
     root = FileDemo()
     root.download = Download()
     cherrypy.tree.mount(root)

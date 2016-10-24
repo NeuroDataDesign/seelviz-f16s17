@@ -686,3 +686,324 @@ IOError: [Errno 2] No such file or directory: u'local/'
 [24/Oct/2016:06:40:38] ENGINE Bus EXITING
 [24/Oct/2016:06:40:38] ENGINE Bus EXITED
 [24/Oct/2016:06:40:38] ENGINE Waiting for child threads to terminate...
+[24/Oct/2016:11:01:31] ENGINE Listening for SIGHUP.
+[24/Oct/2016:11:01:31] ENGINE Listening for SIGTERM.
+[24/Oct/2016:11:01:31] ENGINE Listening for SIGUSR1.
+[24/Oct/2016:11:01:31] ENGINE Bus STARTING
+[24/Oct/2016:11:01:31] ENGINE Started monitor thread 'Autoreloader'.
+[24/Oct/2016:11:01:31] ENGINE Started monitor thread '_TimeoutMonitor'.
+[24/Oct/2016:11:01:31] ENGINE Serving on http://127.0.0.1:8080
+[24/Oct/2016:11:01:31] ENGINE Bus STARTED
+[24/Oct/2016:11:04:19] ENGINE Restarting because /Users/Kepler/code/seelviz/Jupyter/cherrypy/clviz_web_token.py changed.
+[24/Oct/2016:11:04:19] ENGINE Stopped thread 'Autoreloader'.
+[24/Oct/2016:11:04:19] ENGINE Bus STOPPING
+[24/Oct/2016:11:04:19] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('127.0.0.1', 8080)) shut down
+[24/Oct/2016:11:04:19] ENGINE Stopped thread '_TimeoutMonitor'.
+[24/Oct/2016:11:04:19] ENGINE Bus STOPPED
+[24/Oct/2016:11:04:19] ENGINE Bus EXITING
+[24/Oct/2016:11:04:19] ENGINE Bus EXITED
+[24/Oct/2016:11:04:19] ENGINE Waiting for child threads to terminate...
+[24/Oct/2016:11:04:19] ENGINE Re-spawning clviz_web_token.py
+[24/Oct/2016:11:04:25] ENGINE Listening for SIGHUP.
+[24/Oct/2016:11:04:25] ENGINE Listening for SIGTERM.
+[24/Oct/2016:11:04:25] ENGINE Listening for SIGUSR1.
+[24/Oct/2016:11:04:25] ENGINE Bus STARTING
+[24/Oct/2016:11:04:25] ENGINE Started monitor thread 'Autoreloader'.
+[24/Oct/2016:11:04:25] ENGINE Started monitor thread '_TimeoutMonitor'.
+[24/Oct/2016:11:04:25] ENGINE Serving on http://127.0.0.1:8080
+[24/Oct/2016:11:04:25] ENGINE Bus STARTED
+[24/Oct/2016:11:06:29] ENGINE Restarting because /Users/Kepler/code/seelviz/Jupyter/cherrypy/clviz_web_token.py changed.
+[24/Oct/2016:11:06:29] ENGINE Stopped thread 'Autoreloader'.
+[24/Oct/2016:11:06:29] ENGINE Bus STOPPING
+[24/Oct/2016:11:06:29] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('127.0.0.1', 8080)) shut down
+[24/Oct/2016:11:06:29] ENGINE Stopped thread '_TimeoutMonitor'.
+[24/Oct/2016:11:06:29] ENGINE Bus STOPPED
+[24/Oct/2016:11:06:29] ENGINE Bus EXITING
+[24/Oct/2016:11:06:29] ENGINE Bus EXITED
+[24/Oct/2016:11:06:29] ENGINE Waiting for child threads to terminate...
+[24/Oct/2016:11:06:29] ENGINE Re-spawning clviz_web_token.py
+[24/Oct/2016:11:06:34] ENGINE Listening for SIGHUP.
+[24/Oct/2016:11:06:34] ENGINE Listening for SIGTERM.
+[24/Oct/2016:11:06:34] ENGINE Listening for SIGUSR1.
+[24/Oct/2016:11:06:34] ENGINE Bus STARTING
+[24/Oct/2016:11:06:34] ENGINE Started monitor thread 'Autoreloader'.
+[24/Oct/2016:11:06:34] ENGINE Started monitor thread '_TimeoutMonitor'.
+[24/Oct/2016:11:06:34] ENGINE Serving on http://127.0.0.1:8080
+[24/Oct/2016:11:06:34] ENGINE Bus STARTED
+[24/Oct/2016:11:15:25] ENGINE Restarting because /Users/Kepler/code/seelviz/Jupyter/cherrypy/clviz_web_token.py changed.
+[24/Oct/2016:11:15:25] ENGINE Stopped thread 'Autoreloader'.
+[24/Oct/2016:11:15:25] ENGINE Bus STOPPING
+[24/Oct/2016:11:15:25] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('127.0.0.1', 8080)) shut down
+[24/Oct/2016:11:15:25] ENGINE Stopped thread '_TimeoutMonitor'.
+[24/Oct/2016:11:15:25] ENGINE Bus STOPPED
+[24/Oct/2016:11:15:25] ENGINE Bus EXITING
+[24/Oct/2016:11:15:25] ENGINE Bus EXITED
+[24/Oct/2016:11:15:25] ENGINE Waiting for child threads to terminate...
+[24/Oct/2016:11:15:25] ENGINE Re-spawning clviz_web_token.py
+[24/Oct/2016:11:15:32] ENGINE Listening for SIGHUP.
+[24/Oct/2016:11:15:32] ENGINE Listening for SIGTERM.
+[24/Oct/2016:11:15:32] ENGINE Listening for SIGUSR1.
+[24/Oct/2016:11:15:32] ENGINE Bus STARTING
+[24/Oct/2016:11:15:32] ENGINE Started monitor thread 'Autoreloader'.
+[24/Oct/2016:11:15:32] ENGINE Started monitor thread '_TimeoutMonitor'.
+[24/Oct/2016:11:15:32] ENGINE Serving on http://127.0.0.1:8080
+[24/Oct/2016:11:15:32] ENGINE Bus STARTED
+[24/Oct/2016:11:16:07] ENGINE Restarting because /Users/Kepler/code/seelviz/Jupyter/cherrypy/clviz_web_token.py changed.
+[24/Oct/2016:11:16:07] ENGINE Stopped thread 'Autoreloader'.
+[24/Oct/2016:11:16:07] ENGINE Bus STOPPING
+[24/Oct/2016:11:16:07] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('127.0.0.1', 8080)) shut down
+[24/Oct/2016:11:16:07] ENGINE Stopped thread '_TimeoutMonitor'.
+[24/Oct/2016:11:16:07] ENGINE Bus STOPPED
+[24/Oct/2016:11:16:07] ENGINE Bus EXITING
+[24/Oct/2016:11:16:07] ENGINE Bus EXITED
+[24/Oct/2016:11:16:07] ENGINE Waiting for child threads to terminate...
+[24/Oct/2016:11:16:07] ENGINE Re-spawning clviz_web_token.py
+[24/Oct/2016:11:16:14] ENGINE Listening for SIGHUP.
+[24/Oct/2016:11:16:14] ENGINE Listening for SIGTERM.
+[24/Oct/2016:11:16:14] ENGINE Listening for SIGUSR1.
+[24/Oct/2016:11:16:14] ENGINE Bus STARTING
+[24/Oct/2016:11:16:14] ENGINE Started monitor thread 'Autoreloader'.
+[24/Oct/2016:11:16:14] ENGINE Started monitor thread '_TimeoutMonitor'.
+[24/Oct/2016:11:16:14] ENGINE Serving on http://127.0.0.1:8080
+[24/Oct/2016:11:16:14] ENGINE Bus STARTED
+[24/Oct/2016:11:18:35] ENGINE Restarting because /Users/Kepler/code/seelviz/Jupyter/cherrypy/clviz_web_token.py changed.
+[24/Oct/2016:11:18:35] ENGINE Stopped thread 'Autoreloader'.
+[24/Oct/2016:11:18:35] ENGINE Bus STOPPING
+[24/Oct/2016:11:18:35] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('127.0.0.1', 8080)) shut down
+[24/Oct/2016:11:18:35] ENGINE Stopped thread '_TimeoutMonitor'.
+[24/Oct/2016:11:18:35] ENGINE Bus STOPPED
+[24/Oct/2016:11:18:35] ENGINE Bus EXITING
+[24/Oct/2016:11:18:35] ENGINE Bus EXITED
+[24/Oct/2016:11:18:35] ENGINE Waiting for child threads to terminate...
+[24/Oct/2016:11:18:35] ENGINE Re-spawning clviz_web_token.py
+[24/Oct/2016:11:18:45] ENGINE Listening for SIGHUP.
+[24/Oct/2016:11:18:45] ENGINE Listening for SIGTERM.
+[24/Oct/2016:11:18:45] ENGINE Listening for SIGUSR1.
+[24/Oct/2016:11:18:45] ENGINE Bus STARTING
+[24/Oct/2016:11:18:45] ENGINE Started monitor thread 'Autoreloader'.
+[24/Oct/2016:11:18:45] ENGINE Started monitor thread '_TimeoutMonitor'.
+[24/Oct/2016:11:18:45] ENGINE Serving on http://127.0.0.1:8080
+[24/Oct/2016:11:18:45] ENGINE Bus STARTED
+[24/Oct/2016:11:19:58] ENGINE Restarting because /Users/Kepler/code/seelviz/Jupyter/cherrypy/clviz_web_token.py changed.
+[24/Oct/2016:11:19:58] ENGINE Stopped thread 'Autoreloader'.
+[24/Oct/2016:11:19:58] ENGINE Bus STOPPING
+[24/Oct/2016:11:19:58] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('127.0.0.1', 8080)) shut down
+[24/Oct/2016:11:19:58] ENGINE Stopped thread '_TimeoutMonitor'.
+[24/Oct/2016:11:19:58] ENGINE Bus STOPPED
+[24/Oct/2016:11:19:58] ENGINE Bus EXITING
+[24/Oct/2016:11:19:58] ENGINE Bus EXITED
+[24/Oct/2016:11:19:58] ENGINE Waiting for child threads to terminate...
+[24/Oct/2016:11:19:58] ENGINE Re-spawning clviz_web_token.py
+[24/Oct/2016:11:20:03] ENGINE Listening for SIGHUP.
+[24/Oct/2016:11:20:03] ENGINE Listening for SIGTERM.
+[24/Oct/2016:11:20:03] ENGINE Listening for SIGUSR1.
+[24/Oct/2016:11:20:03] ENGINE Bus STARTING
+[24/Oct/2016:11:20:03] ENGINE Started monitor thread 'Autoreloader'.
+[24/Oct/2016:11:20:03] ENGINE Started monitor thread '_TimeoutMonitor'.
+[24/Oct/2016:11:20:03] ENGINE Serving on http://127.0.0.1:8080
+[24/Oct/2016:11:20:03] ENGINE Bus STARTED
+[24/Oct/2016:11:20:47] ENGINE Restarting because /Users/Kepler/code/seelviz/Jupyter/cherrypy/clviz_web_token.py changed.
+[24/Oct/2016:11:20:47] ENGINE Stopped thread 'Autoreloader'.
+[24/Oct/2016:11:20:47] ENGINE Bus STOPPING
+[24/Oct/2016:11:20:47] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('127.0.0.1', 8080)) shut down
+[24/Oct/2016:11:20:47] ENGINE Stopped thread '_TimeoutMonitor'.
+[24/Oct/2016:11:20:47] ENGINE Bus STOPPED
+[24/Oct/2016:11:20:47] ENGINE Bus EXITING
+[24/Oct/2016:11:20:47] ENGINE Bus EXITED
+[24/Oct/2016:11:20:48] ENGINE Waiting for child threads to terminate...
+[24/Oct/2016:11:20:48] ENGINE Re-spawning clviz_web_token.py
+[24/Oct/2016:11:20:52] ENGINE Listening for SIGHUP.
+[24/Oct/2016:11:20:52] ENGINE Listening for SIGTERM.
+[24/Oct/2016:11:20:52] ENGINE Listening for SIGUSR1.
+[24/Oct/2016:11:20:52] ENGINE Bus STARTING
+[24/Oct/2016:11:20:52] ENGINE Started monitor thread 'Autoreloader'.
+[24/Oct/2016:11:20:52] ENGINE Started monitor thread '_TimeoutMonitor'.
+[24/Oct/2016:11:20:52] ENGINE Serving on http://127.0.0.1:8080
+[24/Oct/2016:11:20:52] ENGINE Bus STARTED
+[24/Oct/2016:11:25:18] HTTP 
+Traceback (most recent call last):
+  File "/Users/Kepler/anaconda/envs/py27/lib/python2.7/site-packages/cherrypy/_cprequest.py", line 670, in respond
+    response.body = self.handler()
+  File "/Users/Kepler/anaconda/envs/py27/lib/python2.7/site-packages/cherrypy/lib/encoding.py", line 217, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "/Users/Kepler/anaconda/envs/py27/lib/python2.7/site-packages/cherrypy/_cpdispatch.py", line 61, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "clviz_web_token.py", line 206, in neurodata
+    image_parse(myToken)
+  File "clviz_web_token.py", line 21, in image_parse
+    img.loadEqImg()
+  File "/Users/Kepler/anaconda/envs/py27/lib/python2.7/site-packages/clarityviz/claritybase.py", line 196, in loadEqImg
+    img = nib.load(path)
+  File "/Users/Kepler/anaconda/envs/py27/lib/python2.7/site-packages/nibabel/loadsave.py", line 40, in load
+    raise FileNotFoundError("No such file: '%s'" % filename)
+FileNotFoundError: No such file: '/Users/Kepler/code/seelviz/Jupyter/cherrypy/img/Fear199.img'
+[24/Oct/2016:11:50:56] ENGINE Keyboard Interrupt: shutting down bus
+[24/Oct/2016:11:50:56] ENGINE Bus STOPPING
+[24/Oct/2016:11:50:56] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('127.0.0.1', 8080)) shut down
+[24/Oct/2016:11:50:56] ENGINE Stopped thread 'Autoreloader'.
+[24/Oct/2016:11:50:56] ENGINE Stopped thread '_TimeoutMonitor'.
+[24/Oct/2016:11:50:56] ENGINE Bus STOPPED
+[24/Oct/2016:11:50:56] ENGINE Bus EXITING
+[24/Oct/2016:11:50:56] ENGINE Bus EXITED
+[24/Oct/2016:11:50:56] ENGINE Waiting for child threads to terminate...
+[24/Oct/2016:13:15:28] ENGINE Listening for SIGHUP.
+[24/Oct/2016:13:15:28] ENGINE Listening for SIGTERM.
+[24/Oct/2016:13:15:28] ENGINE Listening for SIGUSR1.
+[24/Oct/2016:13:15:28] ENGINE Bus STARTING
+[24/Oct/2016:13:15:28] ENGINE Started monitor thread 'Autoreloader'.
+[24/Oct/2016:13:15:28] ENGINE Started monitor thread '_TimeoutMonitor'.
+[24/Oct/2016:13:15:29] ENGINE Serving on http://127.0.0.1:8080
+[24/Oct/2016:13:15:29] ENGINE Bus STARTED
+[24/Oct/2016:13:18:58] HTTP 
+Traceback (most recent call last):
+  File "/Users/Kepler/anaconda/envs/py27/lib/python2.7/site-packages/cherrypy/_cprequest.py", line 670, in respond
+    response.body = self.handler()
+  File "/Users/Kepler/anaconda/envs/py27/lib/python2.7/site-packages/cherrypy/lib/encoding.py", line 217, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "/Users/Kepler/anaconda/envs/py27/lib/python2.7/site-packages/cherrypy/_cpdispatch.py", line 61, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "clviz_web_token.py", line 206, in neurodata
+    image_parse(myToken)
+  File "clviz_web_token.py", line 21, in image_parse
+    img.loadEqImg()
+  File "/Users/Kepler/anaconda/envs/py27/lib/python2.7/site-packages/clarityviz/claritybase.py", line 196, in loadEqImg
+    img = nib.load(path)
+  File "/Users/Kepler/anaconda/envs/py27/lib/python2.7/site-packages/nibabel/loadsave.py", line 40, in load
+    raise FileNotFoundError("No such file: '%s'" % filename)
+FileNotFoundError: No such file: '/Users/Kepler/code/seelviz/Jupyter/cherrypy/img/Fear199.img'
+[24/Oct/2016:13:23:31] ENGINE Keyboard Interrupt: shutting down bus
+[24/Oct/2016:13:23:31] ENGINE Bus STOPPING
+[24/Oct/2016:13:23:31] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('127.0.0.1', 8080)) shut down
+[24/Oct/2016:13:23:31] ENGINE Stopped thread '_TimeoutMonitor'.
+[24/Oct/2016:13:23:31] ENGINE Stopped thread 'Autoreloader'.
+[24/Oct/2016:13:23:31] ENGINE Bus STOPPED
+[24/Oct/2016:13:23:31] ENGINE Bus EXITING
+[24/Oct/2016:13:23:31] ENGINE Bus EXITED
+[24/Oct/2016:13:23:31] ENGINE Waiting for child threads to terminate...
+[24/Oct/2016:13:28:05] ENGINE Listening for SIGHUP.
+[24/Oct/2016:13:28:05] ENGINE Listening for SIGTERM.
+[24/Oct/2016:13:28:05] ENGINE Listening for SIGUSR1.
+[24/Oct/2016:13:28:05] ENGINE Bus STARTING
+[24/Oct/2016:13:28:05] ENGINE Started monitor thread 'Autoreloader'.
+[24/Oct/2016:13:28:05] ENGINE Started monitor thread '_TimeoutMonitor'.
+[24/Oct/2016:13:28:05] ENGINE Serving on http://127.0.0.1:8080
+[24/Oct/2016:13:28:05] ENGINE Bus STARTED
+[24/Oct/2016:13:28:31] HTTP 
+Traceback (most recent call last):
+  File "/Users/Kepler/anaconda/envs/py27/lib/python2.7/site-packages/cherrypy/_cprequest.py", line 670, in respond
+    response.body = self.handler()
+  File "/Users/Kepler/anaconda/envs/py27/lib/python2.7/site-packages/cherrypy/lib/encoding.py", line 217, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "/Users/Kepler/anaconda/envs/py27/lib/python2.7/site-packages/cherrypy/_cpdispatch.py", line 61, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "clviz_web_token.py", line 253, in upload
+    with open(copy, 'wb') as fcopy:
+IOError: [Errno 2] No such file or directory: u'local/Fear199.csv'
+[24/Oct/2016:13:46:18] ENGINE Restarting because /Users/Kepler/code/seelviz/Jupyter/cherrypy/clviz_web_token.py changed.
+[24/Oct/2016:13:46:18] ENGINE Stopped thread 'Autoreloader'.
+[24/Oct/2016:13:46:18] ENGINE Bus STOPPING
+[24/Oct/2016:13:46:18] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('127.0.0.1', 8080)) shut down
+[24/Oct/2016:13:46:18] ENGINE Stopped thread '_TimeoutMonitor'.
+[24/Oct/2016:13:46:18] ENGINE Bus STOPPED
+[24/Oct/2016:13:46:18] ENGINE Bus EXITING
+[24/Oct/2016:13:46:18] ENGINE Bus EXITED
+[24/Oct/2016:13:46:18] ENGINE Waiting for child threads to terminate...
+[24/Oct/2016:13:46:18] ENGINE Re-spawning clviz_web_token.py
+[24/Oct/2016:13:46:32] ENGINE Listening for SIGHUP.
+[24/Oct/2016:13:46:32] ENGINE Listening for SIGTERM.
+[24/Oct/2016:13:46:32] ENGINE Listening for SIGUSR1.
+[24/Oct/2016:13:46:32] ENGINE Bus STARTING
+[24/Oct/2016:13:46:32] ENGINE Started monitor thread 'Autoreloader'.
+[24/Oct/2016:13:46:32] ENGINE Started monitor thread '_TimeoutMonitor'.
+[24/Oct/2016:13:46:32] ENGINE Serving on http://127.0.0.1:8080
+[24/Oct/2016:13:46:32] ENGINE Bus STARTED
+[24/Oct/2016:13:46:41] HTTP 
+Traceback (most recent call last):
+  File "/Users/Kepler/anaconda/envs/py27/lib/python2.7/site-packages/cherrypy/_cprequest.py", line 670, in respond
+    response.body = self.handler()
+  File "/Users/Kepler/anaconda/envs/py27/lib/python2.7/site-packages/cherrypy/lib/encoding.py", line 217, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "/Users/Kepler/anaconda/envs/py27/lib/python2.7/site-packages/cherrypy/_cpdispatch.py", line 61, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "clviz_web_token.py", line 207, in neurodata
+    image_parse(myToken)
+  File "clviz_web_token.py", line 26, in image_parse
+    csv.loadInitCsv()
+NameError: global name 'csv' is not defined
+[24/Oct/2016:13:46:58] ENGINE Restarting because /Users/Kepler/code/seelviz/Jupyter/cherrypy/clviz_web_token.py changed.
+[24/Oct/2016:13:46:58] ENGINE Stopped thread 'Autoreloader'.
+[24/Oct/2016:13:46:58] ENGINE Bus STOPPING
+[24/Oct/2016:13:46:58] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('127.0.0.1', 8080)) shut down
+[24/Oct/2016:13:46:58] ENGINE Stopped thread '_TimeoutMonitor'.
+[24/Oct/2016:13:46:58] ENGINE Bus STOPPED
+[24/Oct/2016:13:46:58] ENGINE Bus EXITING
+[24/Oct/2016:13:46:58] ENGINE Bus EXITED
+[24/Oct/2016:13:46:58] ENGINE Waiting for child threads to terminate...
+[24/Oct/2016:13:46:58] ENGINE Re-spawning clviz_web_token.py
+[24/Oct/2016:13:47:06] ENGINE Listening for SIGHUP.
+[24/Oct/2016:13:47:06] ENGINE Listening for SIGTERM.
+[24/Oct/2016:13:47:06] ENGINE Listening for SIGUSR1.
+[24/Oct/2016:13:47:06] ENGINE Bus STARTING
+[24/Oct/2016:13:47:06] ENGINE Started monitor thread 'Autoreloader'.
+[24/Oct/2016:13:47:06] ENGINE Started monitor thread '_TimeoutMonitor'.
+[24/Oct/2016:13:47:06] ENGINE Serving on http://127.0.0.1:8080
+[24/Oct/2016:13:47:06] ENGINE Bus STARTED
+[24/Oct/2016:13:47:30] HTTP 
+Traceback (most recent call last):
+  File "/Users/Kepler/anaconda/envs/py27/lib/python2.7/site-packages/cherrypy/_cprequest.py", line 670, in respond
+    response.body = self.handler()
+  File "/Users/Kepler/anaconda/envs/py27/lib/python2.7/site-packages/cherrypy/lib/encoding.py", line 217, in __call__
+    self.body = self.oldhandler(*args, **kwargs)
+  File "/Users/Kepler/anaconda/envs/py27/lib/python2.7/site-packages/cherrypy/_cpdispatch.py", line 61, in __call__
+    return self.callable(*self.args, **self.kwargs)
+  File "clviz_web_token.py", line 207, in neurodata
+    image_parse(myToken)
+  File "clviz_web_token.py", line 26, in image_parse
+    img.loadInitCsv()
+  File "/Users/Kepler/anaconda/envs/py27/lib/python2.7/site-packages/clarityviz/claritybase.py", line 226, in loadInitCsv
+    with open(path, 'r') as infile:
+TypeError: coercing to Unicode: need string or buffer, NoneType found
+[24/Oct/2016:14:05:26] ENGINE Restarting because /Users/Kepler/code/seelviz/Jupyter/cherrypy/clviz_web_token.py changed.
+[24/Oct/2016:14:05:26] ENGINE Stopped thread 'Autoreloader'.
+[24/Oct/2016:14:05:26] ENGINE Bus STOPPING
+[24/Oct/2016:14:05:26] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('127.0.0.1', 8080)) shut down
+[24/Oct/2016:14:05:26] ENGINE Stopped thread '_TimeoutMonitor'.
+[24/Oct/2016:14:05:26] ENGINE Bus STOPPED
+[24/Oct/2016:14:05:26] ENGINE Bus EXITING
+[24/Oct/2016:14:05:26] ENGINE Bus EXITED
+[24/Oct/2016:14:05:26] ENGINE Waiting for child threads to terminate...
+[24/Oct/2016:14:05:26] ENGINE Re-spawning clviz_web_token.py
+[24/Oct/2016:14:05:32] ENGINE Listening for SIGHUP.
+[24/Oct/2016:14:05:32] ENGINE Listening for SIGTERM.
+[24/Oct/2016:14:05:32] ENGINE Listening for SIGUSR1.
+[24/Oct/2016:14:05:32] ENGINE Bus STARTING
+[24/Oct/2016:14:05:32] ENGINE Started monitor thread 'Autoreloader'.
+[24/Oct/2016:14:05:32] ENGINE Started monitor thread '_TimeoutMonitor'.
+[24/Oct/2016:14:05:32] ENGINE Serving on http://127.0.0.1:8080
+[24/Oct/2016:14:05:32] ENGINE Bus STARTED
+[24/Oct/2016:14:09:23] ENGINE Keyboard Interrupt: shutting down bus
+[24/Oct/2016:14:09:23] ENGINE Bus STOPPING
+[24/Oct/2016:14:09:28] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('127.0.0.1', 8080)) shut down
+[24/Oct/2016:14:09:28] ENGINE Stopped thread 'Autoreloader'.
+[24/Oct/2016:14:09:28] ENGINE Stopped thread '_TimeoutMonitor'.
+[24/Oct/2016:14:09:28] ENGINE Bus STOPPED
+[24/Oct/2016:14:09:28] ENGINE Bus EXITING
+[24/Oct/2016:14:09:28] ENGINE Bus EXITED
+[24/Oct/2016:14:09:28] ENGINE Waiting for child threads to terminate...
+[24/Oct/2016:14:09:37] ENGINE Listening for SIGHUP.
+[24/Oct/2016:14:09:37] ENGINE Listening for SIGTERM.
+[24/Oct/2016:14:09:37] ENGINE Listening for SIGUSR1.
+[24/Oct/2016:14:09:37] ENGINE Bus STARTING
+[24/Oct/2016:14:09:37] ENGINE Started monitor thread 'Autoreloader'.
+[24/Oct/2016:14:09:37] ENGINE Started monitor thread '_TimeoutMonitor'.
+[24/Oct/2016:14:09:37] ENGINE Serving on http://127.0.0.1:8080
+[24/Oct/2016:14:09:37] ENGINE Bus STARTED
+[24/Oct/2016:14:21:05] ENGINE Keyboard Interrupt: shutting down bus
+[24/Oct/2016:14:21:05] ENGINE Bus STOPPING
+[24/Oct/2016:14:21:05] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('127.0.0.1', 8080)) shut down
+[24/Oct/2016:14:21:05] ENGINE Stopped thread '_TimeoutMonitor'.
+[24/Oct/2016:14:21:05] ENGINE Stopped thread 'Autoreloader'.
+[24/Oct/2016:14:21:05] ENGINE Bus STOPPED
+[24/Oct/2016:14:21:05] ENGINE Bus EXITING
+[24/Oct/2016:14:21:05] ENGINE Bus EXITED
+[24/Oct/2016:14:21:05] ENGINE Waiting for child threads to terminate...
