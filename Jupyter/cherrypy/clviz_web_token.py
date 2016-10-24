@@ -52,16 +52,13 @@ class FileDemo(object):
 
     @cherrypy.expose
     def neurodata(self, myToken):
+        image_parse(myToken)
         fzip = shutil.make_archive(myToken, 'zip', myToken)
         fzip_abs = os.path.abspath(fzip)
-        image_parse(myToken)
         html = """
         <html><body>
             <h2>Ouputs</h2>
         """
-#            <a href="index?directory=%s">Up</a><br />
-#        """ % os.path.dirname(os.path.abspath("."))
-        # print os.path.dirname(os.path.abspath("."))
 
         # for filename in out:
         plotly = []
@@ -92,11 +89,6 @@ class FileDemo(object):
 
     @cherrypy.expose
     def upload(self, myFile):
-#        destination = os.path.join('local/')
-#        print destination
-#        with open(destination + myFile.filename, 'wb') as f:
-#            shutil.copyfileobj(cherrypy.request.body, f)
-        # print os.path.dirname(os.path.realpath(myFile.file))
         copy = 'local/' + myFile.filename
         print copy
         token = myFile.filename.split('.')[:-1]
@@ -111,8 +103,6 @@ class FileDemo(object):
         copydir = os.path.join(os.getcwd(), os.path.dirname('local/'))
         print copydir
         csv = claritybase.claritybase(token, copydir)
-        # out = plot3d(myFile.file, absDir, myFile.filename)
-        # out = plot3d('local/', myFile.filename)
         csv.loadInitCsv(copydir + '/' + myFile.filename)
         csv.plot3d()
         csv.savePoints()
@@ -125,10 +115,6 @@ class FileDemo(object):
         <html><body>
             <h2>Ouputs</h2>
         """
-#            <a href="index?directory=%s">Up</a><br />
-#        """ % os.path.dirname(os.path.abspath("."))
-        # print os.path.dirname(os.path.abspath("."))
-        # for filename in out:
         plotly = []
         for filename in glob.glob(token + '/*'):
             absPath = os.path.abspath(filename)
@@ -158,7 +144,6 @@ class FileDemo(object):
     @cherrypy.expose
     def plotly(self, plot="test/testplotly.html"):
         return file(plot)
-    # index.exposed = True
 
 
 class Download:
@@ -166,8 +151,6 @@ class Download:
     @cherrypy.expose
     def index(self, filepath):
         return serve_file(filepath, "application/x-download", "attachment")
-
-    # index.exposed = True
 
 
 tutconf = os.path.join(os.path.dirname('/usr/local/lib/python2.7/dist-packages/cherrypy/tutorial/'), 'tutorial.conf')
@@ -177,7 +160,7 @@ tutconf = os.path.join(os.path.dirname('/usr/local/lib/python2.7/dist-packages/c
 if __name__ == '__main__':
     # CherryPy always starts with app.root when trying to map request URIs
     # to objects, so we need to mount a request handler root. A request
-    # to '/' will be mapped to HelloWorld().index().
+    # to '/' will be mapped to index().
     root = FileDemo()
     root.download = Download()
     cherrypy.tree.mount(root)
