@@ -630,14 +630,14 @@ hr.small {
 }
 
 .About {
-    background-color: #785098;
+    background-color: #8C489F;
     padding: 48px 12%;
 }
 
 .Acknowledgments {
     /* old color: #785098 */
     background-color: #DDA7BB;
-    color: #E7DEEE;
+    color: #FFFFFF;
     padding-bottom: 128px;
 }
 
@@ -650,6 +650,7 @@ hr.small {
 
 .heading-faq {
    font-family: 'Helvetica Neue';
+   color: #FFFFFF;
    font-size: 36px;
    margin-bottom: 24px;
    text-align: center;
