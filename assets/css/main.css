@@ -548,14 +548,14 @@ hr.small {
 .partners-heading,
 .collaborators-heading,
 .heading-faq{
-   color: #FFFFFF;
+   color: #000000;
 }
 
 
 /* Project */
 .Project {
     background-color: #EDEDED;
-    color: #FFFFFF;
+    color: #000000;
     padding: 20px 0;
 }
 
@@ -632,7 +632,7 @@ hr.small {
 .About {
     /*old color #8C489F*/
     background-color: #EDEDED;
-    color: #FFFFFF;
+    color: #000000;
     padding: 48px 12%;
 }
 
