@@ -554,7 +554,7 @@ hr.small {
 
 /* Project */
 .Project {
-    background-color: #000000;
+    background-color: #EDEDED;
     color: #FFFFFF;
     padding: 20px 0;
 }
@@ -631,7 +631,7 @@ hr.small {
 
 .About {
     /*old color #8C489F*/
-    background-color: #000000;
+    background-color: #EDEDED;
     color: #FFFFFF;
     padding: 48px 12%;
 }
