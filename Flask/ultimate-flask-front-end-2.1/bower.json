@@ -1,0 +1,21 @@
+{
+  "name": "templates",
+  "homepage": "https://github.com/NeuroDataDesign/seelviz",
+  "authors": [
+    "alee156 <lealbertle@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "react": "^15.1.0"
+  }
+}
