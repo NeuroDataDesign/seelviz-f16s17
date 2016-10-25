@@ -548,14 +548,15 @@ hr.small {
 .partners-heading,
 .collaborators-heading,
 .heading-faq{
-   color: #193d56;
+   color: #FFFFFF;
 }
 
 
 /* Project */
 .Project {
-    background-color: #E7DEEE;
-    padding: 60px 0;
+    background-color: #000000;
+    color: #FFFFFF;
+    padding: 20px 0;
 }
 
 @media all and (max-width:700px) {
@@ -568,7 +569,7 @@ hr.small {
 .info-heading {
    font-family: 'Helvetica Neue';
    font-size: 36px;
-   margin-bottom: 48px;
+   margin-bottom: 10px;
 }
 
 .info-para {
@@ -580,8 +581,7 @@ hr.small {
     background-color: #000000;
     color: #FFFFFF;
     overflow: hidden;
-    padding: 80px 0;
-    position: relative;
+    padding: 40px;
     text-align: center;
     width: 100%;
 }
@@ -630,13 +630,15 @@ hr.small {
 }
 
 .About {
-    background-color: #8C489F;
+    /*old color #8C489F*/
+    background-color: #000000;
+    color: #FFFFFF;
     padding: 48px 12%;
 }
 
 .Acknowledgments {
-    /* old color: #785098 */
-    background-color: #DDA7BB;
+    /* old color: #DDA7BB */
+    background-color: #000000;
     color: #FFFFFF;
     padding-bottom: 128px;
 }
