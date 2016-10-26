@@ -1,370 +1,144 @@
-<!-- Code written by Albert, Tony, Luke -->
-
 <!DOCTYPE html>
-<!-- Thanks to NeuroData for the html code -->
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>SeelViz - Javascript Visualizations of Clarity Brains</title>
-    {% load staticfiles %}
-    <link href="{% static 'clarityviz/assets/css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'clarityviz/assets/css/main.css' %}" rel="stylesheet">
-    <link href="{% static 'assets/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
-    <link rel="shortcut icon" href="{% static 'assets/ocp_main3.ico' %}"> <!-- This is the icon for the website -->
-</head>
-
-<!-- Beginning of Splash portion -->
-
-<body id="page-top">
-    <div class="header-navbar">
-    	<h1 class="header-navbar-logo">SeelViz Logo</h1> <!-- not sure what this is? -->
-
-    <!-- Navigation Bar -->
-        <div class="header-navbar-hamburger"></div>
-        <ul class="header-navbar-items">
-            <li class="header-navbar-item"><a href="#Project" class="header-navbar-link">Project Description</a></li>
-            <li class="header-navbar-item"><a href="#Graph" class="header-navbar-link">Graph Explanations</a></li>
-            <li class="header-navbar-item"><a href="#About" class="header-navbar-link">About Us</a></li>
-            <li class="header-navbar-item"><a href="#Acknowledgments" class="header-navbar-link">Acknowledgments</a></li>
-        </ul>
-    </div>
-    <!-- End of Navigation Bar -->
-
-    <div class="header">
-        <div class="header-grad"></div>
-        <div class="header-pcb"></div>
-        <div class="header-bg"></div>
-        <div class="header-text">
-            <h2 class="header-text-headline"> 
-                SeelViz - Javascript Visualizations of Clarity Brains
-            </h2>
-            <h4 class="header-text-byline"><strong>Albert Lee, Jon Liu, Tony Sun, Luke Zhu</strong></h4>
-
-    <!-- Gratitudes -->
-
-            <h4 class="header-text-byline">Research made possible by <strong>
-                <a href="http://www.neurodata.io" style="color: #fff;">
-                NeuroData
-                </a>
-            </strong>
-            </h4>
-    <!-- End of Gratitudes -->
-             
-        </div>
-    </div>
-
-<!-- End of Splash portion -->
-
-<!-- Project description -->
-    <div id="Project" class="Project">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h1 class="descr-title info-heading">SeelViz: Data Visualization of Clarity Brain Images</h1>
-                    <p class="lead info-para">
-                    SeelViz (short for Clarity Visualization) is a collection of tools used to analyze and visualize CLARITY-treated brains. This website is maintained to provide deliverables (see <a href="https://neurodatadesign.github.io/seelviz/reveal/Deliverables+Markdown.html#/">here</a>) of our weekly progress as well as extensive documentation regarding our projects.  Upload CSV files <a href="http://104.198.102.166">here</a> to perform processing on our web server (in alpha, please upload 200 kb or less).
-                    <br>                  
-                    </p>
-                    <p>
-                    <!--
-                    <form action="upload.php" method="post" enctype="multipart/form-data">
-                    Select file to upload:
-                    <input type="file" name="fileToUpload" id="fileToUpload">
-                    <input type="submit" value="Upload File" name="submit">
-                    </form>
-                    -->
-                    </p>
+        <html lang="en">
+        <head>
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta name="description" content="">
+            <meta name="author" content="">
+            <title>ClarityViz</title>
+            {% load staticfiles %}
+            <!-- Bootstrap Core CSS -->
+            <link href="{% static 'clarityviz/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+            <!-- Custom Fonts -->
+            <link href="{% static 'clarityviz/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+            <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+            <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+            <!-- Plugin CSS -->
+            <link href="{% static 'clarityviz/vendor/magnific-popup/magnific-popup.css' %}" rel="stylesheet">
+            <!-- Theme CSS -->
+            <link href="{% static 'clarityviz/css/creative.min.css' %}" rel="stylesheet">
+            <!-- Custom styles for this template -->
+            <link href="{% static 'clarityviz/css/style.css' %}" rel="stylesheet">
+            <!-- Dropzone CSS -->
+            <link href="{% static 'clarityviz/css/dropzone.css' %}" rel="stylesheet">
+            <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+            <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+            <!--[if lt IE 9]>
+                <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+                <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+            <![endif]-->
+        </head>
+        <body id="page-top">
+            <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                        </button>
+                        <a class="navbar-brand page-scroll" href="#page-top">ClarityViz</a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a class="page-scroll" href="https://neurodatadesign.github.io/seelviz/#Project">Project Description</a>
+                            </li>
+                            <li>
+                                <a class="page-scroll" href="https://neurodatadesign.github.io/seelviz/#Graph">Graph Explanations</a>
+                            </li>
+                            <li>
+                                <a class="page-scroll" href="https://neurodatadesign.github.io/seelviz/#About">About Us</a>
+                            </li>
+                            <li>
+                                <a class="page-scroll" href="https://neurodatadesign.github.io/seelviz/#Acknowledgments">Acknowledgements</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
                 </div>
-            </div>
-        </div>
-    </div>
-
-<!-- Graph Explanations -->
-    <div id="Graph" class="Graph">
-        <div class="container">
-            <h2 class="section-apply-heading text-center">Graph Explanations</h2>
-                <div class="col-lg-12 text-center"></div>
-
-<!-- saved from url=(0100)https://neurodatadesign.github.io/seelviz/reveal/html/graphmlhtmls/Cocaine174localeqbig.graphml.html -->
-<center><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style></style></head><body><script type="text/javascript">/**
-* plotly.js v1.16.2
-* Copyright 2012-2016, Plotly, Inc.
-* All rights reserved.
-* Licensed under the MIT license
-*/
-    </script></center>
-            <div class="col-lg-12 text-center">
-            <p class="lead info-para">
-            Shown above is an example output of a density false-colored for Cocaine 174 generated via ClarityViz. The colorations correspond to the number of edges for each node (an edge-number-to-color mapping can be seen <a href="https://neurodatadesign.github.io/seelviz/reveal/html/graphmlhtmls/Cocaine174localeqbig.graphmlheatmap.html">here</a>. Each unique color represents a 5% increase in total number of nodes, with the most-connected node being the white node.  The original source code can be seen <a href="https://neurodatadesign.github.io/seelviz/reveal/october5stuff/ChangingPlotlyColorByDensity.html">here</a>.
-            &nbsp;
-            &nbsp; 
-            </p>
-        </div>
-    </div>
-    <div class="container">
-        <div class="col-lg-12 text-center"></div>
-
-<!-- search for meeeee -->
-
-<!-- saved from url=(0102)https://neurodatadesign.github.io/seelviz/reveal/html/graphmlhtmls/Control258localeq.region_color.html -->
-<center><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style></style></head><body><script type="text/javascript">/**
-* plotly.js v1.16.2
-* Copyright 2012-2016, Plotly, Inc.
-* All rights reserved.
-* Licensed under the MIT license
-*/
-    </script></body></html></center>
-
-        <div class="col-lg-12 text-center">
-            <p class="lead info-para">
-            &nbsp;
-            &nbsp;
-            Shown above is an example output of the Control258 brain with each region as designated by the atlas a unique colored.  Controls along the side allow for toggling the traces on/off.  See <a href=https://github.com/NeuroDataDesign/seelviz/blob/gh-pages/Jupyter/Plotly%20Regions%20Control258.ipynb>here</a> for implementation details.   
-            </p>
-        </div>
-    </div>
-
-    <!-- Second Hidden Segment -->
-
-    <div class="container">
-        <div class="col-lg-12 text-center"></div>
-<!-- saved from url=(0097)https://neurodatadesign.github.io/seelviz/reveal/html/graphmlhtmls/Control258localeq.graphml.html -->
-<center><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style></style></head><body><script type="text/javascript">/**
-* plotly.js v1.16.2
-* Copyright 2012-2016, Plotly, Inc.
-* All rights reserved.
-* Licensed under the MIT license
-*/
-
-    </script></body></html></center>
-
-        <div class="col-lg-12 text-center">
-            <p class="lead info-para">
-            &nbsp;
-            &nbsp;
-            Shown above is an example output of the Control258 brain with each edge highlighted in cyan.  The edges were determined by an epsilon ball radius of 25.  See <a href=https://neurodatadesign.github.io/seelviz/reveal/october5stuff/PlotlyGraphMLOnly.html>here</a> for implementation details.   
-            </p>
-        </div>
-    </div>
-
-<!-- About Us section -->
-
-    <div id="About" class="About">
-        <h2 class="heading-faq">About Us</h2>
-
-        <div class="col-lg-12 text-center">
-                    <h1 class="Name Header">Albert Lee &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Jon Liu &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Tony Sun &nbsp; &nbsp; &nbsp; &nbsp; Luke Zhu</h1>
-					<a href = "https://github.com/alee156/"><IMG SRC="assets/img/WebsiteFiles/albert.png" ALT = "Albert" hspace = "5"></a>
-                    <a href = "https://www.linkedin.com/in/jonathan-liu-455711b6"><IMG SRC="assets/img/WebsiteFiles/jon.png" ALT = "Jon" hspace = "5"></a>
-                    <a href = "https://www.linkedin.com/in/toekneesunshine"><IMG SRC="assets/img/WebsiteFiles/tony.png" ALT = "Tony" hspace = "5"></a>
-                    <a href = "https://www.linkedin.com/in/luke-zhu-909670b7"><IMG SRC="assets/img/WebsiteFiles/luke.png" ALT = "Luke" hspace = "5"></a> 
-        </div>
-
-<!-- Acknowledgements -->
-        <p class="contact"><strong> &nbsp; <br> <br></p>        
-    </div>
-
-    <div id="Acknowledgments" class="Acknowledgments">
-        <div class="container">
-            <div class="row">
-            <h2 class="section-apply-heading text-center">Acknowledgements</h2>
-                <div class="col-lg-12 text-center">
-
-                        <a href = "http://www.bme.jhu.edu/"><img src="assets/img/sponsors/jhu-bme.png" width="400px" height="auto" ALT = "JHU BME" hspace = "20"></a>
-
-                        <a href = "neurodata.io/"><img src="assets/img/logo_dark copy.png" width="400px" height="auto" ALT = "neurodata.io" hspacae = "20"></a>
-
-                        <a href = "http://clarityresourcecenter.org/"><img src="assets/img/sponsors/clarityresourcecenter" width="400px" height="auto" ALT = "deisseroth lab" hspacae = "20"></a>
-
+                <!-- /.container-fluid -->
+            </nav>
+            <header>
+                <div class="header-content">
+                    <div class="header-content-inner">
+                        <h1 id="homeHeading">Select File</h1>
+                        <hr>
+                        <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
+                        <div class="row">
+                            <div class="col-xs-6 col-md-4"></div>
+                            <div class="col-xs-6 col-md-4">
+                                <label for="myFile">Upload a File</label>
+                                <form action="/file-upload" class="dropzone" method="post" enctype="multipart/form-data" id="myFile">
+                                </form>
+                                <input class="btn btn-default" type="submit" value="Submit">
+                                <!-- <p class="help-block">Example block-level help text here.</p> -->
+                                <!-- <form action="upload" method="post" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label for="myFile">Upload a File</label>
+                                        <div class="center-block"></div>
+                                        <input type="file" class="form-control" id="myFile" name="myFile">
+                                    </div>
+                                    <input class="btn btn-default" type="submit" value="Submit">
+                                </form> -->
+                                <h2>OR</h2>
+                                <form action="#" method="get" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label for="myToken">Submit Token</label>
+                                        <input type="text" class="form-control" id="myToken" name="myToken" placeholder="Token">
+                                    </div>
+                                    <!-- Token name: <input type="text" name="myToken"/><br /> -->
+                                    <input class="btn btn-default" type="submit" name="tokenButton" value="Submit">
+                                </form> 
+                            </div>
+                            <div class="col-xs-6 col-md-4"></div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-
-    <script src="/assets/js/jquery.js"></script>
-    <script>
-    $(function() {
-
-        function isMobile() {
-
-            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        }
-
-        // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
-        // http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating
-
-        // requestAnimationFrame polyfill by Erik Möller. fixes from Paul Irish and Tino Zijdel
-
-        // MIT license
-
-        (function() {
-            var lastTime = 0;
-            var vendors = ['ms', 'moz', 'webkit', 'o'];
-            for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-                window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
-                window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] ||
-                  window[vendors[x]+'CancelRequestAnimationFrame'];
-            }
-
-            if (!window.requestAnimationFrame)
-                window.requestAnimationFrame = function(callback, element) {
-                    var currTime = new Date().getTime();
-                    var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-                    var id = window.setTimeout(function() { callback(currTime + timeToCall); },
-                      timeToCall);
-                    lastTime = currTime + timeToCall;
-                    return id;
-                };
-
-            if (!window.cancelAnimationFrame)
-                window.cancelAnimationFrame = function(id) {
-                    clearTimeout(id);
-                };
-        }());
-
-        if(!isMobile()) {
-            (function(window, document, undefined) {
-
-              $(document).ready(function() {
-
-                var running = false,
-                    $header = $('.header-navbar');
-
-                function updateHeaderScroll() {
-
-                  if(running) {
-
-                    return;
-                  }
-
-                  running = true;
-
-                  window.requestAnimationFrame(function() {
-
-                    $header.toggleClass('header-navbar-scrolled', $(window).scrollTop() > 20);
-                    running = false;
-                  });
-                }
-
-                updateHeaderScroll();
-
-                $(window).scroll(updateHeaderScroll);
-              });
-
-            })(window, window.document);
-        }
-
-        $('a[href*=#]:not([href=#])').click(function() {
-
-            if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-                var target = $(this.hash);
-                target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-
-                if (target.length) {
-
-                    $('html,body').animate({
-
-                        scrollTop: target.offset().top - $('.header-navbar').height(),
-
-                    }, 500);
-
-                    $('html').removeClass('nav-open');
-
-                    return false;
-                }
-            }
-        });
-
-        $('.header-navbar-logo').click(function() {
-
-            $('html,body').animate({scrollTop: 0}, 500);
-            $('html').removeClass('nav-open');
-        });
-
-        $('.header-navbar-hamburger').click(function() {
-
-            $('html').toggleClass('nav-open');
-        });
-
-        $('body').click(function(e) {
-
-            if($('html').hasClass('nav-open') && $(e.target).parents('.header-navbar').length === 0) {
-
-                $('html').removeClass('nav-open');
-            }
-        });
-
-        if(isMobile()) {
-
-            $('.header-navbar').addClass('header-navbar-scrolled');
-        }
-    });
-    </script>
-    <script>
-        $(function() {
-
-            var ekg         = document.getElementById('ekg'),
-                path        = ekg.getElementsByTagName('path')[0],
-                totalLength = path.getTotalLength()
-                thumper     = document.getElementById('thumper'),
-                style       = document.createElement('style'),
-                resizeTimeout = null;
-
-            document.getElementsByTagName('head')[0].appendChild(style);
-            var stylesheet = style.sheet;
-
-            function resizeEkg() {
-
-                resizeTimeout = null;
-
-                var width = document.body.clientWidth + 200;
-
-                ekg.setAttribute('width', width);
-
-                var viewBox = ekg.getAttribute('viewBox').split(' ');
-                viewBox[2] = width;
-                ekg.setAttribute('viewBox', viewBox.join(' '));
-
-                var side = ((width - 61.045) / 2).toFixed(3);
-
-                path.setAttribute('d', 'M0 39h' + side + 'l2.798 -5.740l5.525 10.763l12.629 -48.956l13.705 71.031l12.315 -35.070l4.691 14.717l5.727 -13.101l3.655 5.925h' + side);
-
-                totalLength = path.getTotalLength();
-                path.setAttribute('stroke-dasharray', (totalLength - 100).toFixed(3) + ' 100');
-
-                while(stylesheet.cssRules.length > 0) {
-
-                    stylesheet.deleteRule(0);
-                }
-
-                var animation = 'ekg { 0% { stroke-dashoffset: ' + totalLength.toFixed(3) + '; } 100% { stroke-dashoffset: 0; } }'
-                try { stylesheet.insertRule('@-webkit-keyframes ' + animation, 0); } catch(e) {}
-                try { stylesheet.insertRule('@keyframes ' + animation, 0); } catch(e) {}
-
-                var duration = totalLength / 350;
-                path.style.webkitAnimationDuration = duration + 's';
-                path.style.animationDuration       = duration + 's';
-            }
-
-            resizeEkg();
-
-            path.style.webkitAnimation = 'ekg 5.7s ease-in infinite';
-            path.style.animation       = 'ekg 5.7s ease-in infinite';
-
-            $(window).on('resize', function() {
-
-                if(resizeTimeout !== null) {
-
-                    clearTimeout(resizeTimeout);
-                }
-
-                resizeTimeout = setTimeout(resizeEkg, 30);
-            });
-        });
-    </script>
-</body>
-</html>
+            </header>
+            <section class="bg-primary" id="about">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2 text-center">
+                            <h2 class="section-heading">We've got what you need!</h2>
+                            <hr class="light">
+                            <p class="text-faded">Start Bootstrap has everything you need to get your new website up and running in no time! All of the templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings attached!</p>
+                            <a href="#services" class="page-scroll btn btn-default btn-xl sr-button">Get Started!</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="contact">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2 text-center">
+                            <h2 class="section-heading">Acknowledgements</h2>
+                            <hr class="primary">
+                            <p>Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
+                        </div>
+                        <div class="col-lg-4 col-lg-offset-2 text-center">
+                            <i class="fa fa-phone fa-3x sr-contact"></i>
+                            <p>123-456-6789</p>
+                        </div>
+                        <div class="col-lg-4 text-center">
+                            <i class="fa fa-envelope-o fa-3x sr-contact"></i>
+                            <p><a href="mailto:your-email@your-domain.com">feedback@startbootstrap.com</a></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- jQuery -->
+            <script src="{% static 'clarityviz/vendor/jquery/jquery.min.js' %}"></script>
+            <!-- Bootstrap Core JavaScript -->
+            <script src="{% static 'clarityviz/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+            <!-- Plugin JavaScript -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+            <script src="{% static 'clarityviz/vendor/scrollreveal/scrollreveal.min.js' %}"></script>
+            <script src="{% static 'clarityviz/vendor/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+            <!-- Theme JavaScript -->
+            <script src="{% static 'clarityviz/js/creative.min.js' %}"></script>
+            <!-- JavaScript for the drag and drop upload box. -->
+            <script src="{% static 'clarityviz/js/dropzone.js' %}"></script>
+        </body>
+        </html>

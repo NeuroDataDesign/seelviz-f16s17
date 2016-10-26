@@ -1,0 +1,370 @@
+<!-- Code written by Albert, Tony, Luke -->
+
+<!DOCTYPE html>
+<!-- Thanks to NeuroData for the html code -->
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>SeelViz - Javascript Visualizations of Clarity Brains</title>
+    {% load staticfiles %}
+    <link href="{% static 'teampage/assets/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'teampage/assets/css/main.css' %}" rel="stylesheet">
+    <link href="{% static 'teampage/assets/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="{% static 'teampage/assets/ocp_main3.ico' %}"> <!-- This is the icon for the website -->
+</head>
+
+<!-- Beginning of Splash portion -->
+
+<body id="page-top">
+    <div class="header-navbar">
+    	<h1 class="header-navbar-logo">SeelViz Logo</h1> <!-- not sure what this is? -->
+
+    <!-- Navigation Bar -->
+        <div class="header-navbar-hamburger"></div>
+        <ul class="header-navbar-items">
+            <li class="header-navbar-item"><a href="#Project" class="header-navbar-link">Project Description</a></li>
+            <li class="header-navbar-item"><a href="#Graph" class="header-navbar-link">Graph Explanations</a></li>
+            <li class="header-navbar-item"><a href="#About" class="header-navbar-link">About Us</a></li>
+            <li class="header-navbar-item"><a href="#Acknowledgments" class="header-navbar-link">Acknowledgments</a></li>
+        </ul>
+    </div>
+    <!-- End of Navigation Bar -->
+
+    <div class="header">
+        <div class="header-grad"></div>
+        <div class="header-pcb"></div>
+        <div class="header-bg"></div>
+        <div class="header-text">
+            <h2 class="header-text-headline"> 
+                SeelViz - Javascript Visualizations of Clarity Brains
+            </h2>
+            <h4 class="header-text-byline"><strong>Albert Lee, Jon Liu, Tony Sun, Luke Zhu</strong></h4>
+
+    <!-- Gratitudes -->
+
+            <h4 class="header-text-byline">Research made possible by <strong>
+                <a href="http://www.neurodata.io" style="color: #fff;">
+                NeuroData
+                </a>
+            </strong>
+            </h4>
+    <!-- End of Gratitudes -->
+             
+        </div>
+    </div>
+
+<!-- End of Splash portion -->
+
+<!-- Project description -->
+    <div id="Project" class="Project">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h1 class="descr-title info-heading">SeelViz: Data Visualization of Clarity Brain Images</h1>
+                    <p class="lead info-para">
+                    SeelViz (short for Clarity Visualization) is a collection of tools used to analyze and visualize CLARITY-treated brains. This website is maintained to provide deliverables (see <a href="https://neurodatadesign.github.io/seelviz/reveal/Deliverables+Markdown.html#/">here</a>) of our weekly progress as well as extensive documentation regarding our projects.  Upload CSV files <a href="http://104.198.102.166">here</a> to perform processing on our web server (in alpha, please upload 200 kb or less).
+                    <br>                  
+                    </p>
+                    <p>
+                    <!--
+                    <form action="upload.php" method="post" enctype="multipart/form-data">
+                    Select file to upload:
+                    <input type="file" name="fileToUpload" id="fileToUpload">
+                    <input type="submit" value="Upload File" name="submit">
+                    </form>
+                    -->
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Graph Explanations -->
+    <div id="Graph" class="Graph">
+        <div class="container">
+            <h2 class="section-apply-heading text-center">Graph Explanations</h2>
+                <div class="col-lg-12 text-center"></div>
+
+<!-- saved from url=(0100)https://neurodatadesign.github.io/seelviz/reveal/html/graphmlhtmls/Cocaine174localeqbig.graphml.html -->
+<center><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style></style></head><body><script type="text/javascript">/**
+* plotly.js v1.16.2
+* Copyright 2012-2016, Plotly, Inc.
+* All rights reserved.
+* Licensed under the MIT license
+*/
+    </script></center>
+            <div class="col-lg-12 text-center">
+            <p class="lead info-para">
+            Shown above is an example output of a density false-colored for Cocaine 174 generated via ClarityViz. The colorations correspond to the number of edges for each node (an edge-number-to-color mapping can be seen <a href="https://neurodatadesign.github.io/seelviz/reveal/html/graphmlhtmls/Cocaine174localeqbig.graphmlheatmap.html">here</a>. Each unique color represents a 5% increase in total number of nodes, with the most-connected node being the white node.  The original source code can be seen <a href="https://neurodatadesign.github.io/seelviz/reveal/october5stuff/ChangingPlotlyColorByDensity.html">here</a>.
+            &nbsp;
+            &nbsp; 
+            </p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="col-lg-12 text-center"></div>
+
+<!-- search for meeeee -->
+
+<!-- saved from url=(0102)https://neurodatadesign.github.io/seelviz/reveal/html/graphmlhtmls/Control258localeq.region_color.html -->
+<center><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style></style></head><body><script type="text/javascript">/**
+* plotly.js v1.16.2
+* Copyright 2012-2016, Plotly, Inc.
+* All rights reserved.
+* Licensed under the MIT license
+*/
+    </script></body></html></center>
+
+        <div class="col-lg-12 text-center">
+            <p class="lead info-para">
+            &nbsp;
+            &nbsp;
+            Shown above is an example output of the Control258 brain with each region as designated by the atlas a unique colored.  Controls along the side allow for toggling the traces on/off.  See <a href=https://github.com/NeuroDataDesign/seelviz/blob/gh-pages/Jupyter/Plotly%20Regions%20Control258.ipynb>here</a> for implementation details.   
+            </p>
+        </div>
+    </div>
+
+    <!-- Second Hidden Segment -->
+
+    <div class="container">
+        <div class="col-lg-12 text-center"></div>
+<!-- saved from url=(0097)https://neurodatadesign.github.io/seelviz/reveal/html/graphmlhtmls/Control258localeq.graphml.html -->
+<center><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style></style></head><body><script type="text/javascript">/**
+* plotly.js v1.16.2
+* Copyright 2012-2016, Plotly, Inc.
+* All rights reserved.
+* Licensed under the MIT license
+*/
+
+    </script></body></html></center>
+
+        <div class="col-lg-12 text-center">
+            <p class="lead info-para">
+            &nbsp;
+            &nbsp;
+            Shown above is an example output of the Control258 brain with each edge highlighted in cyan.  The edges were determined by an epsilon ball radius of 25.  See <a href=https://neurodatadesign.github.io/seelviz/reveal/october5stuff/PlotlyGraphMLOnly.html>here</a> for implementation details.   
+            </p>
+        </div>
+    </div>
+
+<!-- About Us section -->
+
+    <div id="About" class="About">
+        <h2 class="heading-faq">About Us</h2>
+
+        <div class="col-lg-12 text-center">
+                    <h1 class="Name Header">Albert Lee &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Jon Liu &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Tony Sun &nbsp; &nbsp; &nbsp; &nbsp; Luke Zhu</h1>
+					<a href = "https://github.com/alee156/"><IMG SRC="assets/img/WebsiteFiles/albert.png" ALT = "Albert" hspace = "5"></a>
+                    <a href = "https://www.linkedin.com/in/jonathan-liu-455711b6"><IMG SRC="assets/img/WebsiteFiles/jon.png" ALT = "Jon" hspace = "5"></a>
+                    <a href = "https://www.linkedin.com/in/toekneesunshine"><IMG SRC="assets/img/WebsiteFiles/tony.png" ALT = "Tony" hspace = "5"></a>
+                    <a href = "https://www.linkedin.com/in/luke-zhu-909670b7"><IMG SRC="assets/img/WebsiteFiles/luke.png" ALT = "Luke" hspace = "5"></a> 
+        </div>
+
+<!-- Acknowledgements -->
+        <p class="contact"><strong> &nbsp; <br> <br></p>        
+    </div>
+
+    <div id="Acknowledgments" class="Acknowledgments">
+        <div class="container">
+            <div class="row">
+            <h2 class="section-apply-heading text-center">Acknowledgements</h2>
+                <div class="col-lg-12 text-center">
+
+                        <a href = "http://www.bme.jhu.edu/"><img src="assets/img/sponsors/jhu-bme.png" width="400px" height="auto" ALT = "JHU BME" hspace = "20"></a>
+
+                        <a href = "neurodata.io/"><img src="assets/img/logo_dark copy.png" width="400px" height="auto" ALT = "neurodata.io" hspacae = "20"></a>
+
+                        <a href = "http://clarityresourcecenter.org/"><img src="assets/img/sponsors/clarityresourcecenter" width="400px" height="auto" ALT = "deisseroth lab" hspacae = "20"></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="/assets/js/jquery.js"></script>
+    <script>
+    $(function() {
+
+        function isMobile() {
+
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+        // http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating
+
+        // requestAnimationFrame polyfill by Erik Möller. fixes from Paul Irish and Tino Zijdel
+
+        // MIT license
+
+        (function() {
+            var lastTime = 0;
+            var vendors = ['ms', 'moz', 'webkit', 'o'];
+            for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+                window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+                window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] ||
+                  window[vendors[x]+'CancelRequestAnimationFrame'];
+            }
+
+            if (!window.requestAnimationFrame)
+                window.requestAnimationFrame = function(callback, element) {
+                    var currTime = new Date().getTime();
+                    var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+                    var id = window.setTimeout(function() { callback(currTime + timeToCall); },
+                      timeToCall);
+                    lastTime = currTime + timeToCall;
+                    return id;
+                };
+
+            if (!window.cancelAnimationFrame)
+                window.cancelAnimationFrame = function(id) {
+                    clearTimeout(id);
+                };
+        }());
+
+        if(!isMobile()) {
+            (function(window, document, undefined) {
+
+              $(document).ready(function() {
+
+                var running = false,
+                    $header = $('.header-navbar');
+
+                function updateHeaderScroll() {
+
+                  if(running) {
+
+                    return;
+                  }
+
+                  running = true;
+
+                  window.requestAnimationFrame(function() {
+
+                    $header.toggleClass('header-navbar-scrolled', $(window).scrollTop() > 20);
+                    running = false;
+                  });
+                }
+
+                updateHeaderScroll();
+
+                $(window).scroll(updateHeaderScroll);
+              });
+
+            })(window, window.document);
+        }
+
+        $('a[href*=#]:not([href=#])').click(function() {
+
+            if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+                var target = $(this.hash);
+                target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+
+                if (target.length) {
+
+                    $('html,body').animate({
+
+                        scrollTop: target.offset().top - $('.header-navbar').height(),
+
+                    }, 500);
+
+                    $('html').removeClass('nav-open');
+
+                    return false;
+                }
+            }
+        });
+
+        $('.header-navbar-logo').click(function() {
+
+            $('html,body').animate({scrollTop: 0}, 500);
+            $('html').removeClass('nav-open');
+        });
+
+        $('.header-navbar-hamburger').click(function() {
+
+            $('html').toggleClass('nav-open');
+        });
+
+        $('body').click(function(e) {
+
+            if($('html').hasClass('nav-open') && $(e.target).parents('.header-navbar').length === 0) {
+
+                $('html').removeClass('nav-open');
+            }
+        });
+
+        if(isMobile()) {
+
+            $('.header-navbar').addClass('header-navbar-scrolled');
+        }
+    });
+    </script>
+    <script>
+        $(function() {
+
+            var ekg         = document.getElementById('ekg'),
+                path        = ekg.getElementsByTagName('path')[0],
+                totalLength = path.getTotalLength()
+                thumper     = document.getElementById('thumper'),
+                style       = document.createElement('style'),
+                resizeTimeout = null;
+
+            document.getElementsByTagName('head')[0].appendChild(style);
+            var stylesheet = style.sheet;
+
+            function resizeEkg() {
+
+                resizeTimeout = null;
+
+                var width = document.body.clientWidth + 200;
+
+                ekg.setAttribute('width', width);
+
+                var viewBox = ekg.getAttribute('viewBox').split(' ');
+                viewBox[2] = width;
+                ekg.setAttribute('viewBox', viewBox.join(' '));
+
+                var side = ((width - 61.045) / 2).toFixed(3);
+
+                path.setAttribute('d', 'M0 39h' + side + 'l2.798 -5.740l5.525 10.763l12.629 -48.956l13.705 71.031l12.315 -35.070l4.691 14.717l5.727 -13.101l3.655 5.925h' + side);
+
+                totalLength = path.getTotalLength();
+                path.setAttribute('stroke-dasharray', (totalLength - 100).toFixed(3) + ' 100');
+
+                while(stylesheet.cssRules.length > 0) {
+
+                    stylesheet.deleteRule(0);
+                }
+
+                var animation = 'ekg { 0% { stroke-dashoffset: ' + totalLength.toFixed(3) + '; } 100% { stroke-dashoffset: 0; } }'
+                try { stylesheet.insertRule('@-webkit-keyframes ' + animation, 0); } catch(e) {}
+                try { stylesheet.insertRule('@keyframes ' + animation, 0); } catch(e) {}
+
+                var duration = totalLength / 350;
+                path.style.webkitAnimationDuration = duration + 's';
+                path.style.animationDuration       = duration + 's';
+            }
+
+            resizeEkg();
+
+            path.style.webkitAnimation = 'ekg 5.7s ease-in infinite';
+            path.style.animation       = 'ekg 5.7s ease-in infinite';
+
+            $(window).on('resize', function() {
+
+                if(resizeTimeout !== null) {
+
+                    clearTimeout(resizeTimeout);
+                }
+
+                resizeTimeout = setTimeout(resizeEkg, 30);
+            });
+        });
+    </script>
+</body>
+</html>
