@@ -78,8 +78,8 @@ def imgGet(inToken):
 
 
 def image_parse(inToken):
-    #imgName = imgGet(inToken)
-    imgName = str(inToken) + "reorient_atlas"
+    imgName = imgGet(inToken)
+    # imgName = str(inToken) + "reorient_atlas"
     copydir = os.path.join(os.getcwd(), os.path.dirname('img/'))
     img = claritybase.claritybase(imgName, copydir)       # initial call for clarityviz
     print "loaded into claritybase"
