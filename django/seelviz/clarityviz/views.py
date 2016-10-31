@@ -156,12 +156,9 @@ def token_compute(request):
 
     for plot in plotly:
         absPath = os.path.abspath(plot)
-        html += """
-          <form action="plotly" method="get">
-            <input type="text" value=""" + '"' + absPath + '" name="plot" ' + """/>
-            <button type="submit">View """ + os.path.basename(plot) + """</button>
-          </form>"""
-        # html += '<a href="file:///' + '//' + absPath + '">' + "View Plotly graph</a> <br />"    
+        with open(abspath, "r") as ins:
+            for line in ins:
+                html += line
 
 
     html += '<a href="/download/' + fzip_abs + '">' + token + '.zip' + "</a> <br />"
