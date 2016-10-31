@@ -32,6 +32,8 @@ import ndio.remote.neurodata as neurodata
 import nibabel as nb
 from numpy import genfromtxt
 
+import time
+
 from . import test
 
 def index(request):
@@ -60,9 +62,21 @@ def token_compute(request):
 
     # test.testFunction(token)
 
+    ip_start = time.time()
     token = image_parse(token)
+    ip_run_time = time.time() - ip_start
+    print('image_parse total time = %f' % ip_run_time)
+
+    start = time.time()
     density_graph(token)
+    run_time = time.time() - start
+    print('density_graph total time = %f' % run_time)
+    
+    start = time.time()
     atlas_region(token)
+    run_time = time.time() - start
+    print('density_graph total time = %f' % run_time)
+    
     fzip = shutil.make_archive(token, 'zip', token)
     fzip_abs = os.path.abspath(fzip)
 
@@ -183,7 +197,12 @@ def imgGet(inToken):
 
 
 def image_parse(inToken):
+    start = time.time()
     imgName = imgGet(inToken)
+    run_time = time.time() - start
+    print('imgGet time = %f' % run_time)
+
+    
     # imgName = inToken + 'reorient_atlas'
     copydir = os.path.join(os.getcwd(), os.path.dirname('img/'))
     img = claritybase(imgName, copydir)       # initial call for clarityviz
@@ -194,19 +213,43 @@ def image_parse(inToken):
     print "local histogram equalization"
     img.loadGeneratedNii()
     print "loaded generated nii"
-    img.calculatePoints(threshold = 0.9, sample = 0.05)
-    print "calculating points"
+
+    start = time.time()
+    thr = 0.9
+    sam = 0.005
+    img.calculatePoints(threshold = thr, sample = sam)
+    print "calculated points"
+    run_time = time.time() - start
+    print('calculatePoints time (with threshold = %f, sample = %f) = %f' % (thr, sam, run_time))
+
+    start = time.time()
     img.brightPoints(None,40000)
-    print "saving brightest points to csv"
+    run_time = time.time() - start
+    print('brightPoints time = %f' % run_time)
+
+    # print "saving brightest points to csv"
     # img.savePoints()
-    img.generate_plotly_html()
+
     print "generating plotly"
-    img.plot3d()
+    start = time.time()
+    img.generate_plotly_html()
+    run_time = time.time() - start
+    print('brightPoints time = %f' % run_time)
+
     print "generating nodes and edges list"
-    img.graphmlconvert()
+    start = time.time()
+    img.plot3d()
+    run_time = time.time() - start
+    print('plot3d time = %f' % run_time)
+    
     print "generating graphml"
-    img.get_brain_figure(None, imgName + ' edgecount')
+    start = time.time()
+    img.graphmlconvert()
+    run_time = time.time() - start
+    print('graphmlconvert time = %f' % run_time)
+
     print "generating density graph"
+    img.get_brain_figure(None, imgName + ' edgecount')
     
     return imgName
 
