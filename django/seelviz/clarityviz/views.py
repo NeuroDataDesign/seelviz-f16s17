@@ -2,10 +2,10 @@
 # from .models import TokenUpload
 
 # class IndexView(generic.ListView):
-# 	template_name = 'clarityviz/index.html'
+#   template_name = 'clarityviz/index.html'
 
-# 	def get_queryset(self):
-# 		return 
+#   def get_queryset(self):
+#       return 
 
 
 import os
@@ -39,12 +39,12 @@ def index(request):
 
 
 def token_compute(request):
-	print('INSIDE TOKEN_COMPUTE')
-	token = request.POST['token']
+    print('INSIDE TOKEN_COMPUTE')
+    token = request.POST['token']
 
-	# test.testFunction(token)
+    # test.testFunction(token)
 
-	token = image_parse(token)
+    token = image_parse(token)
     density_graph(token)
     atlas_region(token)
     fzip = shutil.make_archive(token, 'zip', token)
@@ -80,11 +80,11 @@ def token_compute(request):
 
     files = glob.glob(token + '/*')
 
-	context = {'token': token, 'files': files}
+    context = {'token': token, 'files': files}
 
     return HttpResponse(html)
 
-	# return render(request, 'clarityviz/outputs.html', context) 
+    # return render(request, 'clarityviz/outputs.html', context) 
 
 # def token_
 
@@ -207,10 +207,10 @@ def density_graph(Token):
 
 def atlas_region(Token):
     atlas_img = Token + '/' + Token + 'localeq' + '.nii'
-    atlas = nb.load(atlas_img)	# <- atlas .nii image
+    atlas = nb.load(atlas_img)  # <- atlas .nii image
     atlas_data = atlas.get_data()
 
-    csvfile = Token + '/' + Token + 'localeq.csv' # 'atlasexp/Control258localeq.csv'	# <- regular csv from the .nii to csv step
+    csvfile = Token + '/' + Token + 'localeq.csv' # 'atlasexp/Control258localeq.csv'    # <- regular csv from the .nii to csv step
 
     bright_points = genfromtxt(csvfile, delimiter=',')
 
@@ -222,7 +222,7 @@ def atlas_region(Token):
     infile = open(csvfile, 'r')
     for i, line in enumerate(infile):
         line = line.strip().split(',')
-        outfile.write(",".join(line) + "," + str(regions[i]) + "\n")	# adding a 5th column to the original csv indicating its region (integer)
+        outfile.write(",".join(line) + "," + str(regions[i]) + "\n")    # adding a 5th column to the original csv indicating its region (integer)
     infile.close()
     outfile.close()
 
