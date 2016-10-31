@@ -10,9 +10,12 @@
 
 from django.shortcuts import render
 from django.template.loader import render_to_string
+from django.conf import settings
 # from django.template import loader
 from django.http import HttpResponse
 from .models import TokenUpload
+
+# non django stuff ========
 
 import os
 import os.path
@@ -111,15 +114,44 @@ def token_compute(request):
     file_basenames = []
     plotly_paths = []
     plotly_basenames = []
+    # for filename in glob.glob(token + '/*'):
+    #     absPath = os.path.abspath(filename)
+    #     if os.path.isdir(absPath):
+    #         link = '<a href="/index?directory=' + absPath + '">' + os.path.basename(filename) + "</a> <br />"
+    #         html += link
+    #     else:
+    #         if filename.endswith('html'):
+    #             plotly.append(filename)
+    #         link = '<a href="/download/?filepath=' + absPath + '">' + os.path.basename(filename) + "</a> <br />"
+    #         html += link
+
+    # for plot in plotly:
+    #     absPath = os.path.abspath(plot)
+    #     html += """
+    #       <form action="plotly" method="get">
+    #         <input type="text" value=""" + '"' + absPath + '" name="plot" ' + """/>
+    #         <button type="submit">View """ + os.path.basename(plot) + """</button>
+    #       </form>"""
+    #     # html += '<a href="file:///' + '//' + absPath + '">' + "View Plotly graph</a> <br />"    
+
+    # for plot in plotly:
+    #     absPath = os.path.abspath(plot)
+    #     html += """
+    #       <form action="plotly" method="get">
+    #         <input type="text" value=""" + '"' + absPath + '" name="plot" ' + """/>
+    #         <button type="submit">View """ + os.path.basename(plot) + """</button>
+    #       </form>"""
+    #     # html += '<a href="file:///' + '//' + absPath + '">' + "View Plotly graph</a> <br />"
+
     for filename in glob.glob(token + '/*'):
         absPath = os.path.abspath(filename)
         if os.path.isdir(absPath):
-            link = '<a href="/index?directory=' + absPath + '">' + os.path.basename(filename) + "</a> <br />"
+            link = '<a href="/download/' + absPath + '">' + os.path.basename(filename) + "</a> <br />"
             html += link
         else:
             if filename.endswith('html'):
                 plotly.append(filename)
-            link = '<a href="/download/?filepath=' + absPath + '">' + os.path.basename(filename) + "</a> <br />"
+            link = '<a href="/download/' + absPath + '">' + os.path.basename(filename) + "</a> <br />"
             html += link
 
     for plot in plotly:
@@ -129,9 +161,10 @@ def token_compute(request):
             <input type="text" value=""" + '"' + absPath + '" name="plot" ' + """/>
             <button type="submit">View """ + os.path.basename(plot) + """</button>
           </form>"""
-        # html += '<a href="file:///' + '//' + absPath + '">' + "View Plotly graph</a> <br />"
+        # html += '<a href="file:///' + '//' + absPath + '">' + "View Plotly graph</a> <br />"    
 
-    html += '<a href="/download/?filepath=' + fzip_abs + '">' + token + '.zip' + "</a> <br />"
+
+    html += '<a href="/download/' + fzip_abs + '">' + token + '.zip' + "</a> <br />"
 
     html += """
                 </div>
@@ -154,7 +187,15 @@ def token_compute(request):
 
     return render(request, 'clarityviz/files.html', context) 
 
-# def token_
+def download(request, path):
+    file_path = path
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type="application/x-download")
+            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+            return response
+    else:
+        raise Http404
 
 def output(request, token):
     return render(request, 'clarityviz/outputs.html')
