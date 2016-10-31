@@ -74,7 +74,7 @@ class claritybase(object):
         gc.collect()
         return self
     
-    def brightPoints(self, path=None, points=10000):
+    def brightPoints(self, path=None, points=20000):
         pathname = ""
         if path == None:
             pathname = self._token + '/' + self._token + 'localeq.csv'
@@ -94,8 +94,10 @@ class claritybase(object):
             else:
                 allpoints.append([line[0], line[1], line[2], line[3]])
 
-        total -= len(brightpoints)
-        bright -= 1
+        total = total - len(brightpoints)
+        print(total)
+        bright = bright - 1
+        print(bright)
         if total < 0:
             index = random.sample(xrange(0, len(brightpoints)), total + len(brightpoints))
             for ind in index:
@@ -107,13 +109,18 @@ class claritybase(object):
                 savePoints.append(item)
 
         while(total > 0):
-            del brightpoints[:]
+            print("in while loop")
+            brightpoints = []
+            newallpoints = []
             for item in allpoints:
                 if item[3] == bright:
                     brightpoints.append(item)
-                    allpoints.remove(item)
-            total -= len(brightpoints)
-            bright -= 1
+                else:
+                    newallpoints.append(item)
+            total = total - len(brightpoints)
+            print(total)
+            bright = bright - 1
+            print(bright)
             if total < 0:
                 index = random.sample(xrange(0, len(brightpoints)), total + len(brightpoints))
                 for ind in index:
@@ -123,15 +130,17 @@ class claritybase(object):
                 for item in brightpoints:
                     outfile.write(str(item[0]) + "," + str(item[1]) + "," + str(item[2]) + "," + str(item[3]) + "\n")
                     savePoints.append(item)
+            allpoints = newallpoints
         outfile.close()
         self._points = savePoints
 
     def generate_plotly_html(self):
         """Generates the plotly from the csv file."""
         # Type in the path to your csv file here
+        thedata = None
         thedata = np.genfromtxt(self._token + '/' + self._token + 'localeq.csv',
             delimiter=',', dtype='int', usecols = (0,1,2), names=['a','b','c'])
-
+       
         trace1 = Scatter3d(
             x = thedata['a'],
             y = thedata['b'],
@@ -355,11 +364,12 @@ class claritybase(object):
         print("Finished")
         return self
 
-    def savePoints(self,path=None):
+    def savePoints(self,path=None,points=None):
         """Saves the points to a file"""
+        if points != None:
+            self._points = points
         if self._points is None:
             raise ValueError("Points is empty, please call imgToPoints() first.")
-
         pathname = self._token + "/" + self._token+"localeq.csv"
         np.savetxt(pathname,self._points,fmt='%d',delimiter=',')
         return self
