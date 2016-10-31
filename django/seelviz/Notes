@@ -1,0 +1,16 @@
+Output:
+- base graph: plotly html
+- density graph: plotly html
+- altas region graph: plotly html
+- csv file: csv
+- edges and nodes csv files: csv
+- graphml file: graphml
+
+
+After making changes to an app's models run:
+'python manage.py makemigrations clarityviz'
+then run:
+'python manage.py migrate'
+to apply the changes.
+
+'python manage.py shell'

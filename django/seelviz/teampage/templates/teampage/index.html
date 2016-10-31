@@ -1,37 +1,6 @@
-<!-- Code written by Albert, Tony, Luke -->
+{% extends "clarityviz/header.html" %}
 
-<!DOCTYPE html>
-<!-- Thanks to NeuroData for the html code -->
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>SeelViz - Javascript Visualizations of Clarity Brains</title>
-    {% load staticfiles %}
-    <link href="{% static 'teampage/assets/css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'teampage/assets/css/main.css' %}" rel="stylesheet">
-    <link href="{% static 'teampage/assets/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
-    <link rel="shortcut icon" href="{% static 'teampage/assets/ocp_main3.ico' %}"> <!-- This is the icon for the website -->
-</head>
-
-<!-- Beginning of Splash portion -->
-
-<body id="page-top">
-    <div class="header-navbar">
-    	<h1 class="header-navbar-logo">SeelViz Logo</h1> <!-- not sure what this is? -->
-
-    <!-- Navigation Bar -->
-        <div class="header-navbar-hamburger"></div>
-        <ul class="header-navbar-items">
-            <li class="header-navbar-item"><a href="#Project" class="header-navbar-link">Project Description</a></li>
-            <li class="header-navbar-item"><a href="#Graph" class="header-navbar-link">Graph Explanations</a></li>
-            <li class="header-navbar-item"><a href="#About" class="header-navbar-link">About Us</a></li>
-            <li class="header-navbar-item"><a href="#Acknowledgments" class="header-navbar-link">Acknowledgments</a></li>
-        </ul>
-    </div>
-    <!-- End of Navigation Bar -->
+{% block content %}
 
     <div class="header">
         <div class="header-grad"></div>
@@ -87,68 +56,8 @@
         <div class="container">
             <h2 class="section-apply-heading text-center">Graph Explanations</h2>
                 <div class="col-lg-12 text-center"></div>
+                    {% include 'teampage/graphs.html' %}
 
-<!-- saved from url=(0100)https://neurodatadesign.github.io/seelviz/reveal/html/graphmlhtmls/Cocaine174localeqbig.graphml.html -->
-<center><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style></style></head><body><script type="text/javascript">/**
-* plotly.js v1.16.2
-* Copyright 2012-2016, Plotly, Inc.
-* All rights reserved.
-* Licensed under the MIT license
-*/
-    </script></center>
-            <div class="col-lg-12 text-center">
-            <p class="lead info-para">
-            Shown above is an example output of a density false-colored for Cocaine 174 generated via ClarityViz. The colorations correspond to the number of edges for each node (an edge-number-to-color mapping can be seen <a href="https://neurodatadesign.github.io/seelviz/reveal/html/graphmlhtmls/Cocaine174localeqbig.graphmlheatmap.html">here</a>. Each unique color represents a 5% increase in total number of nodes, with the most-connected node being the white node.  The original source code can be seen <a href="https://neurodatadesign.github.io/seelviz/reveal/october5stuff/ChangingPlotlyColorByDensity.html">here</a>.
-            &nbsp;
-            &nbsp; 
-            </p>
-        </div>
-    </div>
-    <div class="container">
-        <div class="col-lg-12 text-center"></div>
-
-<!-- search for meeeee -->
-
-<!-- saved from url=(0102)https://neurodatadesign.github.io/seelviz/reveal/html/graphmlhtmls/Control258localeq.region_color.html -->
-<center><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style></style></head><body><script type="text/javascript">/**
-* plotly.js v1.16.2
-* Copyright 2012-2016, Plotly, Inc.
-* All rights reserved.
-* Licensed under the MIT license
-*/
-    </script></body></html></center>
-
-        <div class="col-lg-12 text-center">
-            <p class="lead info-para">
-            &nbsp;
-            &nbsp;
-            Shown above is an example output of the Control258 brain with each region as designated by the atlas a unique colored.  Controls along the side allow for toggling the traces on/off.  See <a href=https://github.com/NeuroDataDesign/seelviz/blob/gh-pages/Jupyter/Plotly%20Regions%20Control258.ipynb>here</a> for implementation details.   
-            </p>
-        </div>
-    </div>
-
-    <!-- Second Hidden Segment -->
-
-    <div class="container">
-        <div class="col-lg-12 text-center"></div>
-<!-- saved from url=(0097)https://neurodatadesign.github.io/seelviz/reveal/html/graphmlhtmls/Control258localeq.graphml.html -->
-<center><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style></style></head><body><script type="text/javascript">/**
-* plotly.js v1.16.2
-* Copyright 2012-2016, Plotly, Inc.
-* All rights reserved.
-* Licensed under the MIT license
-*/
-
-    </script></body></html></center>
-
-        <div class="col-lg-12 text-center">
-            <p class="lead info-para">
-            &nbsp;
-            &nbsp;
-            Shown above is an example output of the Control258 brain with each edge highlighted in cyan.  The edges were determined by an epsilon ball radius of 25.  See <a href=https://neurodatadesign.github.io/seelviz/reveal/october5stuff/PlotlyGraphMLOnly.html>here</a> for implementation details.   
-            </p>
-        </div>
-    </div>
 
 <!-- About Us section -->
 
@@ -157,10 +66,11 @@
 
         <div class="col-lg-12 text-center">
                     <h1 class="Name Header">Albert Lee &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Jon Liu &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Tony Sun &nbsp; &nbsp; &nbsp; &nbsp; Luke Zhu</h1>
-					<a href = "https://github.com/alee156/"><IMG SRC="assets/img/WebsiteFiles/albert.png" ALT = "Albert" hspace = "5"></a>
-                    <a href = "https://www.linkedin.com/in/jonathan-liu-455711b6"><IMG SRC="assets/img/WebsiteFiles/jon.png" ALT = "Jon" hspace = "5"></a>
-                    <a href = "https://www.linkedin.com/in/toekneesunshine"><IMG SRC="assets/img/WebsiteFiles/tony.png" ALT = "Tony" hspace = "5"></a>
-                    <a href = "https://www.linkedin.com/in/luke-zhu-909670b7"><IMG SRC="assets/img/WebsiteFiles/luke.png" ALT = "Luke" hspace = "5"></a> 
+                    {% load staticfiles %}
+					<a href = "https://github.com/alee156/"><IMG SRC="{% static 'clarityviz/img/WebsiteFiles/albert.png' %}" ALT = "Albert" hspace = "5"></a>
+                    <a href = "https://www.linkedin.com/in/jonathan-liu-455711b6"><IMG SRC="{% static 'clarityviz/img/WebsiteFiles/jon.png' %}" ALT = "Jon" hspace = "5"></a>
+                    <a href = "https://www.linkedin.com/in/toekneesunshine"><IMG SRC="{% static 'clarityviz/img/WebsiteFiles/tony.png' %}" ALT = "Tony" hspace = "5"></a>
+                    <a href = "https://www.linkedin.com/in/luke-zhu-909670b7"><IMG SRC="{% static 'clarityviz/img/WebsiteFiles/luke.png' %}" ALT = "Luke" hspace = "5"></a> 
         </div>
 
 <!-- Acknowledgements -->
@@ -173,19 +83,18 @@
             <h2 class="section-apply-heading text-center">Acknowledgements</h2>
                 <div class="col-lg-12 text-center">
 
-                        <a href = "http://www.bme.jhu.edu/"><img src="assets/img/sponsors/jhu-bme.png" width="400px" height="auto" ALT = "JHU BME" hspace = "20"></a>
+                        <a href = "http://www.bme.jhu.edu/"><img src="{% static 'clarityviz/img/sponsors/jhu-bme.png' %}" width="400px" height="auto" ALT = "JHU BME" hspace = "20"></a>
 
-                        <a href = "neurodata.io/"><img src="assets/img/logo_dark copy.png" width="400px" height="auto" ALT = "neurodata.io" hspacae = "20"></a>
+                        <a href = "neurodata.io/"><img src="{% static 'clarityviz/img/logo_dark copy.png' %}" width="400px" height="auto" ALT = "neurodata.io" hspacae = "20"></a>
 
-                        <a href = "http://clarityresourcecenter.org/"><img src="assets/img/sponsors/clarityresourcecenter" width="400px" height="auto" ALT = "deisseroth lab" hspacae = "20"></a>
+                        <a href = "http://clarityresourcecenter.org/"><img src="{% static 'clarityviz/img/sponsors/clarityresourcecenter' %}" width="400px" height="auto" ALT = "deisseroth lab" hspacae = "20"></a>
 
                 </div>
             </div>
         </div>
     </div>
 
-
-    <script src="/assets/js/jquery.js"></script>
+    <script src="{% static 'clarityviz/vendor/jquery/jquery.js' %}"></script>
     <script>
     $(function() {
 
@@ -368,3 +277,5 @@
     </script>
 </body>
 </html>
+
+{% endblock %}
