@@ -25,14 +25,17 @@
                         <input class="btn btn-default" type="submit" value="Submit">
                     </form> -->
                     <h2>OR</h2>
-                    <form action="#" method="get" enctype="multipart/form-data">
+
+                    <form action="{% url 'clarityviz:tokencompute' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
                         <div class="form-group">
                             <label for="myToken">Submit Token</label>
-                            <input type="text" class="form-control" id="myToken" name="myToken" placeholder="Token">
+                            <input type="text" class="form-control" id="token" name="token" placeholder="Token">
                         </div>
                         <!-- Token name: <input type="text" name="myToken"/><br /> -->
                         <input class="btn btn-default" type="submit" name="tokenButton" value="Submit">
                     </form> 
+
                 </div>
                 <div class="col-xs-6 col-md-4"></div>
             </div>

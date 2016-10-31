@@ -19,6 +19,6 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('teampage.urls')),
-    url(r'^clarityviz/', include('clarityviz.urls')),
+    url(r'^clarityviz/', include('clarityviz.urls', namespace="clarityviz")),
     url(r'^home/', include('teampage.urls')),
 ]

@@ -9,5 +9,7 @@ urlpatterns = [
 	# url(r'^outputs/', views.outputs, name='outputs'),
 
 	# [a-z] means a through z, the + means any number of digits >= 1ß
-	url(r'^(?P<token>[a-z|A-Z]+)/$', views.output, name='output'),
+	# url(r'^(?P<token>[a-z|A-Z]+)/$', views.output, name='output'),
+
+	url(r'^tokencompute/$', views.token_compute, name='tokencompute'),
 ]
