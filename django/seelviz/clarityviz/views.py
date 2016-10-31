@@ -22,8 +22,8 @@ import glob
 import random
 
 from clarityviz import claritybase
-from clarityviz import densitygraph as dg
-from clarityviz import atlasregiongraph as arg
+from clarityviz import densitygraph
+from clarityviz import atlasregiongraph
 import networkx as nx
 import plotly
 
@@ -143,7 +143,7 @@ def imgGet(inToken):
                 xyz.append([xval, yval, zval])
             else:
                 value = 0
-    rImg = claritybase.claritybase(inToken + 'raw', None)
+    rImg = claritybase(inToken + 'raw', None)
     rImg.savePoints(None,xyz)
     rImg.generate_plotly_html()
     print "random sample of points above 250"
@@ -186,7 +186,7 @@ def image_parse(inToken):
     imgName = imgGet(inToken)
     # imgName = inToken + 'reorient_atlas'
     copydir = os.path.join(os.getcwd(), os.path.dirname('img/'))
-    img = claritybase.claritybase(imgName, copydir)       # initial call for clarityviz
+    img = claritybase(imgName, copydir)       # initial call for clarityviz
     print "loaded into claritybase"
     img.loadEqImg()
     print "loaded image"
@@ -211,7 +211,7 @@ def image_parse(inToken):
     return imgName
 
 def density_graph(Token):
-    densg = dg.densitygraph(Token)
+    densg = densitygraph(Token)
     print 'densitygraph module'
     densg.generate_density_graph()
     print 'generated density graph'
@@ -250,6 +250,6 @@ def atlas_region(Token):
     print uniq
 
     newToken = Token + '.region'
-    atlas = arg.atlasregiongraph(newToken, Token)
+    atlas = atlasregiongraph(newToken, Token)
     
     atlas.generate_atlas_region_graph(None, numRegions)
