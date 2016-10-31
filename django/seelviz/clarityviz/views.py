@@ -54,7 +54,7 @@ def token_compute(request):
     file_paths = []
     file_basenames = []
     plotly_paths = []
-    plotly basenames = []
+    plotly_basenames = []
     for filename in glob.glob(token + '/*'):
         absPath = os.path.abspath(filename)
         if os.path.isdir(absPath):
