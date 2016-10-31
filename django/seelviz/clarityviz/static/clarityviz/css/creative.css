@@ -43,8 +43,13 @@ p {
   margin-bottom: 20px;
 }
 .bg-primary {
+  /*if you want to change the background color, go to creative.min.css*/
   background-color: #785098;
 }
+.bg-graph {
+  background-color: black;
+}
+
 .bg-dark {
   background-color: #222222;
   color: white;

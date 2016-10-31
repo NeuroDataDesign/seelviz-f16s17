@@ -52,16 +52,44 @@
     </div>
 
 <!-- Graph Explanations -->
-    <div id="Graph" class="Graph">
+
+<section class="bg-graph" id="Graph">
+    <div class="container">
+        <h2 class="section-apply-heading text-center">Graph Explanations</h2>
+            {% include 'teampage/graphs.html' %}
+    </div>
+</section>
+
+    <!-- <div id="Graph" class="Graph">
         <div class="container">
             <h2 class="section-apply-heading text-center">Graph Explanations</h2>
-                <div class="col-lg-12 text-center"></div>
-                    {% include 'teampage/graphs.html' %}
+                
+                {% include 'teampage/graphs.html' %}
+
+        </div>
+    </div> -->
 
 
 <!-- About Us section -->
 
-    <div id="About" class="About">
+<section class="bg-primary" id="About">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <h2 class="section-heading">About Us</h2>
+                <hr class="light">
+                {% load staticfiles %}
+                <a href = "https://github.com/alee156/"><IMG SRC="{% static 'clarityviz/img/WebsiteFiles/albert.png' %}" ALT = "Albert" hspace = "5"></a>
+                <a href = "https://www.linkedin.com/in/jonathan-liu-455711b6"><IMG SRC="{% static 'clarityviz/img/WebsiteFiles/jon.png' %}" ALT = "Jon" hspace = "5"></a>
+                <a href = "https://www.linkedin.com/in/toekneesunshine"><IMG SRC="{% static 'clarityviz/img/WebsiteFiles/tony.png' %}" ALT = "Tony" hspace = "5"></a>
+                <a href = "https://www.linkedin.com/in/luke-zhu-909670b7"><IMG SRC="{% static 'clarityviz/img/WebsiteFiles/luke.png' %}" ALT = "Luke" hspace = "5"></a> 
+                <!-- <a href="#services" class="page-scroll btn btn-default btn-xl sr-button">Get Started!</a> -->
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- <div id="About" class="About">
         <h2 class="heading-faq">About Us</h2>
 
         <div class="col-lg-12 text-center">
@@ -71,7 +99,7 @@
                     <a href = "https://www.linkedin.com/in/jonathan-liu-455711b6"><IMG SRC="{% static 'clarityviz/img/WebsiteFiles/jon.png' %}" ALT = "Jon" hspace = "5"></a>
                     <a href = "https://www.linkedin.com/in/toekneesunshine"><IMG SRC="{% static 'clarityviz/img/WebsiteFiles/tony.png' %}" ALT = "Tony" hspace = "5"></a>
                     <a href = "https://www.linkedin.com/in/luke-zhu-909670b7"><IMG SRC="{% static 'clarityviz/img/WebsiteFiles/luke.png' %}" ALT = "Luke" hspace = "5"></a> 
-        </div>
+        </div> -->
 
 <!-- Acknowledgements -->
         <p class="contact"><strong> &nbsp; <br> <br></p>        

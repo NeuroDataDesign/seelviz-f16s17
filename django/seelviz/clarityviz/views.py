@@ -9,6 +9,7 @@
 
 
 from django.shortcuts import render
+from django.template.loader import render_to_string
 # from django.template import loader
 from django.http import HttpResponse
 from .models import TokenUpload
@@ -80,6 +81,31 @@ def token_compute(request):
     fzip = shutil.make_archive(token, 'zip', token)
     fzip_abs = os.path.abspath(fzip)
 
+    html = """
+    {% extends "clarityviz/header.html" %}
+
+    {% block content %}
+
+    <header>
+        <div class="header-content">
+            <div class="header-content-inner">
+                {% if token %}
+                    <h1>{{token}}</h2>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <body>
+
+    <section class="bg-graph" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Results</h2>
+                    <hr class="light">
+    """
+
     plotly = []
     file_paths = []
     file_basenames = []
@@ -106,24 +132,33 @@ def token_compute(request):
         # html += '<a href="file:///' + '//' + absPath + '">' + "View Plotly graph</a> <br />"
 
     html += '<a href="/download/?filepath=' + fzip_abs + '">' + token + '.zip' + "</a> <br />"
-    html += """</body></html>"""
 
-    files = glob.glob(token + '/*')
+    html += """
+                </div>
+            </div>
+        </div>
+    </section>
+    </body>
+    </html>
+    {% endblock %}
+    """
 
-    context = {'token': token, 'files': files}
+    with open("clarityviz/templates/clarityviz/files.html", "w+") as text_file:
+        text_file.write("{}".format(html))
 
-    return HttpResponse(html)
+    # files = glob.glob(token + '/*')
 
-    # return render(request, 'clarityviz/outputs.html', context) 
+    context = {'token': token}
+
+    # return HttpResponse(html)
+
+    return render(request, 'clarityviz/files.html', context) 
 
 # def token_
 
 def output(request, token):
     return render(request, 'clarityviz/outputs.html')
 
-localDir = os.path.dirname(__file__)
-absDir = os.path.join(os.getcwd(), localDir)
-# print absDir
 
 def imgGet(inToken):
     refToken = "ara_ccf2"                         # hardcoded 'ara_ccf2' atlas until additional functionality is requested
@@ -162,7 +197,7 @@ def imgGet(inToken):
     rImg.generate_plotly_html()
     print "random sample of points above 250"
     spacingImg = inImg.GetSpacing()
-    spacing = tuple(i * 10 for i in spacingImg)
+    spacing = tuple(i * 50 for i in spacingImg)
     inImg.SetSpacing(spacingImg)
     inImg_download = inImg    # Aut1367 set to default spacing
     inImg = imgResample(inImg, spacing=refImg.GetSpacing())
@@ -216,19 +251,23 @@ def image_parse(inToken):
 
     start = time.time()
     thr = 0.9
-    sam = 0.005
+    sam = 0.0005
     img.calculatePoints(threshold = thr, sample = sam)
     print "calculated points"
     run_time = time.time() - start
     print('calculatePoints time (with threshold = %f, sample = %f) = %f' % (thr, sam, run_time))
 
-    start = time.time()
-    img.brightPoints(None,40000)
-    run_time = time.time() - start
-    print('brightPoints time = %f' % run_time)
+    # uncomment either (1) or (2)
 
-    # print "saving brightest points to csv"
-    # img.savePoints()
+    #(1)
+    # start = time.time()
+    # img.brightPoints(None,40000)
+    # run_time = time.time() - start
+    # print('brightPoints time = %f' % run_time)
+
+    #(2)
+    print "saving brightest points to csv"
+    img.savePoints()
 
     print "generating plotly"
     start = time.time()

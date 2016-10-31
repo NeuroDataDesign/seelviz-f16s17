@@ -1379,6 +1379,14 @@ a.bg-primary:hover,
 a.bg-primary:focus {
   background-color: #286090;
 }
+.bg-graphs {
+  color: #fff;
+  background-color: #000000;
+}
+a.bg-graphs:hover,
+a.bg-graphs:focus {
+  background-color: #000000;
+}
 .bg-success {
   background-color: #dff0d8;
 }
