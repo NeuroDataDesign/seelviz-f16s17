@@ -146,12 +146,12 @@ def token_compute(request):
     for filename in glob.glob(token + '/*'):
         absPath = os.path.abspath(filename)
         if os.path.isdir(absPath):
-            link = '<a href="/download/' + absPath + '">' + os.path.basename(filename) + "</a> <br />"
+            link = '<a href="/clarityviz/download/' + absPath + '">' + os.path.basename(filename) + "</a> <br />"
             html += link
         else:
             if filename.endswith('html'):
                 plotly.append(filename)
-            link = '<a href="/download/' + absPath + '">' + os.path.basename(filename) + "</a> <br />"
+            link = '<a href="/clarityviz/download/' + absPath + '">' + os.path.basename(filename) + "</a> <br />"
             html += link
 
     for plot in plotly:
@@ -161,7 +161,7 @@ def token_compute(request):
                 html += line
 
 
-    html += '<a href="/download/' + fzip_abs + '">' + token + '.zip' + "</a> <br />"
+    html += '<a href="/clarityviz/download/' + fzip_abs + '">' + token + '.zip' + "</a> <br />"
 
     html += """
                 </div>
