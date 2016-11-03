@@ -77,10 +77,10 @@ def token_compute(request):
     # run_time = time.time() - start
     # print('density_graph total time = %f' % run_time)
     
-    start = time.time()
-    atlas_region(token)
-    run_time = time.time() - start
-    print('density_graph total time = %f' % run_time)
+    # start = time.time()
+    # atlas_region(token)
+    # run_time = time.time() - start
+    # print('density_graph total time = %f' % run_time)
     
     fzip = shutil.make_archive(token, 'zip', token)
     fzip_abs = os.path.abspath(fzip)
