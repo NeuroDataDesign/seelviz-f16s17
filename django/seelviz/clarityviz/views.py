@@ -64,9 +64,10 @@ def token_compute(request):
     print('INSIDE TOKEN_COMPUTE')
     token = request.POST['token']
     ogToken = token
-    token = token.strip().split(',')
-    ori1 = token[1].strip()
-    token = token[0].strip()
+    if token != 'Aut1367reorient_atlas':
+        token = token.strip().split(',')
+        ori1 = token[1].strip()
+        token = token[0].strip()
 
     # test.testFunction(token)
 
