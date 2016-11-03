@@ -39,7 +39,7 @@ class atlasregiongraph(object):
         if path == None:
             data_txt = token + '/' + token + '.csv'
         else:
-            data_txt = path + '/' + token + '.csv'
+            data_txt = path + '/' + token + '.region.csv'
         self._data = np.genfromtxt(data_txt, delimiter=',', dtype='int', usecols = (0,1,2,4), names=['x','y','z','region'])
 
     def generate_atlas_region_graph(self, path=None, numRegions = 10):
@@ -52,7 +52,7 @@ class atlasregiongraph(object):
             thedata = self._data
         else:
         ### load data
-            thedata = np.genfromtxt(self._token + '/' + self._token + '.csv', delimiter=',', dtype='int', usecols = (0,1,2,4), names=['x','y','z','region'])
+            thedata = np.genfromtxt(self._token + '/' + self._token + '.region.csv', delimiter=',', dtype='int', usecols = (0,1,2,4), names=['x','y','z','region'])
 
         region_dict = OrderedDict()
         for l in thedata:

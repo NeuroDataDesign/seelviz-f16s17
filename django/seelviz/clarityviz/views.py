@@ -67,15 +67,15 @@ def token_compute(request):
 
     # test.testFunction(token)
 
-    ip_start = time.time()
-    token = image_parse(token)
-    ip_run_time = time.time() - ip_start
-    print('image_parse total time = %f' % ip_run_time)
+    # ip_start = time.time()
+    # token = image_parse(token)
+    # ip_run_time = time.time() - ip_start
+    # print('image_parse total time = %f' % ip_run_time)
 
-    start = time.time()
-    density_graph(token)
-    run_time = time.time() - start
-    print('density_graph total time = %f' % run_time)
+    # start = time.time()
+    # density_graph(token)
+    # run_time = time.time() - start
+    # print('density_graph total time = %f' % run_time)
     
     start = time.time()
     atlas_region(token)
