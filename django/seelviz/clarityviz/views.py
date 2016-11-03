@@ -159,7 +159,7 @@ def token_compute(request):
 
     for plot in plotly:
         absPath = os.path.abspath(plot)
-        if absPath.endswith('_pointcloud.html'):
+        if absPath.endswith(token + '_pointcloud.html'):
             link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Pointcloud</a> <br />'
         elif absPath.endswith('_edge_count_pointcloud.html'):
             link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Edge Count Pointcloud</a> <br />'
