@@ -67,20 +67,20 @@ def token_compute(request):
 
     # test.testFunction(token)
 
-    ip_start = time.time()
-    token = image_parse(token)
-    ip_run_time = time.time() - ip_start
-    print('image_parse total time = %f' % ip_run_time)
+    # ip_start = time.time()
+    # token = image_parse(token)
+    # ip_run_time = time.time() - ip_start
+    # print('image_parse total time = %f' % ip_run_time)
 
-    start = time.time()
-    density_graph(token)
-    run_time = time.time() - start
-    print('density_graph total time = %f' % run_time)
+    # start = time.time()
+    # density_graph(token)
+    # run_time = time.time() - start
+    # print('density_graph total time = %f' % run_time)
     
-    start = time.time()
-    atlas_region(token)
-    run_time = time.time() - start
-    print('density_graph total time = %f' % run_time)
+    # start = time.time()
+    # atlas_region(token)
+    # run_time = time.time() - start
+    # print('density_graph total time = %f' % run_time)
     
     fzip = shutil.make_archive(token, 'zip', token)
     fzip_abs = os.path.abspath(fzip)
@@ -159,13 +159,13 @@ def token_compute(request):
         absPath = os.path.abspath(plot)
         if absPath.endswith('_pointcloud.html'):
             link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button" Pointcloud</a> <br />'
-        else if absPath.endswith('_edge_count_pointcloud.html'):
+        elif absPath.endswith('_edge_count_pointcloud.html'):
             link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Edge Count Pointcloud</a> <br />'
-        else if absPath.endswith('_density_pointcloud.html'):
+        elif absPath.endswith('_density_pointcloud.html'):
             link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Density Pointcloud</a> <br />'
-        else if absPath.endswith('_density_pointcloud_heatmap.html'):
+        elif absPath.endswith('_density_pointcloud_heatmap.html'):
             link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Density Pointcloud Heatmap</a> <br />'
-        else if absPath.endswith('_atlas_region_pointcloud.html'):
+        elif absPath.endswith('_atlas_region_pointcloud.html'):
             link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Atlas Region Pointcloud</a> <br />'
         with open(absPath, "r") as ins:
             for line in ins:
@@ -255,13 +255,13 @@ def plot(request, path):
     type = ''
     if path.endswith('_pointcloud.html'):
         type = 'Pointcloud'
-    else if path.endswith('_edge_count_pointcloud.html'):
+    elif path.endswith('_edge_count_pointcloud.html'):
         type = 'Edge Count Pointcloud'
-    else if path.endswith('_density_pointcloud.html'):
+    elif path.endswith('_density_pointcloud.html'):
         type = 'Density Pointcloud'
-    else if path.endswith('_density_pointcloud_heatmap.html'):
+    elif path.endswith('_density_pointcloud_heatmap.html'):
         type = 'Density Pointcloud Heatmap'
-    else if path.endswith('_atlas_region_pointcloud.html'):
+    elif path.endswith('_atlas_region_pointcloud.html'):
         type = 'Atlas Region Pointcloud'
 
     context = {'type': type}
