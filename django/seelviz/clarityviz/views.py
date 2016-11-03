@@ -72,15 +72,15 @@ def token_compute(request):
     ip_run_time = time.time() - ip_start
     print('image_parse total time = %f' % ip_run_time)
 
-    # start = time.time()
-    # density_graph(token)
-    # run_time = time.time() - start
-    # print('density_graph total time = %f' % run_time)
+    start = time.time()
+    density_graph(token)
+    run_time = time.time() - start
+    print('density_graph total time = %f' % run_time)
     
-    # start = time.time()
-    # atlas_region(token)
-    # run_time = time.time() - start
-    # print('density_graph total time = %f' % run_time)
+    start = time.time()
+    atlas_region(token)
+    run_time = time.time() - start
+    print('density_graph total time = %f' % run_time)
     
     fzip = shutil.make_archive(token, 'zip', token)
     fzip_abs = os.path.abspath(fzip)
@@ -252,8 +252,10 @@ def plot(request, path):
         text_file.write("{}".format(html))
 
     type = ''
+    description = ''
     if path.endswith('_brain_pointcloud.html'):
         type = 'Brain Pointcloud'
+        description = ''
     elif path.endswith('_edge_count_pointcloud.html'):
         type = 'Edge Count Pointcloud'
     elif path.endswith('_density_pointcloud.html'):
