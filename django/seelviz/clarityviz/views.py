@@ -167,7 +167,7 @@ def token_compute(request):
             link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Density Pointcloud</a> <br /><br />'
         elif absPath.endswith('_density_pointcloud_heatmap.html'):
             link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Density Pointcloud Heatmap</a> <br /><br />'
-        elif absPath.endswith('_atlas_region_pointcloud.html'):
+        elif absPath.endswith('_region_pointcloud.html'):
             link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Atlas Region Pointcloud</a> <br /><br />'
         html += link
 
@@ -253,7 +253,7 @@ def plot(request, path):
 
     type = ''
     if path.endswith('_pointcloud.html'):
-        type = 'Pointcloud'
+        type = 'BrainPointcloud'
     elif path.endswith('_edge_count_pointcloud.html'):
         type = 'Edge Count Pointcloud'
     elif path.endswith('_density_pointcloud.html'):

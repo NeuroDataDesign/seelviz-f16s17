@@ -99,5 +99,5 @@ class atlasregiongraph(object):
         )
 
         fig = Figure(data=data, layout=layout)
-        plotly.offline.plot(fig, filename= self._path + '/' + self._token + "atlas_region_pointcloud.html")
+        plotly.offline.plot(fig, filename= self._path + '/' + self._token + "_region_pointcloud.html")
 
