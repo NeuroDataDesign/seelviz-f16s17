@@ -1,0 +1,41 @@
+aut1367 as downloaded from ndio
+
+query = {
+    'token': TOKEN,
+    'channel': CHANNEL,
+    'x_start': 10000,
+    'x_stop': 11000,
+    'y_start': 12500,
+    'y_stop': 17500,
+    'z_start': 500,
+    'z_stop': 600,
+    'resolution': 0
+}
+
+aut_1367 = nd.get_cutout(**query)
+
+
+NOTE that shape was:
+
+<type 'numpy.ndarray'>
+(1000, 5000, 100)
+
+Then we transformed with swap axes to get z-slices:
+## if we have (i, j, k), we want (k, j, i)  (converts nibabel format to sitk format)
+new_im = aut_1367.swapaxes(0,2) # just swap i and k
+
+RUN 2:
+
+query = {
+    'token': TOKEN,
+    'channel': CHANNEL,
+    'x_start': 10000,
+    'x_stop': 15000,
+    'y_start': 10000,
+    'y_stop': 15000,
+    'z_start': 500,
+    'z_stop': 505,
+    'resolution': 0
+}
+
+aut_1367 = nd.get_cutout(**query)
