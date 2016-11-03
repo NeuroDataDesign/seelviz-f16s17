@@ -156,7 +156,7 @@ def token_compute(request):
 
     for plot in plotly:
         absPath = os.path.abspath(plot)
-        with open(abspath, "r") as ins:
+        with open(absPath, "r") as ins:
             for line in ins:
                 html += line
 

@@ -14,3 +14,12 @@ then run:
 to apply the changes.
 
 'python manage.py shell'
+
+
+
+REORIENTATION SHIT =============================================================
+
+inImg = imgReorient(inImg, "LAI", "RSA")
+inAnnoImg = imgReorient(inAnnoImg, "RSA", "LAI")
+
+https://github.com/neurodata/ndreg/blob/master/doc/3dRegistrationAndAnalysis.ipynb
