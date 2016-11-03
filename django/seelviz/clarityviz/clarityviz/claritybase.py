@@ -166,7 +166,7 @@ class claritybase(object):
 
         fig = Figure(data=data, layout=layout)
         print(self._token + "plotly")
-        plotly.offline.plot(fig, filename= self._token + "/" + self._token + "plotly.html")
+        plotly.offline.plot(fig, filename= self._token + "/" + self._token + "_pointcloud.html")
 
     def applyLocalEq(self):
         """Applies local equilization to the img's histogram and outputs a .nii file"""
@@ -553,7 +553,7 @@ class claritybase(object):
 
         data = Data([node_trace, edge_trace])
         fig = Figure(data=data, layout=layout)
-        plotly.offline.plot(fig, filename= self._token + "/" + self._token + "_edges_graphml.html")
+        plotly.offline.plot(fig, filename= self._token + "/" + self._token + "_edge_count_pointcloud.html")
 
         #return fig 
 

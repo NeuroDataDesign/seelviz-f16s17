@@ -63,6 +63,7 @@ def index(request):
 def token_compute(request):
     print('INSIDE TOKEN_COMPUTE')
     token = request.POST['token']
+    ogToken = token
 
     # test.testFunction(token)
 
@@ -156,10 +157,25 @@ def token_compute(request):
 
     for plot in plotly:
         absPath = os.path.abspath(plot)
+        if absPath.endswith('_pointcloud.html')
+            link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button" Pointcloud</a> <br />'
+        else if absPath.endswith('_edge_count_pointcloud.html')
+            link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Edge Count Pointcloud</a> <br />'
+        else if absPath.endswith('_density_pointcloud.html')
+            link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Density Pointcloud</a> <br />'
+        else if absPath.endswith('_density_pointcloud_heatmap.html')
+            link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Density Pointcloud Heatmap</a> <br />'
+        else if absPath.endswith('_atlas_region_pointcloud.html')
+            link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Atlas Region Pointcloud</a> <br />'
         with open(absPath, "r") as ins:
             for line in ins:
                 html += line
 
+    # for plot in plotly:
+    #     absPath = os.path.abspath(plot)
+    #     with open(absPath, "r") as ins:
+    #         for line in ins:
+    #             html += line
 
     html += '<a href="/clarityviz/download/' + fzip_abs + '">' + token + '.zip' + "</a> <br />"
 
@@ -193,6 +209,65 @@ def download(request, path):
             return response
     else:
         raise Http404
+
+def plot(request, path):
+
+    html = """
+    {% extends "clarityviz/header.html" %}
+
+    {% block content %}
+
+    <header>
+        <div class="header-content">
+            <div class="header-content-inner">
+                {% if type %}
+                    <h1>{{type}}</h2>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <body>
+
+    <section class="bg-graph" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+    """
+
+    with open(path, "r") as ins:
+        for line in ins:
+            html += line
+
+    html += """
+                </div>
+            </div>
+        </div>
+    </section>
+    </body>
+    </html>
+    {% endblock %}
+    """
+
+    with open("clarityviz/templates/clarityviz/plot.html", "w+") as text_file:
+        text_file.write("{}".format(html))
+
+    type = ''
+    if path.endswith('_pointcloud.html')
+        type = 'Pointcloud'
+    else if path.endswith('_edge_count_pointcloud.html')
+        type = 'Edge Count Pointcloud'
+    else if path.endswith('_density_pointcloud.html')
+        type = 'Density Pointcloud'
+    else if path.endswith('_density_pointcloud_heatmap.html')
+        type = 'Density Pointcloud Heatmap'
+    else if path.endswith('_atlas_region_pointcloud.html')
+        type = 'Atlas Region Pointcloud'
+
+    context = {'type': type}
+
+    return render(request, 'clarityviz/plot.html', context) 
+
 
 def output(request, token):
     return render(request, 'clarityviz/outputs.html')
@@ -337,9 +412,9 @@ def density_graph(Token):
     print 'generated density graph'
     g = nx.read_graphml(Token + '/' + Token + '.graphml')
     ggraph = densg.get_brain_figure(g = g, plot_title=Token)
-    plotly.offline.plot(ggraph, filename = Token + '/' + Token + '_brain_figure.html')
+    plotly.offline.plot(ggraph, filename = Token + '/' + Token + '_density_pointcloud.html')
     hm = densg.generate_heat_map()
-    plotly.offline.plot(hm, filename = Token + '/' + Token + '_brain_heatmap.html')
+    plotly.offline.plot(hm, filename = Token + '/' + Token + '_density_pointcloud_heatmap.html')
 
 def atlas_region(Token):
     atlas_img = Token + '/' + Token + 'localeq' + '.nii'
@@ -369,7 +444,7 @@ def atlas_region(Token):
     print len(uniq)
     print uniq
 
-    newToken = Token + '.region'
-    atlas = atlasregiongraph(newToken, Token)
+    # newToken = Token + '.region'
+    atlas = atlasregiongraph(Token, Token)
     
     atlas.generate_atlas_region_graph(None, numRegions)
