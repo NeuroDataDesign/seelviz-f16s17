@@ -157,15 +157,15 @@ def token_compute(request):
 
     for plot in plotly:
         absPath = os.path.abspath(plot)
-        if absPath.endswith('_pointcloud.html')
+        if absPath.endswith('_pointcloud.html'):
             link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button" Pointcloud</a> <br />'
-        else if absPath.endswith('_edge_count_pointcloud.html')
+        else if absPath.endswith('_edge_count_pointcloud.html'):
             link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Edge Count Pointcloud</a> <br />'
-        else if absPath.endswith('_density_pointcloud.html')
+        else if absPath.endswith('_density_pointcloud.html'):
             link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Density Pointcloud</a> <br />'
-        else if absPath.endswith('_density_pointcloud_heatmap.html')
+        else if absPath.endswith('_density_pointcloud_heatmap.html'):
             link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Density Pointcloud Heatmap</a> <br />'
-        else if absPath.endswith('_atlas_region_pointcloud.html')
+        else if absPath.endswith('_atlas_region_pointcloud.html'):
             link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Atlas Region Pointcloud</a> <br />'
         with open(absPath, "r") as ins:
             for line in ins:
@@ -253,15 +253,15 @@ def plot(request, path):
         text_file.write("{}".format(html))
 
     type = ''
-    if path.endswith('_pointcloud.html')
+    if path.endswith('_pointcloud.html'):
         type = 'Pointcloud'
-    else if path.endswith('_edge_count_pointcloud.html')
+    else if path.endswith('_edge_count_pointcloud.html'):
         type = 'Edge Count Pointcloud'
-    else if path.endswith('_density_pointcloud.html')
+    else if path.endswith('_density_pointcloud.html'):
         type = 'Density Pointcloud'
-    else if path.endswith('_density_pointcloud_heatmap.html')
+    else if path.endswith('_density_pointcloud_heatmap.html'):
         type = 'Density Pointcloud Heatmap'
-    else if path.endswith('_atlas_region_pointcloud.html')
+    else if path.endswith('_atlas_region_pointcloud.html'):
         type = 'Atlas Region Pointcloud'
 
     context = {'type': type}
