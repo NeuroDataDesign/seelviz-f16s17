@@ -520,7 +520,7 @@ class claritybase(object):
                                marker=Marker(symbol='dot',
                                              size=6,
                                              opacity=0.5,
-                                             color='purple'),
+                                             color='cyan'),
                                # text=[str(r) for r in range(V)],
                                # text=atlas_data['nodes'],
                                hoverinfo='text')

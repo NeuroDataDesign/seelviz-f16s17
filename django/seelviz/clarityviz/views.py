@@ -64,23 +64,26 @@ def token_compute(request):
     print('INSIDE TOKEN_COMPUTE')
     token = request.POST['token']
     ogToken = token
+    token = token.strip().split(',')
+    ori1 = token[1].strip()
+    token = token[0].strip()
 
     # test.testFunction(token)
 
-    ip_start = time.time()
-    token = image_parse(token)
-    ip_run_time = time.time() - ip_start
-    print('image_parse total time = %f' % ip_run_time)
+    # ip_start = time.time()
+    # token = image_parse(token,ori1)
+    # ip_run_time = time.time() - ip_start
+    # print('image_parse total time = %f' % ip_run_time)
 
-    start = time.time()
-    density_graph(token)
-    run_time = time.time() - start
-    print('density_graph total time = %f' % run_time)
+    # start = time.time()
+    # density_graph(token)
+    # run_time = time.time() - start
+    # print('density_graph total time = %f' % run_time)
     
-    start = time.time()
-    atlas_region(token)
-    run_time = time.time() - start
-    print('density_graph total time = %f' % run_time)
+    # start = time.time()
+    # atlas_region(token)
+    # run_time = time.time() - start
+    # print('density_graph total time = %f' % run_time)
     
     fzip = shutil.make_archive(token, 'zip', token)
     fzip_abs = os.path.abspath(fzip)
@@ -242,6 +245,11 @@ def plot(request, path):
                 </div>
             </div>
         </div>
+        <div class="container">
+            {% if description %}
+                <p>{{description}}</p>
+            {% endif %}
+        </div>
     </section>
     </body>
     </html>
@@ -251,21 +259,24 @@ def plot(request, path):
     with open("clarityviz/templates/clarityviz/plot.html", "w+") as text_file:
         text_file.write("{}".format(html))
 
-    type = ''
+    plot_type = ''
     description = ''
     if path.endswith('_brain_pointcloud.html'):
-        type = 'Brain Pointcloud'
-        description = ''
+        plot_type = 'Brain Pointcloud'
+        description = 'In cyan we have a point cloud visualization of the 10,000 brightest points of the CLARITY brain selected after image filtering and histogram equalization.  The filtering and histogram equalization increased the relative contrast of each voxel relative to its nearest neighbors; the 10,000 brightest points were selected by randomly sampling voxels with 255 grey scale values.  We hypothesize that the denser areas of the point cloud correspond to brain regions with the more neurological activity.'
     elif path.endswith('_edge_count_pointcloud.html'):
-        type = 'Edge Count Pointcloud'
+        plot_type = 'Edge Count Pointcloud'
+        description = 'This graph shows the brain with each edge highlighted in cyan. The edges were determined by an epsilon ball radius of 25'
     elif path.endswith('_density_pointcloud.html'):
-        type = 'Density Pointcloud'
+        plot_type = 'Density Pointcloud'
+        description = 'The multicolored plot shows a false-coloration scheme of the 10,000 brightest points by their edge counts, relative to a preselected epsilon ball radius.  The epsilon ball radius determines the number of edges a given node has by connecting all neighboring nodes within the radius with an edge.  Black nodes had an edge count of 0.  Then, in reverse rainbow order, (purple → red), we get increasing numbers of edges.  The densest node with the most edges is shown in white.  The plot supports up to 20 different colors.'
     elif path.endswith('_density_pointcloud_heatmap.html'):
-        type = 'Density Pointcloud Heatmap'
+        plot_type = 'Density Pointcloud Heatmap'
     elif path.endswith('_region_pointcloud.html'):
-        type = 'Atlas Region Pointcloud'
+        plot_type = 'Atlas Region Pointcloud'
+        description = 'This graph shows a plot of the brain with each region as designated by the atlas a unique colored. Controls along the side allow for toggling the traces on/off'
 
-    context = {'type': type}
+    context = {'type': plot_type, 'description': description}
 
     return render(request, 'clarityviz/plot.html', context) 
 
@@ -274,7 +285,7 @@ def output(request, token):
     return render(request, 'clarityviz/outputs.html')
 
 
-def imgGet(inToken):
+def imgGet(inToken, ori1):
     refToken = "ara_ccf2"                         # hardcoded 'ara_ccf2' atlas until additional functionality is requested
     refImg = imgDownload(refToken)                # download atlas
     refAnnoImg = imgDownload(refToken, channel="annotation")
@@ -316,7 +327,8 @@ def imgGet(inToken):
     inImg_download = inImg    # Aut1367 set to default spacing
     inImg = imgResample(inImg, spacing=refImg.GetSpacing())
     print "resampled img"
-    Img_reorient = imgReorient(inImg, "LPS", "RSA")    # reoriented Aut1367
+    Img_reorient = imgReorient(inImg, ori1, "RSA")    # reoriented Aut1367
+    # Img_reorient = imgReorient(inImg, "LPS", "RSA")    # reoriented Aut1367
     refImg_ds = imgResample(refImg, spacing=spacing)    # atlas with downsampled spacing 10x
     inImg_ds = imgResample(Img_reorient, spacing=spacing)    # Aut1367 with downsampled spacing 10x
     print "reoriented image"
@@ -332,7 +344,8 @@ def imgGet(inToken):
     invField = fieldApplyField(invAffineField, invField)
     inAnnoImg = imgApplyField(refAnnoImg, invField,useNearest=True, size=Img_reorient.GetSize())
 
-    inAnnoImg = imgReorient(inAnnoImg, "RSA", "LPS")
+    inAnnoImg = imgReorient(inAnnoImg, "RSA", ori1)
+    # inAnnoImg = imgReorient(inAnnoImg, "RSA", "LPS")
     inAnnoImg = imgResample(inAnnoImg, spacing=inImg_download.GetSpacing(), size=inImg_download.GetSize(), useNearest=True)
     print "inverse affine"
     imgName = inToken + "reorient_atlas"
@@ -345,9 +358,10 @@ def imgGet(inToken):
     return imgName
 
 
-def image_parse(inToken):
+def image_parse(inToken, ori1):
     start = time.time()
-    imgName = imgGet(inToken)
+    imgName = imgGet(inToken,ori1)
+    # imgName = imgGet(inToken)
     run_time = time.time() - start
     print('imgGet time = %f' % run_time)
 
