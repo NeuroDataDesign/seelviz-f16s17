@@ -269,7 +269,7 @@ def plot(request, path):
         description = 'This graph shows the brain with each edge highlighted in cyan. The edges were determined by an epsilon ball radius of 25'
     elif path.endswith('_density_pointcloud.html'):
         plot_type = 'Density Pointcloud'
-        description = 'The multicolored plot shows a false-coloration scheme of the 10,000 brightest points by their edge counts, relative to a preselected epsilon ball radius.  The epsilon ball radius determines the number of edges a given node has by connecting all neighboring nodes within the radius with an edge.  Black nodes had an edge count of 0.  Then, in reverse rainbow order, (purple → red), we get increasing numbers of edges.  The densest node with the most edges is shown in white.  The plot supports up to 20 different colors.'
+        description = 'The multicolored plot shows a false-coloration scheme of the 10,000 brightest points by their edge counts, relative to a preselected epsilon ball radius.  The epsilon ball radius determines the number of edges a given node has by connecting all neighboring nodes within the radius with an edge.  Black nodes had an edge count of 0.  Then, in reverse rainbow order, (purple to red), we get increasing numbers of edges.  The densest node with the most edges is shown in white.  The plot supports up to 20 different colors.'
     elif path.endswith('_density_pointcloud_heatmap.html'):
         plot_type = 'Density Pointcloud Heatmap'
     elif path.endswith('_region_pointcloud.html'):
