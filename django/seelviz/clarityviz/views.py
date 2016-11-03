@@ -71,20 +71,21 @@ def token_compute(request):
 
     # test.testFunction(token)
 
-    # ip_start = time.time()
-    # token = image_parse(token,ori1)
-    # ip_run_time = time.time() - ip_start
-    # print('image_parse total time = %f' % ip_run_time)
+    if token != 'Aut1367reorient_atlas':
+        ip_start = time.time()
+        token = image_parse(token,ori1)
+        ip_run_time = time.time() - ip_start
+        print('image_parse total time = %f' % ip_run_time)
 
-    # start = time.time()
-    # density_graph(token)
-    # run_time = time.time() - start
-    # print('density_graph total time = %f' % run_time)
-    
-    # start = time.time()
-    # atlas_region(token)
-    # run_time = time.time() - start
-    # print('density_graph total time = %f' % run_time)
+        start = time.time()
+        density_graph(token)
+        run_time = time.time() - start
+        print('density_graph total time = %f' % run_time)
+        
+        start = time.time()
+        atlas_region(token)
+        run_time = time.time() - start
+        print('density_graph total time = %f' % run_time)
     
     fzip = shutil.make_archive(token, 'zip', token)
     fzip_abs = os.path.abspath(fzip)
