@@ -167,6 +167,7 @@ def token_compute(request):
             link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Density Pointcloud Heatmap</a> <br />'
         elif absPath.endswith('_atlas_region_pointcloud.html'):
             link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Atlas Region Pointcloud</a> <br />'
+        html += link
 
     # for plot in plotly:
     #     absPath = os.path.abspath(plot)
