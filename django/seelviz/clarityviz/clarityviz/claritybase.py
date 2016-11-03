@@ -161,7 +161,9 @@ class claritybase(object):
                 r=0,
                 b=0,
                 t=0
-            )
+            ),
+            paper_bgcolor='rgb(0,0,0)',
+            plot_bgcolor='rgb(0,0,0)'
         )
 
         fig = Figure(data=data, layout=layout)
