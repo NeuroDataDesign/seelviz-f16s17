@@ -67,20 +67,20 @@ def token_compute(request):
 
     # test.testFunction(token)
 
-    # ip_start = time.time()
-    # token = image_parse(token)
-    # ip_run_time = time.time() - ip_start
-    # print('image_parse total time = %f' % ip_run_time)
+    ip_start = time.time()
+    token = image_parse(token)
+    ip_run_time = time.time() - ip_start
+    print('image_parse total time = %f' % ip_run_time)
 
-    # start = time.time()
-    # density_graph(token)
-    # run_time = time.time() - start
-    # print('density_graph total time = %f' % run_time)
+    start = time.time()
+    density_graph(token)
+    run_time = time.time() - start
+    print('density_graph total time = %f' % run_time)
     
-    # start = time.time()
-    # atlas_region(token)
-    # run_time = time.time() - start
-    # print('density_graph total time = %f' % run_time)
+    start = time.time()
+    atlas_region(token)
+    run_time = time.time() - start
+    print('density_graph total time = %f' % run_time)
     
     fzip = shutil.make_archive(token, 'zip', token)
     fzip_abs = os.path.abspath(fzip)
@@ -167,9 +167,6 @@ def token_compute(request):
             link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Density Pointcloud Heatmap</a> <br />'
         elif absPath.endswith('_atlas_region_pointcloud.html'):
             link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Atlas Region Pointcloud</a> <br />'
-        with open(absPath, "r") as ins:
-            for line in ins:
-                html += line
 
     # for plot in plotly:
     #     absPath = os.path.abspath(plot)
