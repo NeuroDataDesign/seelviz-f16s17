@@ -94,7 +94,7 @@ def token_compute(request):
         <div class="header-content">
             <div class="header-content-inner">
                 {% if token %}
-                    <h1>{{token}}</h2>
+                    <h1>{{token}}</h1>
                 {% endif %}
             </div>
         </div>
@@ -155,20 +155,20 @@ def token_compute(request):
             link = '<a href="/clarityviz/download/' + absPath + '">' + os.path.basename(filename) + "</a> <br />"
             html += link
 
-    html += '<a href="/clarityviz/download/' + fzip_abs + '">' + token + '.zip' + "</a> <br />"
+    html += '<a href="/clarityviz/download/' + fzip_abs + '">' + token + '.zip' + "</a> <br /><br />"
 
     for plot in plotly:
         absPath = os.path.abspath(plot)
         if absPath.endswith('brain_pointcloud.html'):
-            link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Brain Pointcloud</a> <br />'
+            link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Brain Pointcloud</a> <br /><br />'
         elif absPath.endswith('_edge_count_pointcloud.html'):
-            link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Edge Count Pointcloud</a> <br />'
+            link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Edge Count Pointcloud</a> <br /><br />'
         elif absPath.endswith('_density_pointcloud.html'):
-            link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Density Pointcloud</a> <br />'
+            link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Density Pointcloud</a> <br /><br />'
         elif absPath.endswith('_density_pointcloud_heatmap.html'):
-            link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Density Pointcloud Heatmap</a> <br />'
+            link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Density Pointcloud Heatmap</a> <br /><br />'
         elif absPath.endswith('_atlas_region_pointcloud.html'):
-            link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Atlas Region Pointcloud</a> <br />'
+            link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Atlas Region Pointcloud</a> <br /><br />'
         html += link
 
     # for plot in plotly:
