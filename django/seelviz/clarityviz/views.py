@@ -252,15 +252,15 @@ def plot(request, path):
         text_file.write("{}".format(html))
 
     type = ''
-    if path.endswith('_pointcloud.html'):
-        type = 'BrainPointcloud'
+    if path.endswith('_brain_pointcloud.html'):
+        type = 'Brain Pointcloud'
     elif path.endswith('_edge_count_pointcloud.html'):
         type = 'Edge Count Pointcloud'
     elif path.endswith('_density_pointcloud.html'):
         type = 'Density Pointcloud'
     elif path.endswith('_density_pointcloud_heatmap.html'):
         type = 'Density Pointcloud Heatmap'
-    elif path.endswith('_atlas_region_pointcloud.html'):
+    elif path.endswith('_region_pointcloud.html'):
         type = 'Atlas Region Pointcloud'
 
     context = {'type': type}
