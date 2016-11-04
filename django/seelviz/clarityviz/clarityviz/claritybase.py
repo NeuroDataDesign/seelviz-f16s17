@@ -148,7 +148,7 @@ class claritybase(object):
             mode='markers',
             marker=dict(
                 size=1.2,
-                color='purple',                # set color to an array/list of desired values
+                color='cyan',                # set color to an array/list of desired values
                 colorscale='Viridis',   # choose a colorscale
                 opacity=0.15
             )
@@ -520,7 +520,7 @@ class claritybase(object):
                                marker=Marker(symbol='dot',
                                              size=6,
                                              opacity=0.5,
-                                             color='cyan'),
+                                             color='purple'),
                                # text=[str(r) for r in range(V)],
                                # text=atlas_data['nodes'],
                                hoverinfo='text')
