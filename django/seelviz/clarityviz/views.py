@@ -364,6 +364,7 @@ def imgGet(inToken, ori1):
 
 def image_parse(inToken, ori1):
     start = time.time()
+    # imgGet is where the token name changes to adding the 'reorient_atlas'
     imgName = imgGet(inToken,ori1)
     # imgName = imgGet(inToken)
     run_time = time.time() - start
@@ -372,6 +373,8 @@ def image_parse(inToken, ori1):
     
     # imgName = inToken + 'reorient_atlas'
     copydir = os.path.join(os.getcwd(), os.path.dirname('img/'))
+    print('copydir: %s' % copydir)
+    print('imgName: %s' % imgName)
     img = claritybase(imgName, copydir)       # initial call for clarityviz
     print "loaded into claritybase"
     img.loadEqImg()
