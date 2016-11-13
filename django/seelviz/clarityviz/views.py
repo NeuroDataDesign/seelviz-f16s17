@@ -319,6 +319,8 @@ def imgGet(inToken, ori1):
                 xyz.append([xval, yval, zval])
             else:
                 value = 0
+    print('inToken asdfasdf:')
+    print(inToken)
     rImg = claritybase(inToken + 'raw', None)
     rImg.savePoints(None,xyz)
     rImg.generate_plotly_html()

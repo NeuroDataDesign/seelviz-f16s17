@@ -440,6 +440,8 @@ class claritybase(object):
             self._points = points
         if self._points is None:
             raise ValueError("Points is empty, please call imgToPoints() first.")
+        print('self._token asdfasdf:')
+        print(self._token)
         pathname = 'output/' + self._token + "/" + self._token+"localeq.csv"
         np.savetxt(pathname,self._points,fmt='%d',delimiter=',')
         return self
