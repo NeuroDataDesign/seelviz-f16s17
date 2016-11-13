@@ -319,7 +319,7 @@ def imgGet(inToken, ori1):
                 xyz.append([xval, yval, zval])
             else:
                 value = 0
-    rImg = claritybase('output/' + inToken + 'raw', None)
+    rImg = claritybase(inToken + 'raw', None)
     rImg.savePoints(None,xyz)
     rImg.generate_plotly_html()
     print "random sample of points above 250"

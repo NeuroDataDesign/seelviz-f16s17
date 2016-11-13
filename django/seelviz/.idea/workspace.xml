@@ -23,8 +23,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/clarityviz/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="352" column="21" selection-start-line="352" selection-start-column="16" selection-end-line="352" selection-end-column="21" />
+            <state relative-caret-position="717">
+              <caret line="366" column="34" selection-start-line="366" selection-start-column="34" selection-end-line="366" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -43,7 +43,7 @@
       <file leaf-file-name="claritybase.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/clarityviz/clarityviz/claritybase.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
+            <state relative-caret-position="1917">
               <caret line="557" column="26" selection-start-line="557" selection-start-column="20" selection-end-line="557" selection-end-column="26" />
               <folding />
             </state>
@@ -476,7 +476,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/clarityviz/clarityviz/claritybase.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
+        <state relative-caret-position="1917">
           <caret line="557" column="26" selection-start-line="557" selection-start-column="20" selection-end-line="557" selection-end-column="26" />
           <folding />
         </state>
@@ -484,8 +484,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/clarityviz/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="352" column="21" selection-start-line="352" selection-start-column="16" selection-end-line="352" selection-end-column="21" />
+        <state relative-caret-position="717">
+          <caret line="366" column="34" selection-start-line="366" selection-start-column="34" selection-end-line="366" selection-end-column="34" />
           <folding />
         </state>
       </provider>
