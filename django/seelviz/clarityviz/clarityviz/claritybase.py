@@ -363,6 +363,8 @@ class claritybase(object):
         if sample < 1.0:
             # np.random.random returns random floats in the half-open interval [0.0, 1.0)
             filt = np.random.random(size=l) < sample
+            print('v.shape:')
+            print(l)
             print('x.size before filter: %d' % x.size)
             print('y.size before filter: %d' % y.size)
             print('z.size before filter: %d' % z.size)

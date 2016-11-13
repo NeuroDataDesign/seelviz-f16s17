@@ -1,0 +1,62 @@
+docker pull alee156/clviz:0
+
+- See which docker images are currently running:
+docker ps
+
+- See what docker repos you've pulled:
+docker images
+
+
+- -t is used to keep the container running, -i means interactive
+docker run -t -i alee156/clviz:0
+
+shirley
+
+- to run on localhost
+docker run -t -i -p 80:80 alee156/clviz:0
+
+after shirley is started, go press DOCKER CLI in bottom left of Kitematic, then in that shell run 'docker attach elegant_shirle	y'
+
+
+
+=============
+MANAGING DOWNLOADED CONTAINERS
+
+- run 'docker ps -a' to find list of all previously run containers
+- find the name of the one you want to use
+- run 'docker start container_name'
+- run 'docker attach container_name'
+
+
+so if you run an image
+you create a container
+that container holds the information of the session
+but the image is preserved for distribution
+if you want to check your containers
+do
+docker ps -a
+and you should have a huuuuuge list of exited (or running) containers
+to remove any that you dont need
+docker rm <container name>
+
+======
+RUNNING JUPYTER IN A GOOGLE CLOUD IN A DOCKER
+
+on the google cloud
+instead of running alee156/clviz:0
+run alee156/clviz:jupyter
+run -t -i -p 80:80 alee156/clviz:jupyter
+
+its alee156/clviz:jupyter1
+run -t -i -p 80:80 alee156/clviz:jupyter1
+you can call 'jupyter notebook' in the container and open the notebook by going to the server's ip address
+104.155.167.35
+
+
+================================
+RUNNING DOCKER ON CORTEX
+
+docker exec -it determined_swanson /bin/bash
+
+128.220.11.5
+
