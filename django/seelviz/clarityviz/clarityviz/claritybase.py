@@ -440,7 +440,7 @@ class claritybase(object):
             self._points = points
         if self._points is None:
             raise ValueError("Points is empty, please call imgToPoints() first.")
-        pathname = self._token + "/" + self._token+"localeq.csv"
+        pathname = 'output/' + self._token + "/" + self._token+"localeq.csv"
         np.savetxt(pathname,self._points,fmt='%d',delimiter=',')
         return self
 
@@ -459,7 +459,7 @@ class claritybase(object):
         
         # points is an array of arrays
         points = self._points
-        outpath = self._token + '/'
+        outpath = 'output/' + self._token + '/'
         nodename = outpath + filename + '.nodes.csv'
         edgename = outpath + filename + '.edges.csv'
 
@@ -491,12 +491,14 @@ class claritybase(object):
         nodefile = None
         edgefile = None
 
+        path = 'output/' + self._token
+
         # If no nodefilename was entered, used the Clarity object's nodefile
         if nodefilename == None: 
             #nodefile = self._nodefile
             #nodefile = open(self._nodefile, 'r')
             
-            self.loadNodeCsv(self._token + "/" + self._token + ".nodes.csv")
+            self.loadNodeCsv(path + "/" + self._token + ".nodes.csv")
             nodefile = self._nodefile
         else:
             self.loadNodeCsv(nodefilename)
@@ -507,14 +509,14 @@ class claritybase(object):
             #edgefile = self._edgefile
             #edgefile = open(self._edgefile, 'r')
             
-            self.loadEdgeCsv(self._token + "/" + self._token + ".edges.csv")
+            self.loadEdgeCsv(path + "/" + self._token + ".edges.csv")
             edgefile = self._edgefile
         else:
             self.loadEdgeCsv(edgefilename)
             edgefile = self._edgefile
 
         # Start writing to the output graphml file
-        path = self._token + "/" + self._token + ".graphml"
+        path = path + "/" + self._token + ".graphml"
         with open(path, 'w') as outfile:
             outfile.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
             outfile.write("<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\"\n")
@@ -553,7 +555,7 @@ class claritybase(object):
         print('generating plotly with edges...')
         if path == None:
             # If bath is not specified use the default path to the generated folder.
-            path = self._token + '/' + self._token + '.graphml'           
+            path = 'output/' + self._token + '/' + self._token + '.graphml'
 
         g = nx.read_graphml(path)
 
@@ -623,7 +625,7 @@ class claritybase(object):
 
         data = Data([node_trace, edge_trace])
         fig = Figure(data=data, layout=layout)
-        plotly.offline.plot(fig, filename= self._token + "/" + self._token + "_edge_count_pointcloud.html")
+        plotly.offline.plot(fig, filename= 'output/' + self._token + "/" + self._token + "_edge_count_pointcloud.html")
 
         #return fig 
 

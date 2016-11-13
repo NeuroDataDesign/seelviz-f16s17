@@ -39,7 +39,7 @@ class densitygraph(object):
     def __init__(self, token, graph_path = None):
         self._token = token
         if graph_path == None:
-           self._graph = nx.read_graphml(token + '/' + token + '.graphml')
+           self._graph = nx.read_graphml('output/' + token + '/' + token + '.graphml')
         else:
             self._graph = graph_path
         self._sortedList = None

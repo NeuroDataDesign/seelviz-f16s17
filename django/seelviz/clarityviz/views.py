@@ -149,7 +149,7 @@ def token_compute(request):
     #       </form>"""
     #     # html += '<a href="file:///' + '//' + absPath + '">' + "View Plotly graph</a> <br />"
 
-    for filename in glob.glob(token + '/*'):
+    for filename in glob.glob('output/' + token + '/*'):
         absPath = os.path.abspath(filename)
         if os.path.isdir(absPath):
             link = '<a href="/clarityviz/download/' + absPath + '">' + os.path.basename(filename) + "</a> <br />"
@@ -319,7 +319,7 @@ def imgGet(inToken, ori1):
                 xyz.append([xval, yval, zval])
             else:
                 value = 0
-    rImg = claritybase(inToken + 'raw', None)
+    rImg = claritybase('output/' + inToken + 'raw', None)
     rImg.savePoints(None,xyz)
     rImg.generate_plotly_html()
     print "random sample of points above 250"
@@ -429,18 +429,18 @@ def density_graph(Token):
     print 'densitygraph module'
     densg.generate_density_graph()
     print 'generated density graph'
-    g = nx.read_graphml(Token + '/' + Token + '.graphml')
+    g = nx.read_graphml('output/' + Token + '/' + Token + '.graphml')
     ggraph = densg.get_brain_figure(g = g, plot_title=Token)
-    plotly.offline.plot(ggraph, filename = Token + '/' + Token + '_density_pointcloud.html')
+    plotly.offline.plot(ggraph, filename = 'output/' + Token + '/' + Token + '_density_pointcloud.html')
     hm = densg.generate_heat_map()
-    plotly.offline.plot(hm, filename = Token + '/' + Token + '_density_pointcloud_heatmap.html')
+    plotly.offline.plot(hm, filename = 'output/' + Token + '/' + Token + '_density_pointcloud_heatmap.html')
 
 def atlas_region(Token):
-    atlas_img = Token + '/' + Token + 'localeq' + '.nii'
+    atlas_img = 'output/' + Token + '/' + Token + 'localeq' + '.nii'
     atlas = nb.load(atlas_img)  # <- atlas .nii image
     atlas_data = atlas.get_data()
 
-    csvfile = Token + '/' + Token + 'localeq.csv' # 'atlasexp/Control258localeq.csv'    # <- regular csv from the .nii to csv step
+    csvfile = 'output/' + Token + '/' + Token + 'localeq.csv' # 'atlasexp/Control258localeq.csv'    # <- regular csv from the .nii to csv step
 
     bright_points = genfromtxt(csvfile, delimiter=',')
 
@@ -448,7 +448,7 @@ def atlas_region(Token):
 
     regions = [atlas_data[l[0], l[1], l[2]] for l in locations]
 
-    outfile = open(Token + '/' + Token + '.region.csv', 'w')
+    outfile = open('output/' + Token + '/' + Token + '.region.csv', 'w')
     infile = open(csvfile, 'r')
     for i, line in enumerate(infile):
         line = line.strip().split(',')
@@ -464,6 +464,6 @@ def atlas_region(Token):
     print uniq
 
     # newToken = Token + '.region'
-    atlas = atlasregiongraph(Token, Token)
+    atlas = atlasregiongraph(Token)
     
     atlas.generate_atlas_region_graph(None, numRegions)
