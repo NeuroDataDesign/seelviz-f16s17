@@ -352,7 +352,7 @@ class claritybase(object):
         print("Above threshold=%d"%(l))
         # sample
 
-        total_points, temp = l
+        total_points = l
         if not 0 <= num_points <= total_points:
             raise ValueError("Number of points given should be at most equal to total points: %d" % total_points)
         fraction = num_points / float(total_points)
