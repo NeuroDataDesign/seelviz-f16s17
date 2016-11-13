@@ -326,6 +326,12 @@ class claritybase(object):
         print("File Loaded: %s"%(self._edgefile.name))
         return self
 
+    def calculatePoints(self, num_points = 10000, optimize = True):
+
+
+
+        self.calculatePoints(threshold, sample, optimize)
+
     def calculatePoints(self, threshold=0.1, sample=0.5, optimize=True):
         """Method to extract points data from the img file."""
         if not 0 <= threshold < 1:
@@ -350,16 +356,25 @@ class claritybase(object):
         v = self._img[filt]
         if optimize:
             self.discardImg()
-        v = np.int16(255*(np.float32(v)/np.float32(self._max)))
+        v = np.int16(255 * (np.float32(v) / np.float32(self._max)))
         l = v.shape
         print("Above threshold=%d"%(l))
         # sample
         if sample < 1.0:
+            # np.random.random returns random floats in the half-open interval [0.0, 1.0)
             filt = np.random.random(size=l) < sample
+            print('x.size before filter: %d' % x.size)
+            print('y.size before filter: %d' % y.size)
+            print('z.size before filter: %d' % z.size)
+            print('v.size before filter: %d' % v.size)
             x = x[filt]
             y = y[filt]
             z = z[filt]
             v = v[filt]
+            print('x.size after filter: %d' % x.size)
+            print('y.size after filter: %d' % y.size)
+            print('z.size after filter: %d' % z.size)
+            print('v.size after filter: %d' % v.size)
         self._points = np.vstack([x,y,z,v])
         self._points = np.transpose(self._points)
         print("Samples=%d"%(self._points.shape[0]))
