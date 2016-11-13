@@ -382,7 +382,9 @@ def image_parse(inToken, ori1):
     start = time.time()
     thr = 0.9
     sam = 0.0005
-    img.calculatePoints(threshold = thr, sample = sam)
+    # img.calculatePoints(threshold = thr, sample = sam)
+    num_points = 10000
+    img.calculatePointsByNumber(num_points)
     print "calculated points"
     run_time = time.time() - start
     print('calculatePoints time (with threshold = %f, sample = %f) = %f' % (thr, sam, run_time))

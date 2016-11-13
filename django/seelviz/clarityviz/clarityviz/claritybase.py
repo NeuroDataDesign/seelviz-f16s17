@@ -326,11 +326,60 @@ class claritybase(object):
         print("File Loaded: %s"%(self._edgefile.name))
         return self
 
-    def calculatePoints(self, num_points = 10000, optimize = True):
+    def calculatePointsByNumber(self, num_points = 10000, optimize = True):
+        """Method to extract points data from the img file."""
+        if self._img is None:
+            raise ValueError("Img haven't loaded, please call loadImg() first.")
 
+        threshold = .9
+        total = self._shape[0]*self._shape[1]*self._shape[2]
+        print("Coverting to points...\ntoken=%s\ntotal=%d\nmax=%f\nthreshold=%f\nnum_points=%f" \
+              %(self._token,total,self._max,threshold,num_points))
+        print("(This will take couple minutes)")
+        # threshold
+        filt = self._img > threshold * self._max
+        # a is just a container to hold another value for ValueError: too many values to unpack
+        #x, y, z, a = np.where(filt)
+        t = np.where(filt)
+        x = t[0]
+        y = t[1]
+        z = t[2]
+        v = self._img[filt]
+        if optimize:
+            self.discardImg()
+        v = np.int16(255 * (np.float32(v) / np.float32(self._max)))
+        l = v.shape
+        print("Above threshold=%d"%(l))
+        # sample
 
+        total_points, temp = l
+        if not 0 <= num_points <= total_points:
+            raise ValueError("Number of points given should be at most equal to total points: %d" % total_points)
+        fraction = num_points / float(total_points)
 
-        self.calculatePoints(threshold, sample, optimize)
+        if fraction < 1.0:
+            # np.random.random returns random floats in the half-open interval [0.0, 1.0)
+            filt = np.random.random(size=l) < fraction
+            print('v.shape:')
+            print(l)
+            print('x.size before filter: %d' % x.size)
+            print('y.size before filter: %d' % y.size)
+            print('z.size before filter: %d' % z.size)
+            print('v.size before filter: %d' % v.size)
+            x = x[filt]
+            y = y[filt]
+            z = z[filt]
+            v = v[filt]
+            print('x.size after filter: %d' % x.size)
+            print('y.size after filter: %d' % y.size)
+            print('z.size after filter: %d' % z.size)
+            print('v.size after filter: %d' % v.size)
+        self._points = np.vstack([x,y,z,v])
+        self._points = np.transpose(self._points)
+        print("Samples=%d"%(self._points.shape[0]))
+        print("Finished")
+        return self
+
 
     def calculatePoints(self, threshold=0.1, sample=0.5, optimize=True):
         """Method to extract points data from the img file."""
