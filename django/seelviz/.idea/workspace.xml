@@ -33,8 +33,8 @@
       <file leaf-file-name="claritybase.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/clarityviz/clarityviz/claritybase.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="356" column="79" selection-start-line="356" selection-start-column="79" selection-end-line="356" selection-end-column="79" />
+            <state relative-caret-position="360">
+              <caret line="355" column="27" selection-start-line="355" selection-start-column="27" selection-end-line="355" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -66,8 +66,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/dockernotes" />
-        <option value="$PROJECT_DIR$/clarityviz/clarityviz/claritybase.py" />
         <option value="$PROJECT_DIR$/clarityviz/views.py" />
+        <option value="$PROJECT_DIR$/clarityviz/clarityviz/claritybase.py" />
       </list>
     </option>
   </component>
@@ -427,8 +427,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/clarityviz/clarityviz/claritybase.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="356" column="79" selection-start-line="356" selection-start-column="79" selection-end-line="356" selection-end-column="79" />
+        <state relative-caret-position="360">
+          <caret line="355" column="27" selection-start-line="355" selection-start-column="27" selection-end-line="355" selection-end-column="27" />
           <folding />
         </state>
       </provider>
