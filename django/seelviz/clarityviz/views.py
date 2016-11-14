@@ -20,6 +20,18 @@ class ComputeCreate(CreateView):
     fields = ['token', 'orientation', 'num_points']
 
 
+    def compute(self):
+        self.kwargs['pk']
+        print('MEMES')
+        test_function()
+
+
+    def form_valid(self, form):
+        self.object = form.save()
+        self.compute()
+        return super(ComputeCreate, self).form_valid(form)
+
+
 
 # =============================================
 
@@ -82,6 +94,9 @@ def log(request):
         'all_computes': all_computes,
     }
     return render(request, 'clarityviz/log.html', context)
+
+def test_function():
+    print('TEST FUNCTION')
 
 
 def token_compute(request):
