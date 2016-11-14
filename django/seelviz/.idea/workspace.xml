@@ -23,11 +23,11 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/clarityviz/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="98" column="23" selection-start-line="98" selection-start-column="23" selection-end-line="98" selection-end-column="23" />
+            <state relative-caret-position="495">
+              <caret line="33" column="24" selection-start-line="33" selection-start-column="24" selection-end-line="33" selection-end-column="24" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
-                <element signature="e#3883#3884#0" expanded="false" />
+                <element signature="e#4108#4109#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -422,7 +422,7 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.159375" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1936842" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1936842" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -474,7 +474,7 @@
           <caret line="384" column="17" selection-start-line="384" selection-start-column="8" selection-end-line="384" selection-end-column="17" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#3883#3884#0" expanded="false" />
+            <element signature="e#4108#4109#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -509,7 +509,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#3883#3884#0" expanded="false" />
+            <element signature="e#4108#4109#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -520,7 +520,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#3883#3884#0" expanded="false" />
+            <element signature="e#4108#4109#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -657,6 +657,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/clarityviz/templates/clarityviz/compute_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="690">
+          <caret line="49" column="9" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/clarityviz/templates/clarityviz/log.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="33" selection-start-line="12" selection-start-column="33" selection-end-line="12" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/clarityviz/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -677,29 +693,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/clarityviz/templates/clarityviz/log.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="33" selection-start-line="12" selection-start-column="33" selection-end-line="12" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/clarityviz/templates/clarityviz/compute_form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="49" column="9" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/clarityviz/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="98" column="23" selection-start-line="98" selection-start-column="23" selection-end-line="98" selection-end-column="23" />
+        <state relative-caret-position="495">
+          <caret line="33" column="24" selection-start-line="33" selection-start-column="24" selection-end-line="33" selection-end-column="24" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#3883#3884#0" expanded="false" />
+            <element signature="e#4108#4109#0" expanded="false" />
           </folding>
         </state>
       </provider>

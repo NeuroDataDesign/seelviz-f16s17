@@ -21,13 +21,18 @@ class ComputeCreate(CreateView):
 
 
     def compute(self):
-        self.kwargs['pk']
+        # self.kwargs['pk']
         print('MEMES')
         test_function()
 
 
     def form_valid(self, form):
         self.object = form.save()
+        token = form.cleaned_data['token']
+        orientation = form.cleaned_data['orientation']
+        num_points = form.cleaned_data['num_points']
+        print('meme token')
+        print(token)
         self.compute()
         return super(ComputeCreate, self).form_valid(form)
 
