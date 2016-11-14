@@ -155,11 +155,12 @@ def token_compute(request):
 
     print('about to find the filenames')
 
-    for filename in glob.glob('output/' + token + '/*'):
-        absPath = os.path.abspath(filename)
+    for filepath in glob.glob('output/' + token + '/*'):
+        absPath = os.path.abspath(filepath)
         if not os.path.isdir(absPath):
+            filename = filepath.split('/')[2]
             all_files.append(filename)
-            if filename.endswith('html'):
+            if filepath.endswith('html'):
                 plotly_files.append(filename)
 
     # for plot in plotly:
