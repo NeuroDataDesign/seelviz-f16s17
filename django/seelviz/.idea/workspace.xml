@@ -24,10 +24,10 @@
         <entry file="file://$PROJECT_DIR$/clarityviz/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="360">
-              <caret line="176" column="95" selection-start-line="176" selection-start-column="95" selection-end-line="176" selection-end-column="95" />
+              <caret line="176" column="50" selection-start-line="176" selection-start-column="50" selection-end-line="176" selection-end-column="50" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
-                <element signature="e#5537#5538#0" expanded="false" />
+                <element signature="e#5536#5537#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -536,7 +536,7 @@
           <caret line="384" column="17" selection-start-line="384" selection-start-column="8" selection-end-line="384" selection-end-column="17" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#5537#5538#0" expanded="false" />
+            <element signature="e#5536#5537#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -571,7 +571,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#5537#5538#0" expanded="false" />
+            <element signature="e#5536#5537#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -582,7 +582,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#5537#5538#0" expanded="false" />
+            <element signature="e#5536#5537#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -782,10 +782,10 @@
     <entry file="file://$PROJECT_DIR$/clarityviz/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
-          <caret line="176" column="95" selection-start-line="176" selection-start-column="95" selection-end-line="176" selection-end-column="95" />
+          <caret line="176" column="50" selection-start-line="176" selection-start-column="50" selection-end-line="176" selection-end-column="50" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#5537#5538#0" expanded="false" />
+            <element signature="e#5536#5537#0" expanded="false" />
           </folding>
         </state>
       </provider>
