@@ -10,7 +10,7 @@
 
                         {% if all_computes %}
                             {% for compute in all_computes %}
-                            <li></li>
+                            <li><a href="{% url 'clarityviz:output' compute.pk %}">{{ compute.token }} (Num Points: {{ compute.num_points }})</a> </li>
                             {% endfor %}
                         {% else %}
 
