@@ -138,7 +138,7 @@ class claritybase(object):
         """Generates the plotly from the csv file."""
         # Type in the path to your csv file here
         thedata = None
-        thedata = np.genfromtxt(self._token + '/' + self._token + 'localeq.csv',
+        thedata = np.genfromtxt('output/' + self._token + '/' + self._token + 'localeq.csv',
             delimiter=',', dtype='int', usecols = (0,1,2), names=['a','b','c'])
        
         trace1 = Scatter3d(
