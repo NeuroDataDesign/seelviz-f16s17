@@ -183,6 +183,8 @@ def token_compute(request):
     #     text_file.write("{}".format(html))
 
     # files = glob.glob(token + '/*')
+    print('plotly_files:')
+    print(plotly_files)
 
     context = {'token': token, 'all_files': all_files, 'plotly_files': plotly_files}
 
