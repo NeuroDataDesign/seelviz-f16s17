@@ -63,6 +63,10 @@ class ComputeCreate(CreateView):
 
         return super(ComputeCreate, self).form_valid(form)
 
+class PlotView(generic.DetailView):
+    model = Plot
+    template_name = 'clarityviz/plot.html'
+
 
 
 # =============================================
@@ -249,27 +253,34 @@ def download(request, file_name):
 #     else:
 #         raise Http404
 
+
+
 def plot(request, file_info):
 
     token = file_info.split('/')[0]
     type = file_info.split('/')[1]
     plot_type = ''
     description = ''
-    # if type == 'brain'
-    #     plot_type = 'Brain Pointcloud'
-    #     description = 'In the plot above we have a point cloud visualization of the 10,000 brightest points of the CLARITY brain selected after image filtering and histogram equalization.  The filtering and histogram equalization increased the relative contrast of each voxel relative to its nearest neighbors; the 10,000 brightest points were selected by randomly sampling voxels with 255 grey scale values.  We hypothesize that the denser areas of the point cloud correspond to brain regions with the more neurological activity.'
-    #
-    # elif path.endswith('_edge_count_pointcloud.html'):
-    #     plot_type = 'Edge Count Pointcloud'
-    #     description = '''This purple node and cyan edge plot shows the connections from the density plot.  Each cyan edge was drawn with the same epsilon ball initialization used for the density plot.  It's important to note that the process of finding all the edges for a given node is a significant computational task that scales exponentially with increased epsilon ball radius.  The most connected nodes may show some properties of interest'''
-    # elif path.endswith('_density_pointcloud.html'):
-    #     plot_type = 'Density Pointcloud'
-    #     description = 'The multicolored plot shows a false-coloration scheme of the 10,000 brightest points by their edge counts, relative to a preselected epsilon ball radius.  The epsilon ball radius determines the number of edges a given node has by connecting all neighboring nodes within the radius with an edge.  Black nodes had an edge count of 0.  Then, in reverse rainbow order, (purple to red), we get increasing numbers of edges.  The densest node with the most edges is shown in white.  The plot supports up to 20 different colors.'
-    # elif path.endswith('_density_pointcloud_heatmap.html'):
-    #     plot_type = 'Density Pointcloud Heatmap'
-    # elif path.endswith('_region_pointcloud.html'):
-    #     plot_type = 'Atlas Region Pointcloud'
-    #     description = 'This graph shows a plot of the brain with each region as designated by the atlas a unique colored. Controls along the side allow for toggling the traces on/off'
+    file_name = ''
+    if type == 'brain':
+        plot_type = 'Brain Pointcloud'
+        description = 'In the plot above we have a point cloud visualization of the 10,000 brightest points of the CLARITY brain selected after image filtering and histogram equalization.  The filtering and histogram equalization increased the relative contrast of each voxel relative to its nearest neighbors; the 10,000 brightest points were selected by randomly sampling voxels with 255 grey scale values.  We hypothesize that the denser areas of the point cloud correspond to brain regions with the more neurological activity.'
+        file_name = token + '_brain_pointcloud.html'
+    elif type == 'edgecount':
+        plot_type = 'Edge Count Pointcloud'
+        description = '''This purple node and cyan edge plot shows the connections from the density plot.  Each cyan edge was drawn with the same epsilon ball initialization used for the density plot.  It's important to note that the process of finding all the edges for a given node is a significant computational task that scales exponentially with increased epsilon ball radius.  The most connected nodes may show some properties of interest'''
+        file_name = token + '_edge_count_pointcloud.html'
+    elif type == 'density':
+        plot_type = 'Density Pointcloud'
+        description = 'The multicolored plot shows a false-coloration scheme of the 10,000 brightest points by their edge counts, relative to a preselected epsilon ball radius.  The epsilon ball radius determines the number of edges a given node has by connecting all neighboring nodes within the radius with an edge.  Black nodes had an edge count of 0.  Then, in reverse rainbow order, (purple to red), we get increasing numbers of edges.  The densest node with the most edges is shown in white.  The plot supports up to 20 different colors.'
+        file_name = token + '_density_pointcloud.html'
+    elif type == 'densityheatmap':
+        plot_type = 'Density Pointcloud Heatmap'
+        file_name = token + '_density_pointcloud_heatmap.html'
+    elif type == 'atlasregion':
+        plot_type = 'Atlas Region Pointcloud'
+        description = 'This graph shows a plot of the brain with each region as designated by the atlas a unique colored. Controls along the side allow for toggling the traces on/off'
+        file_name = token + '_region_pointcloud.html'
 
     path = '/root/seelviz/django/seelviz/output/Aut1367reorient_atlas/' + file_name
     html = """
@@ -320,7 +331,7 @@ def plot(request, file_info):
 
     context = {'type': plot_type, 'description': description}
 
-    return render(request, 'clarityviz/plot.html', context) 
+    return render(request, 'clarityviz/plot.html', context)
 
 
 def output(request, token):
