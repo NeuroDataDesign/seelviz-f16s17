@@ -87,7 +87,7 @@ def token_compute(request):
         run_time = time.time() - start
         print('density_graph total time = %f' % run_time)
     
-    fzip = shutil.make_archive(token, 'zip', token)
+    fzip = shutil.make_archive('output/' + token + '/' + token, 'zip', token)
     fzip_abs = os.path.abspath(fzip)
 
     html = """
@@ -120,19 +120,26 @@ def token_compute(request):
     file_basenames = []
     plotly_paths = []
     plotly_basenames = []
+    #
+    # for filename in glob.glob('output/' + token + '/*'):
+    #     absPath = os.path.abspath(filename)
+    #     if os.path.isdir(absPath):
+    #         print('ISDIR: %s' % absPath)
+    #         link = '<a href="/clarityviz/download/' + absPath + '">' + os.path.basename(filename) + "</a> <br />"
+    #         html += link
+    #     else:
+    #         if filename.endswith('html'):
+    #             plotly.append(filename)
+    #         link = '<a href="/clarityviz/download/' + absPath + '">' + os.path.basename(filename) + "</a> <br />"
+    #         html += link
 
     for filename in glob.glob('output/' + token + '/*'):
         absPath = os.path.abspath(filename)
-        if os.path.isdir(absPath):
-            print('ISDIR: %s' % absPath)
-            link = '<a href="/clarityviz/download/' + absPath + '">' + os.path.basename(filename) + "</a> <br />"
-            html += link
-        else:
+        if not os.path.isdir(absPath):
             if filename.endswith('html'):
                 plotly.append(filename)
             link = '<a href="/clarityviz/download/' + absPath + '">' + os.path.basename(filename) + "</a> <br />"
             html += link
-
     html += '<a href="/clarityviz/download/' + fzip_abs + '">' + token + '.zip' + "</a> <br /><br />"
 
     for plot in plotly:
@@ -175,7 +182,18 @@ def token_compute(request):
 
     # return HttpResponse(html)
 
-    return render(request, 'clarityviz/files.html', context) 
+    # return render(request, 'clarityviz/files.html', context)
+    return render(request, 'clarityviz/outputs.html', context)
+
+# def download(request, file_name):
+#     file_path = path
+#     if os.path.exists(file_path):
+#         with open(file_path, 'rb') as fh:
+#             response = HttpResponse(fh.read(), content_type="application/x-download")
+#             response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+#             return response
+#     else:
+#         raise Http404
 
 def download(request, path):
     file_path = path
