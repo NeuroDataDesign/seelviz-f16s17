@@ -478,7 +478,8 @@ class claritybase(object):
                     y = temp[1]
                     z = temp[2]
                     v = temp[3]
-                    radius = 18
+                    # radius = 18
+                    radius = 25
                     nodefile.write("s" + str(ind + 1) + "," + str(x) + "," + str(y) + "," + str(z) + "\n")
                     for index in range(ind + 1, len(points)):
                         tmp = points[index]
