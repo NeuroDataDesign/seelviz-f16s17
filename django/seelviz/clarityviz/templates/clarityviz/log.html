@@ -11,7 +11,7 @@
                         <li><a href="{% url 'clarityviz:output' compute.pk %}">{{ compute.token }} (Num Points: {{ compute.num_points }})</a> </li>
                         {% endfor %}
                     {% else %}
-
+                        <p>No analyses Done.</p>
                     {% endif %}
             </div>
         </div>
