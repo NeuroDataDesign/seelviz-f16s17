@@ -283,7 +283,7 @@ class claritybase(object):
     def loadGeneratedNii(self, path=None, info=False):
         """Loads a preexisting nii file.  This function is mainly used for testing"""
         if path == None:
-            path = self._token + '/' + self._token + 'localeq.nii'
+            path = 'output/' + self._token + '/' + self._token + 'localeq.nii'
         
         print("Loading: %s"%(path))
 
