@@ -104,7 +104,7 @@ def image_parse(inToken):
     img.graphmlconvert()
     print "generating graphml"
     img.get_brain_figure(None, imgName + ' edgecount')
-    
+
     return imgName
 
 def density_graph(Token):

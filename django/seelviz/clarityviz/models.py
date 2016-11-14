@@ -1,10 +1,12 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 
 # Create your models here.
-class TokenUpload(models.Model):
+class TokenCompute(models.Model):
     token = models.CharField(max_length = 20)
-
+    orientation = models.CharField(max_length = 3)
     num_points = models.CharField(max_length = 20)
+
 
     # base_csv_path = models.TextField()
     # nodes_csv_path = models.TextField()
@@ -15,8 +17,16 @@ class TokenUpload(models.Model):
     # density_graph_path = models.TextField()
     # atlas_region_graph_path = models.TextField()
 
+
+    def get_absolute_url(self):
+        return reverse('clarityviz:output', kwargs={'pk': self.pk})
+
     def __str__(self):
         return self.token
+
+class Plot(models.Model):
+    token_compute = models.ForeignKey(TokenCompute, on_delete=models.CASCADE)
+    plot_type = models.TextField()
 
 class CsvUpload(models.Model):
     file_name = models.TextField()
@@ -25,7 +35,7 @@ class CsvUpload(models.Model):
         return self.token
 
 class TemplateClass(models.Model):
-    key_test = models.ForeignKey(TokenUpload, on_delete = models.CASCADE)
+    key_test = models.ForeignKey(TokenCompute, on_delete=models.CASCADE)
 
     token = models.CharField(max_length = 20)
 

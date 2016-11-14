@@ -1,11 +1,27 @@
 # from django.views import generic
-# from .models import TokenUpload
+from .models import TokenCompute, Plot
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-# class IndexView(generic.ListView):
-#   template_name = 'clarityviz/index.html'
+class LogView(generic.ListView):
+  template_name = 'clarityviz/log.html'
+  context_object_name = 'all_computes'
 
-#   def get_queryset(self):
-#       return 
+  def get_queryset(self):
+      return TokenCompute.objects.all()
+
+
+class OutputView(generic.DetailView):
+    model = TokenCompute
+    template_name = 'clarityviz/output.html'
+
+
+class ComputeCreate(CreateView):
+    model = TokenCompute
+    fields = ['token', 'orientation', 'num_points']
+
+
+
+# =============================================
 
 
 from django.shortcuts import render
@@ -13,7 +29,7 @@ from django.template.loader import render_to_string
 from django.conf import settings
 # from django.template import loader
 from django.http import HttpResponse
-from .models import TokenUpload
+from .models import TokenCompute
 
 # non django stuff ========
 
@@ -60,20 +76,39 @@ def index(request):
     # return render(request, 'clarityviz/index.html', context)
 
 
+def log(request):
+    all_computes = TokenCompute.objects.all()
+    context = {
+        'all_computes': all_computes,
+    }
+    return render(request, 'clarityviz/log.html', context)
+
+
 def token_compute(request):
     print('INSIDE TOKEN_COMPUTE')
     token = request.POST['token']
     ogToken = token
+    new_compute = None
+
     if token != 'Aut1367reorient_atlas':
         token = token.strip().split(',')
         ori1 = token[1].strip()
         token = token[0].strip()
+        num_results = TokenCompute.objects.filter(token=token).filter(orientation=ori1).count()
+        if num_results == 0:
+            new_compute = TokenCompute(token=token, orientation=ori1)
+            new_compute.save()
+        else:
+            query_set = TokenCompute.objects.filter(token=token).filter(orientation=ori1)
+            for compute in query_set:
+                new_compute = compute
+
 
     # test.testFunction(token)
 
     if token != 'Aut1367reorient_atlas':
         ip_start = time.time()
-        token = image_parse(token,ori1)
+        token = image_parse(token, ori1)
         ip_run_time = time.time() - ip_start
         print('image_parse total time = %f' % ip_run_time)
 
@@ -93,36 +128,9 @@ def token_compute(request):
 
     print('just finished making zip')
 
-    html = """
-    {% extends "clarityviz/header.html" %}
-
-    {% block content %}
-
-    <header>
-        <div class="header-content">
-            <div class="header-content-inner">
-                {% if token %}
-                    <h1>{{token}}</h1>
-                {% endif %}
-            </div>
-        </div>
-    </header>
-
-    <body>
-
-    <section class="bg-graph" id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">Results</h2>
-                    <hr class="light">
-    """
-
     plotly_files = []
     all_files = []
-    file_basenames = []
-    plotly_paths = []
-    plotly_basenames = []
+
     #
     # for filename in glob.glob('output/' + token + '/*'):
     #     absPath = os.path.abspath(filename)
@@ -163,37 +171,13 @@ def token_compute(request):
             if filepath.endswith('html'):
                 plotly_files.append(filename)
 
-    # for plot in plotly:
-    #     absPath = os.path.abspath(plot)
-    #     with open(absPath, "r") as ins:
-    #         for line in ins:
-    #             html += line
-
-
-    html += """
-                </div>
-            </div>
-        </div>
-    </section>
-    </body>
-    </html>
-    {% endblock %}
-    """
-
-    # with open("clarityviz/templates/clarityviz/files.html", "w+") as text_file:
-    #     text_file.write("{}".format(html))
-
-    # files = glob.glob(token + '/*')
     print('plotly_files:')
     print(plotly_files)
 
     context = {'token': token, 'all_files': all_files, 'plotly_files': plotly_files}
 
-    # return HttpResponse(html)
-
-    print('about to return the rendered html')
     # return render(request, 'clarityviz/files.html', context)
-    return render(request, 'clarityviz/outputs.html', context)
+    return render(request, 'clarityviz/output.html', context)
 
 def download(request, file_name):
     file_path = '/root/seelviz/django/seelviz/output/Aut1367reorient_atlas/' + file_name
@@ -216,8 +200,29 @@ def download(request, file_name):
 #     else:
 #         raise Http404
 
-def plot(request, path):
+def plot(request, file_info):
 
+    token = file_info.split('/')[0]
+    type = file_info.split('/')[1]
+    plot_type = ''
+    description = ''
+    # if type == 'brain'
+    #     plot_type = 'Brain Pointcloud'
+    #     description = 'In the plot above we have a point cloud visualization of the 10,000 brightest points of the CLARITY brain selected after image filtering and histogram equalization.  The filtering and histogram equalization increased the relative contrast of each voxel relative to its nearest neighbors; the 10,000 brightest points were selected by randomly sampling voxels with 255 grey scale values.  We hypothesize that the denser areas of the point cloud correspond to brain regions with the more neurological activity.'
+    #
+    # elif path.endswith('_edge_count_pointcloud.html'):
+    #     plot_type = 'Edge Count Pointcloud'
+    #     description = '''This purple node and cyan edge plot shows the connections from the density plot.  Each cyan edge was drawn with the same epsilon ball initialization used for the density plot.  It's important to note that the process of finding all the edges for a given node is a significant computational task that scales exponentially with increased epsilon ball radius.  The most connected nodes may show some properties of interest'''
+    # elif path.endswith('_density_pointcloud.html'):
+    #     plot_type = 'Density Pointcloud'
+    #     description = 'The multicolored plot shows a false-coloration scheme of the 10,000 brightest points by their edge counts, relative to a preselected epsilon ball radius.  The epsilon ball radius determines the number of edges a given node has by connecting all neighboring nodes within the radius with an edge.  Black nodes had an edge count of 0.  Then, in reverse rainbow order, (purple to red), we get increasing numbers of edges.  The densest node with the most edges is shown in white.  The plot supports up to 20 different colors.'
+    # elif path.endswith('_density_pointcloud_heatmap.html'):
+    #     plot_type = 'Density Pointcloud Heatmap'
+    # elif path.endswith('_region_pointcloud.html'):
+    #     plot_type = 'Atlas Region Pointcloud'
+    #     description = 'This graph shows a plot of the brain with each region as designated by the atlas a unique colored. Controls along the side allow for toggling the traces on/off'
+
+    path = '/root/seelviz/django/seelviz/output/Aut1367reorient_atlas/' + file_name
     html = """
     {% extends "clarityviz/header.html" %}
 
@@ -263,22 +268,6 @@ def plot(request, path):
     with open("clarityviz/templates/clarityviz/plot.html", "w+") as text_file:
         text_file.write("{}".format(html))
 
-    plot_type = ''
-    description = ''
-    if path.endswith('_brain_pointcloud.html'):
-        plot_type = 'Brain Pointcloud'
-        description = 'In the plot above we have a point cloud visualization of the 10,000 brightest points of the CLARITY brain selected after image filtering and histogram equalization.  The filtering and histogram equalization increased the relative contrast of each voxel relative to its nearest neighbors; the 10,000 brightest points were selected by randomly sampling voxels with 255 grey scale values.  We hypothesize that the denser areas of the point cloud correspond to brain regions with the more neurological activity.'
-    elif path.endswith('_edge_count_pointcloud.html'):
-        plot_type = 'Edge Count Pointcloud'
-        description = '''This purple node and cyan edge plot shows the connections from the density plot.  Each cyan edge was drawn with the same epsilon ball initialization used for the density plot.  It's important to note that the process of finding all the edges for a given node is a significant computational task that scales exponentially with increased epsilon ball radius.  The most connected nodes may show some properties of interest'''
-    elif path.endswith('_density_pointcloud.html'):
-        plot_type = 'Density Pointcloud'
-        description = 'The multicolored plot shows a false-coloration scheme of the 10,000 brightest points by their edge counts, relative to a preselected epsilon ball radius.  The epsilon ball radius determines the number of edges a given node has by connecting all neighboring nodes within the radius with an edge.  Black nodes had an edge count of 0.  Then, in reverse rainbow order, (purple to red), we get increasing numbers of edges.  The densest node with the most edges is shown in white.  The plot supports up to 20 different colors.'
-    elif path.endswith('_density_pointcloud_heatmap.html'):
-        plot_type = 'Density Pointcloud Heatmap'
-    elif path.endswith('_region_pointcloud.html'):
-        plot_type = 'Atlas Region Pointcloud'
-        description = 'This graph shows a plot of the brain with each region as designated by the atlas a unique colored. Controls along the side allow for toggling the traces on/off'
 
     context = {'type': plot_type, 'description': description}
 
@@ -286,7 +275,7 @@ def plot(request, path):
 
 
 def output(request, token):
-    return render(request, 'clarityviz/outputs.html')
+    return render(request, 'clarityviz/output.html')
 
 
 def imgGet(inToken, ori1):

@@ -1,0 +1,24 @@
+{% extends "clarityviz/header.html" %}
+
+    {% block content %}
+    <body>
+        <section class="bg-graph" id="about">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 text-center">
+                        <h2 class="section-heading">Log</h2>
+
+                        {% if all_computes %}
+                            {% for compute in all_computes %}
+                            <li><</li>
+                            {% endfor %}
+                        {% else %}
+
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+    {% endblock %}

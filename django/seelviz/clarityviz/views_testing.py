@@ -254,7 +254,7 @@ def plot(request, path):
 
 
 def output(request, token):
-    return render(request, 'clarityviz/outputs.html')
+    return render(request, 'clarityviz/output.html')
 
 
 def imgGet(inToken, ori1):
