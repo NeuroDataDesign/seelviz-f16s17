@@ -2,7 +2,7 @@ from django.db import models
 from django.core.urlresolvers import reverse
 
 # Create your models here.
-class TokenCompute(models.Model):
+class Compute(models.Model):
     token = models.CharField(max_length = 20)
     orientation = models.CharField(max_length = 3)
     num_points = models.CharField(max_length = 20)
@@ -25,7 +25,7 @@ class TokenCompute(models.Model):
         return self.token
 
 class Plot(models.Model):
-    token_compute = models.ForeignKey(TokenCompute, on_delete=models.CASCADE)
+    token_compute = models.ForeignKey(Compute, on_delete=models.CASCADE)
     plot_type = models.TextField()
 
 class CsvUpload(models.Model):
@@ -35,7 +35,7 @@ class CsvUpload(models.Model):
         return self.token
 
 class TemplateClass(models.Model):
-    key_test = models.ForeignKey(TokenCompute, on_delete=models.CASCADE)
+    key_test = models.ForeignKey(Compute, on_delete=models.CASCADE)
 
     token = models.CharField(max_length = 20)
 

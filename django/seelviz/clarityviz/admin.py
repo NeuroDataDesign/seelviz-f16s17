@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import TokenCompute
+from .models import Compute
 
 # Register your models here.
-admin.site.register(TokenCompute)
+admin.site.register(Compute)

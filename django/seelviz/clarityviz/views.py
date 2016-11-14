@@ -1,5 +1,5 @@
 from django.views import generic
-from .models import TokenCompute, Plot
+from .models import Compute, Plot
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 class LogView(generic.ListView):
@@ -7,16 +7,16 @@ class LogView(generic.ListView):
   context_object_name = 'all_computes'
 
   def get_queryset(self):
-      return TokenCompute.objects.all()
+      return Compute.objects.all()
 
 
 class OutputView(generic.DetailView):
-    model = TokenCompute
+    model = Compute
     template_name = 'clarityviz/output.html'
 
 
 class ComputeCreate(CreateView):
-    model = TokenCompute
+    model = Compute
     fields = ['token', 'orientation', 'num_points']
 
 
@@ -29,7 +29,7 @@ from django.template.loader import render_to_string
 from django.conf import settings
 # from django.template import loader
 from django.http import HttpResponse
-from .models import TokenCompute
+from .models import Compute
 
 # non django stuff ========
 
@@ -77,7 +77,7 @@ def index(request):
 
 
 def log(request):
-    all_computes = TokenCompute.objects.all()
+    all_computes = Compute.objects.all()
     context = {
         'all_computes': all_computes,
     }
@@ -94,12 +94,12 @@ def token_compute(request):
         token = token.strip().split(',')
         ori1 = token[1].strip()
         token = token[0].strip()
-        num_results = TokenCompute.objects.filter(token=token).filter(orientation=ori1).count()
+        num_results = Compute.objects.filter(token=token).filter(orientation=ori1).count()
         if num_results == 0:
-            new_compute = TokenCompute(token=token, orientation=ori1)
+            new_compute = Compute(token=token, orientation=ori1)
             new_compute.save()
         else:
-            query_set = TokenCompute.objects.filter(token=token).filter(orientation=ori1)
+            query_set = Compute.objects.filter(token=token).filter(orientation=ori1)
             for compute in query_set:
                 new_compute = compute
 
