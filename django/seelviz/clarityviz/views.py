@@ -150,6 +150,8 @@ def token_compute(request):
     #         link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Atlas Region Pointcloud</a> <br /><br />'
     #     html += link
 
+    print('about to find the filenames')
+
     for filename in glob.glob('output/' + token + '/*'):
         absPath = os.path.abspath(filename)
         if not os.path.isdir(absPath):
@@ -183,6 +185,7 @@ def token_compute(request):
 
     # return HttpResponse(html)
 
+    print('about to return the rendered html')
     # return render(request, 'clarityviz/files.html', context)
     return render(request, 'clarityviz/outputs.html', context)
 
