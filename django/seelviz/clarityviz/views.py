@@ -14,6 +14,36 @@ class OutputView(generic.DetailView):
     model = Compute
     template_name = 'clarityviz/output.html'
 
+    def get(self, request, *args, **kwargs):
+        primary_key = self.kargs['pk']
+        query_set = Compute.objects.filter(pk=primary_key)
+        for compute in query_set:
+            new_compute = compute
+
+        print(new_compute.token)
+        token = ''
+        if not new_compute.token.endswith('reorient_atlas'):
+            token = new_compute.token + 'reorient_atlas'
+        else:
+            token = new_compute.token
+
+        plotly_files = []
+        all_files = []
+        for filepath in glob.glob('output/' + token + '/*'):
+            absPath = os.path.abspath(filepath)
+            if not os.path.isdir(absPath):
+                filename = filepath.split('/')[2]
+                all_files.append(filename)
+                if filepath.endswith('html'):
+                    plotly_files.append(filename)
+        # context = {'token': token, 'all_files': all_files, 'plotly_files': plotly_files}
+
+        context = locals()
+        context['token'] = token
+        context['all_files'] = all_files
+        context['plotly_files'] = plotly_files
+        return render_to_response(self.response_template, context, context_instance=RequestContext(request))
+
 
 class ComputeCreate(CreateView):
     model = Compute
