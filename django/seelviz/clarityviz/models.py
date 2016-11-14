@@ -1,6 +1,10 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 
+import glob
+import os
+import os.path
+
 # Create your models here.
 class Compute(models.Model):
     token = models.CharField(max_length = 30)
@@ -19,7 +23,25 @@ class Compute(models.Model):
 
 
     def get_absolute_url(self):
-        return reverse('clarityviz:output', kwargs={'pk': self.pk})
+        # query_set = Compute.objects.filter(pk=self.pk)
+        # for compute in query_set:
+        #     new_compute = compute
+        #
+        # print(new_compute.token)
+        token = self.token + 'reorient_atlas'
+
+        plotly_files = []
+        all_files = []
+        for filepath in glob.glob('output/' + token + '/*'):
+            absPath = os.path.abspath(filepath)
+            if not os.path.isdir(absPath):
+                filename = filepath.split('/')[2]
+                all_files.append(filename)
+                if filepath.endswith('html'):
+                    plotly_files.append(filename)
+        context = {'token': token, 'all_files': all_files, 'plotly_files': plotly_files}
+        return reverse('clarityviz:output', kwargs=context)
+        # return reverse('clarityviz:output', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.token
