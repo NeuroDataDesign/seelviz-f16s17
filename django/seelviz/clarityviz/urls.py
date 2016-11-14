@@ -12,6 +12,6 @@ urlpatterns = [
     # url(r'^(?P<token>[a-z|A-Z]+)/$', views.output, name='output'),
 
     url(r'^tokencompute/$', views.token_compute, name='tokencompute'),
-    url(r'^download/(?P<path>.*)$', views.download, name='download'),
+    url(r'^download/(?P<file_name>.*)$', views.download, name='download'),
     url(r'^plot/(?P<path>.*)$', views.plot, name='plot'),
 ]
