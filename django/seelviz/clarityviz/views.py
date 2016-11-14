@@ -44,7 +44,7 @@ class OutputView(generic.DetailView):
         context['token'] = token
         context['all_files'] = all_files
         context['plotly_files'] = plotly_files
-        return render_to_response(self.response_template, context, context_instance=RequestContext(request))
+        return render_to_response(self.template_name, context, context_instance=RequestContext(request))
 
 
 class ComputeCreate(CreateView):
