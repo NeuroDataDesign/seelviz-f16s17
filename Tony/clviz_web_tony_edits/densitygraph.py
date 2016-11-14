@@ -103,7 +103,9 @@ class densitygraph(object):
         self._scaledEdges = [float(numberEdges[i])/float(maxEdges) for i in range(len(numberEdges))]
 
         ##Tweak this to change the heat map scaling for the points.  Remove outliers.
-
+        ##False coloration heatmap below.  I've commented it out in this version b/c the rainbows
+        ##are difficult to interpret.  I've included a newer red version.
+        '''
         self._heatMapBrain = [
                 # Let null values (0.0) have color rgb(0, 0, 0)
                 [0, 'rgb(0, 0, 0)'],  #black
@@ -169,7 +171,40 @@ class densitygraph(object):
                 [0.95, 'rgb(255, 255, 255)'],
                 [1.0, 'rgb(255, 255, 255)']
             ]        
-        
+        '''
+
+        self._heatMapBrain = [
+         # Let null values (0.0) have color rgb(0, 0, 0)
+        [0, 'rgb(0, 0, 0)'],  #black
+    
+        [0.1, '#7f0000'],
+        [0.2, '#7f0000'],
+
+        [0.2, '#b30000'],
+        [0.3, '#b30000'],
+
+        [0.3, '#d7301f'], 
+        [0.4, '#d7301f'], 
+    
+        [0.4, '#ef6548'], 
+        [0.5, '#ef6548'],
+    
+        [0.5, '#fc8d59'],  
+        [0.6, '#fc8d59'], 
+
+        [0.6, '#fdbb84'],
+        [0.7, '#fdbb84'],
+    
+        [0.7, '#fdd49e'],
+        [0.8, '#fdd49e'],
+    
+        [0.8, '#fee8c8'],
+        [0.9, '#fee8c8'],
+
+        [0.9, '#fff7ec'],
+        [1.0, '#fff7ec']
+    ]  
+
         self._sortedList = sortedList
         self._maxEdges = maxEdges
 

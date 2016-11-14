@@ -38,6 +38,14 @@ def imgGet(inToken):
     counts = np.bincount(values)
     maximum = np.argmax(counts)
 
+    tupleResolution = inImg.GetSpacing();         # spacing here used to scale images to mm size (anisotropic resolution)
+    # EG: for Aut1367, the spacing is (0.01872, 0.01872, 0.005).
+    xResolution = tupleResolution[0]
+    yResolution = tupleResolution[1]
+    zResolution = tupleResolution[2]
+    # Now, to get the mm image size, we can multiply all x, y, z 
+    # to get the proper mm size when plotting.
+
     lowerThreshold = maximum
     upperThreshold = sitk.GetArrayFromImage(inImg).max()+1
 
