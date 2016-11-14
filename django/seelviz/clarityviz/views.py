@@ -1,4 +1,4 @@
-# from django.views import generic
+from django.views import generic
 from .models import TokenCompute, Plot
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
