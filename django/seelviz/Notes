@@ -29,3 +29,6 @@ OTHER STUFF ===================
 
 stuff I need to pass into files.html:
 -
+
+abspath:
+/root/seelviz/django/seelviz/output/Aut1367reorient_atlas/Aut1367reorient_atlas_edge_count_pointcloud.html

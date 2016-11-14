@@ -29,7 +29,7 @@
                     <form action="{% url 'clarityviz:tokencompute' %}" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-group">
-                            <label for="myToken">Submit Token</label>
+                            <label for="token">Submit Token</label>
                             <input type="text" class="form-control" id="token" name="token" placeholder="Token,Orientation">
                         </div>
                         <!-- Token name: <input type="text" name="myToken"/><br /> -->

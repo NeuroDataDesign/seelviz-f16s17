@@ -168,7 +168,7 @@ class claritybase(object):
 
         fig = Figure(data=data, layout=layout)
         print(self._token + "plotly")
-        plotly.offline.plot(fig, filename= self._token + "/" + self._token + "_brain_pointcloud.html")
+        plotly.offline.plot(fig, filename= 'output/' + self._token + "/" + self._token + "_brain_pointcloud.html")
 
     def applyLocalEq(self):
         """Applies local equilization to the img's histogram and outputs a .nii file"""
