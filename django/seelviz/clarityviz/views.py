@@ -15,7 +15,7 @@ class OutputView(generic.DetailView):
     template_name = 'clarityviz/output.html'
 
     def get(self, request, *args, **kwargs):
-        primary_key = self.kargs['pk']
+        primary_key = self.kwargs['pk']
         query_set = Compute.objects.filter(pk=primary_key)
         for compute in query_set:
             new_compute = compute
