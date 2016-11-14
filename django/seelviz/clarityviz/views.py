@@ -87,7 +87,7 @@ def token_compute(request):
         run_time = time.time() - start
         print('density_graph total time = %f' % run_time)
     
-    fzip = shutil.make_archive('output/' + token + '/' + token, 'zip', token)
+    fzip = shutil.make_archive('output/' + token + '/' + token, 'zip', 'output/' + token)
     fzip_abs = os.path.abspath(fzip)
 
     html = """
@@ -115,8 +115,8 @@ def token_compute(request):
                     <hr class="light">
     """
 
-    plotly = []
-    file_paths = []
+    plotly_files = []
+    all_files = []
     file_basenames = []
     plotly_paths = []
     plotly_basenames = []
@@ -129,32 +129,33 @@ def token_compute(request):
     #         html += link
     #     else:
     #         if filename.endswith('html'):
-    #             plotly.append(filename)
+    #             plotly_files.append(filename)
     #         link = '<a href="/clarityviz/download/' + absPath + '">' + os.path.basename(filename) + "</a> <br />"
     #         html += link
+    # html += '<a href="/clarityviz/download/' + fzip_abs + '">' + token + '.zip' + "</a> <br /><br />"
+
+
+    #
+    # for plot in plotly_files:
+    #     absPath = os.path.abspath(plot)
+    #     if absPath.endswith('_brain_pointcloud.html'):
+    #         link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Brain Pointcloud</a> <br /><br />'
+    #     elif absPath.endswith('_edge_count_pointcloud.html'):
+    #         link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Edge Count Pointcloud</a> <br /><br />'
+    #     elif absPath.endswith('_density_pointcloud.html'):
+    #         link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Density Pointcloud</a> <br /><br />'
+    #     elif absPath.endswith('_density_pointcloud_heatmap.html'):
+    #         link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Density Pointcloud Heatmap</a> <br /><br />'
+    #     elif absPath.endswith('_region_pointcloud.html'):
+    #         link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Atlas Region Pointcloud</a> <br /><br />'
+    #     html += link
 
     for filename in glob.glob('output/' + token + '/*'):
         absPath = os.path.abspath(filename)
         if not os.path.isdir(absPath):
+            all_files.append(filename)
             if filename.endswith('html'):
-                plotly.append(filename)
-            link = '<a href="/clarityviz/download/' + absPath + '">' + os.path.basename(filename) + "</a> <br />"
-            html += link
-    html += '<a href="/clarityviz/download/' + fzip_abs + '">' + token + '.zip' + "</a> <br /><br />"
-
-    for plot in plotly:
-        absPath = os.path.abspath(plot)
-        if absPath.endswith('_brain_pointcloud.html'):
-            link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Brain Pointcloud</a> <br /><br />'
-        elif absPath.endswith('_edge_count_pointcloud.html'):
-            link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Edge Count Pointcloud</a> <br /><br />'
-        elif absPath.endswith('_density_pointcloud.html'):
-            link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Density Pointcloud</a> <br /><br />'
-        elif absPath.endswith('_density_pointcloud_heatmap.html'):
-            link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Density Pointcloud Heatmap</a> <br /><br />'
-        elif absPath.endswith('_region_pointcloud.html'):
-            link = '<a href="/clarityviz/plot/' + absPath + '" class="page-scroll btn btn-default btn-xl sr-button">Atlas Region Pointcloud</a> <br /><br />'
-        html += link
+                plotly_files.append(filename)
 
     # for plot in plotly:
     #     absPath = os.path.abspath(plot)
@@ -173,19 +174,29 @@ def token_compute(request):
     {% endblock %}
     """
 
-    with open("clarityviz/templates/clarityviz/files.html", "w+") as text_file:
-        text_file.write("{}".format(html))
+    # with open("clarityviz/templates/clarityviz/files.html", "w+") as text_file:
+    #     text_file.write("{}".format(html))
 
     # files = glob.glob(token + '/*')
 
-    context = {'token': token}
+    context = {'token': token, 'all_files': all_files, 'plotly_files': plotly_files}
 
     # return HttpResponse(html)
 
     # return render(request, 'clarityviz/files.html', context)
     return render(request, 'clarityviz/outputs.html', context)
 
-# def download(request, file_name):
+def download(request, file_name):
+    file_path = '/root/seelviz/django/seelviz/output/Aut1367reorient_atlas/' + file_name
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type="application/x-download")
+            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+            return response
+    else:
+        raise Http404
+
+# def download(request, path):
 #     file_path = path
 #     if os.path.exists(file_path):
 #         with open(file_path, 'rb') as fh:
@@ -194,16 +205,6 @@ def token_compute(request):
 #             return response
 #     else:
 #         raise Http404
-
-def download(request, path):
-    file_path = path
-    if os.path.exists(file_path):
-        with open(file_path, 'rb') as fh:
-            response = HttpResponse(fh.read(), content_type="application/x-download")
-            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
-            return response
-    else:
-        raise Http404
 
 def plot(request, path):
 

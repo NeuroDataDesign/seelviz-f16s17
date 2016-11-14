@@ -21,26 +21,35 @@
                     <h2 class="section-heading">Results</h2>
                     <hr class="light">
 
-                    <a href="/clarityviz/download/' + absPath + '">' + os.path.basename(filename) + "</a> <br />
+                    <a href="/clarityviz/plot/{{token}}-BrainPointcloud" class="page-scroll btn btn-default btn-xl sr-button">Brain Pointcloud</a> <br /><br />
+                    <a href="/clarityviz/plot/{{token}}-EdgeCountPointcloud" class="page-scroll btn btn-default btn-xl sr-button">Edge Count Pointcloud</a> <br /><br />
+                    <a href="/clarityviz/plot/{{token}}-DensityPointcloud" class="page-scroll btn btn-default btn-xl sr-button">Density Pointcloud</a> <br /><br />
+                    <a href="/clarityviz/plot/{{token}}-DensityPountcloudHeatmap" class="page-scroll btn btn-default btn-xl sr-button">Density Pointcloud Heatmap</a> <br /><br />
+                    <a href="/clarityviz/plot/{{token}}-AtlasRegionPointcloud" class="page-scroll btn btn-default btn-xl sr-button">Atlas Region Pointcloud</a> <br /><br />
 
-                    <a href="/clarityviz/download//root/seelviz/django/seelviz/output/Aut1367reorient_atlas/Aut1367reorient_atlaslocaleq.nii">Aut1367reorient_atlaslocaleq.nii</a> <br />
-                    <a href="/clarityviz/download//root/seelviz/django/seelviz/output/Aut1367reorient_atlas/Aut1367reorient_atlas.nodes.csv">Aut1367reorient_atlas.nodes.csv</a> <br />
-                    <a href="/clarityviz/download//root/seelviz/django/seelviz/output/Aut1367reorient_atlas/Aut1367reorient_atlas_edge_count_pointcloud.html">Aut1367reorient_atlas_edge_count_pointcloud.html</a> <br />
-                    <a href="/clarityviz/download//root/seelviz/django/seelviz/output/Aut1367reorient_atlas/Aut1367reorient_atlas.graphml">Aut1367reorient_atlas.graphml</a> <br />
-                    <a href="/clarityviz/download//root/seelviz/django/seelviz/output/Aut1367reorient_atlas/Aut1367reorient_atlas.region.csv">Aut1367reorient_atlas.region.csv</a> <br />
-                    <a href="/clarityviz/download//root/seelviz/django/seelviz/output/Aut1367reorient_atlas/Aut1367reorient_atlas_density_pointcloud_heatmap.html">Aut1367reorient_atlas_density_pointcloud_heatmap.html</a> <br />
-                    <a href="/clarityviz/download//root/seelviz/django/seelviz/output/Aut1367reorient_atlas/Aut1367reorient_atlas_region_pointcloud.html">Aut1367reorient_atlas_region_pointcloud.html</a> <br />
-                    <a href="/clarityviz/download//root/seelviz/django/seelviz/output/Aut1367reorient_atlas/Aut1367reorient_atlas.edges.csv">Aut1367reorient_atlas.edges.csv</a> <br />
-                    <a href="/clarityviz/download//root/seelviz/django/seelviz/output/Aut1367reorient_atlas/Aut1367reorient_atlaslocaleq.csv">Aut1367reorient_atlaslocaleq.csv</a> <br />
-                    <a href="/clarityviz/download//root/seelviz/django/seelviz/output/Aut1367reorient_atlas/Aut1367reorient_atlas_density_pointcloud.html">Aut1367reorient_atlas_density_pointcloud.html</a> <br />
-                    <a href="/clarityviz/download//root/seelviz/django/seelviz/Aut1367reorient_atlas.zip">Aut1367reorient_atlas.zip</a> <br /><br />
+                    <h2 class="section-heading">Downloads</h2>
+                    <hr class="light">
 
-                    <a href="/clarityviz/plot/{{token}}" class="page-scroll btn btn-default btn-xl sr-button">Brain Pointcloud</a> <br /><br />
-                    <a href="/clarityviz/plot/{{token}}" class="page-scroll btn btn-default btn-xl sr-button">Edge Count Pointcloud</a> <br /><br />
-                    <a href="/clarityviz/plot/{{token}}" class="page-scroll btn btn-default btn-xl sr-button">Density Pointcloud Heatmap</a> <br /><br />
-                    <a href="/clarityviz/plot/{{token}}" class="page-scroll btn btn-default btn-xl sr-button">Atlas Region Pointcloud</a> <br /><br />
-                    <a href="/clarityviz/plot/{{token}}" class="page-scroll btn btn-default btn-xl sr-button">Density Pointcloud</a> <br /><br />
+                    {% for filename in all_files %}
+                        <a href="/clarityviz/download/{{ filename }}">{{ filename }}</a> <br />
+                    {%- endfor %}
 
+
+                    <!--{% for filename in plotly_files %}-->
+                        <!--<a href="/clarityviz/plot/{{ filename.split('reorient')[0] }}-">{{ filename }}</a> <br />-->
+                    <!--{%- endfor %}-->
+
+                    <!--<a href="/clarityviz/download/{{token}}-">Aut1367reorient_atlaslocaleq.nii</a> <br />-->
+                    <!--<a href="/clarityviz/download/{{token}}-">Aut1367reorient_atlas.nodes.csv</a> <br />-->
+                    <!--<a href="/clarityviz/download/{{token}}-">Aut1367reorient_atlas_edge_count_pointcloud.html</a> <br />-->
+                    <!--<a href="/clarityviz/download/{{token}}-">Aut1367reorient_atlas.graphml</a> <br />-->
+                    <!--<a href="/clarityviz/download/{{token}}-">Aut1367reorient_atlas.region.csv</a> <br />-->
+                    <!--<a href="/clarityviz/download/{{token}}-">Aut1367reorient_atlas_density_pointcloud_heatmap.html</a> <br />-->
+                    <!--<a href="/clarityviz/download/{{token}}-">Aut1367reorient_atlas_region_pointcloud.html</a> <br />-->
+                    <!--<a href="/clarityviz/download/{{token}}-">Aut1367reorient_atlas.edges.csv</a> <br />-->
+                    <!--<a href="/clarityviz/download//root/seelviz/django/seelviz/output/Aut1367reorient_atlas/Aut1367reorient_atlaslocaleq.csv">Aut1367reorient_atlaslocaleq.csv</a> <br />-->
+                    <!--<a href="/clarityviz/download//root/seelviz/django/seelviz/output/Aut1367reorient_atlas/Aut1367reorient_atlas_density_pointcloud.html">Aut1367reorient_atlas_density_pointcloud.html</a> <br />-->
+                    <!--<a href="/clarityviz/download//root/seelviz/django/seelviz/Aut1367reorient_atlas.zip">Aut1367reorient_atlas.zip</a> <br /><br />-->
 
                 </div>
             </div>
