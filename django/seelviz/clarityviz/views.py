@@ -1,6 +1,8 @@
 from django.views import generic
 from .models import Compute, Plot
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.shortcuts import render_to_response
+from django.template import RequestContext
 
 class LogView(generic.ListView):
   template_name = 'clarityviz/log.html'
