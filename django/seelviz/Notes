@@ -23,3 +23,9 @@ inImg = imgReorient(inImg, "LAI", "RSA")
 inAnnoImg = imgReorient(inAnnoImg, "RSA", "LAI")
 
 https://github.com/neurodata/ndreg/blob/master/doc/3dRegistrationAndAnalysis.ipynb
+
+
+OTHER STUFF ===================
+
+stuff I need to pass into files.html:
+-

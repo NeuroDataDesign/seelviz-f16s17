@@ -117,38 +117,6 @@ def token_compute(request):
     """
 
     plotly = []
-    file_paths = []
-    file_basenames = []
-    plotly_paths = []
-    plotly_basenames = []
-    # for filename in glob.glob(token + '/*'):
-    #     absPath = os.path.abspath(filename)
-    #     if os.path.isdir(absPath):
-    #         link = '<a href="/index?directory=' + absPath + '">' + os.path.basename(filename) + "</a> <br />"
-    #         html += link
-    #     else:
-    #         if filename.endswith('html'):
-    #             plotly.append(filename)
-    #         link = '<a href="/download/?filepath=' + absPath + '">' + os.path.basename(filename) + "</a> <br />"
-    #         html += link
-
-    # for plot in plotly:
-    #     absPath = os.path.abspath(plot)
-    #     html += """
-    #       <form action="plotly" method="get">
-    #         <input type="text" value=""" + '"' + absPath + '" name="plot" ' + """/>
-    #         <button type="submit">View """ + os.path.basename(plot) + """</button>
-    #       </form>"""
-    #     # html += '<a href="file:///' + '//' + absPath + '">' + "View Plotly graph</a> <br />"
-
-    # for plot in plotly:
-    #     absPath = os.path.abspath(plot)
-    #     html += """
-    #       <form action="plotly" method="get">
-    #         <input type="text" value=""" + '"' + absPath + '" name="plot" ' + """/>
-    #         <button type="submit">View """ + os.path.basename(plot) + """</button>
-    #       </form>"""
-    #     # html += '<a href="file:///' + '//' + absPath + '">' + "View Plotly graph</a> <br />"
 
     for filename in glob.glob('output/' + token + '/*'):
         absPath = os.path.abspath(filename)

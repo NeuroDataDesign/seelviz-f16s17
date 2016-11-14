@@ -37,7 +37,7 @@ class atlasregiongraph(object):
         self._path = path
         data_txt = ""
         if path == None:
-            data_txt = 'output/' + token + '/' + token + '.csv'
+            data_txt = 'output/' + token + '/' + token + '.region.csv'
             self._path = 'output/' + token
         else:
             data_txt = path + '/' + token + '.region.csv'
