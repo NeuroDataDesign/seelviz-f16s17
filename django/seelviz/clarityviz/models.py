@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 
 # Create your models here.
 class Compute(models.Model):
-    token = models.CharField(max_length = 20)
+    token = models.CharField(max_length = 30)
     orientation = models.CharField(max_length = 3)
     num_points = models.CharField(max_length = 20)
 
