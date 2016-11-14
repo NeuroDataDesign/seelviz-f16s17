@@ -57,8 +57,8 @@ class claritybase(object):
         #self.loadEqImg()
 
         # make a directory if none exists
-        if not os.path.exists(token):
-            os.makedirs(token)
+        if not os.path.exists('output/' + token):
+            os.makedirs('output/' + token)
 
     def getShape(self):
         """Function that returns the shape."""

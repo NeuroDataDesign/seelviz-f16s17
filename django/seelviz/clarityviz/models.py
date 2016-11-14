@@ -4,6 +4,7 @@ from django.db import models
 class TokenUpload(models.Model):
     token = models.CharField(max_length = 20)
 
+    num_points = models.CharField(max_length = 20)
 
     # base_csv_path = models.TextField()
     # nodes_csv_path = models.TextField()
