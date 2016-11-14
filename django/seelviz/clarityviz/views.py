@@ -19,21 +19,15 @@ class ComputeCreate(CreateView):
     model = Compute
     fields = ['token', 'orientation', 'num_points']
 
-
-    def compute(self):
-        # self.kwargs['pk']
-        print('MEMES')
-        test_function()
-
-
     def form_valid(self, form):
         self.object = form.save()
         token = form.cleaned_data['token']
         orientation = form.cleaned_data['orientation']
         num_points = form.cleaned_data['num_points']
+        token_compute(token, orientation, num_points)
         print('meme token')
         print(token)
-        self.compute()
+
         return super(ComputeCreate, self).form_valid(form)
 
 
@@ -104,24 +98,25 @@ def test_function():
     print('TEST FUNCTION')
 
 
-def token_compute(request):
+# def token_compute(request):
+#     print('INSIDE TOKEN_COMPUTE')
+#     token = request.POST['token']
+def token_compute(token, orientation, num_points=10000):
     print('INSIDE TOKEN_COMPUTE')
-    token = request.POST['token']
     ogToken = token
     new_compute = None
 
     if token != 'Aut1367reorient_atlas':
-        token = token.strip().split(',')
-        ori1 = token[1].strip()
-        token = token[0].strip()
-        num_results = Compute.objects.filter(token=token).filter(orientation=ori1).count()
-        if num_results == 0:
-            new_compute = Compute(token=token, orientation=ori1)
-            new_compute.save()
-        else:
-            query_set = Compute.objects.filter(token=token).filter(orientation=ori1)
-            for compute in query_set:
-                new_compute = compute
+        token = token
+        ori1 = orientation
+        # num_results = Compute.objects.filter(token=token).filter(orientation=ori1).count()
+        # if num_results == 0:
+        #     new_compute = Compute(token=token, orientation=ori1)
+        #     new_compute.save()
+        # else:
+        #     query_set = Compute.objects.filter(token=token).filter(orientation=ori1)
+        #     for compute in query_set:
+        #         new_compute = compute
 
 
     # test.testFunction(token)
@@ -196,8 +191,9 @@ def token_compute(request):
 
     context = {'token': token, 'all_files': all_files, 'plotly_files': plotly_files}
 
+    return context
     # return render(request, 'clarityviz/files.html', context)
-    return render(request, 'clarityviz/output.html', context)
+    # return render(request, 'clarityviz/output.html', context)
 
 def download(request, file_name):
     file_path = '/root/seelviz/django/seelviz/output/Aut1367reorient_atlas/' + file_name
