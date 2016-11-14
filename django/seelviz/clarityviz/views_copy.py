@@ -1,11 +1,11 @@
-from django.views import generic
-from .models import TokenUpload
+# from django.views import generic
+# from .models import TokenUpload
 
-class IndexView(generic.ListView):
-  template_name = 'clarityviz/index.html'
+# class IndexView(generic.ListView):
+#   template_name = 'clarityviz/index.html'
 
 #   def get_queryset(self):
-#       return
+#       return 
 
 
 from django.shortcuts import render
@@ -25,9 +25,9 @@ import tempfile
 import glob
 import random
 
-from clarityviz import claritybase
-from clarityviz import densitygraph
-from clarityviz import atlasregiongraph
+from clarityviz.templates.clarityviz import claritybase
+from clarityviz.templates.clarityviz import densitygraph
+from clarityviz.templates.clarityviz import atlasregiongraph
 import networkx as nx
 import plotly
 
@@ -38,14 +38,13 @@ from numpy import genfromtxt
 
 import time
 
-from . import test
-
+from clarityviz.templates import test
 
 def index(request):
     # return HttpResponse("<h2>Hello World</h2>")
 
-    # get token from user form, then pass that token into the url
-    # while running the pipeline, then open the link to the output
+    # get token from user form, then pass that token into the url 
+    # while running the pipeline, then open the link to the output 
     # with the token e.g. /clarityviz/fear199
 
     # template = loader.get_template('clarityviz/index.html')
@@ -74,7 +73,7 @@ def token_compute(request):
 
     if token != 'Aut1367reorient_atlas':
         ip_start = time.time()
-        token = image_parse(token, ori1)
+        token = image_parse(token,ori1)
         ip_run_time = time.time() - ip_start
         print('image_parse total time = %f' % ip_run_time)
 
@@ -82,12 +81,12 @@ def token_compute(request):
         density_graph(token)
         run_time = time.time() - start
         print('density_graph total time = %f' % run_time)
-
+        
         start = time.time()
         atlas_region(token)
         run_time = time.time() - start
         print('density_graph total time = %f' % run_time)
-
+    
     fzip = shutil.make_archive(token, 'zip', token)
     fzip_abs = os.path.abspath(fzip)
 
@@ -139,7 +138,7 @@ def token_compute(request):
     #         <input type="text" value=""" + '"' + absPath + '" name="plot" ' + """/>
     #         <button type="submit">View """ + os.path.basename(plot) + """</button>
     #       </form>"""
-    #     # html += '<a href="file:///' + '//' + absPath + '">' + "View Plotly graph</a> <br />"
+    #     # html += '<a href="file:///' + '//' + absPath + '">' + "View Plotly graph</a> <br />"    
 
     # for plot in plotly:
     #     absPath = os.path.abspath(plot)
@@ -203,8 +202,7 @@ def token_compute(request):
 
     # return HttpResponse(html)
 
-    return render(request, 'clarityviz/files.html', context)
-
+    return render(request, 'clarityviz/files.html', context) 
 
 def download(request, path):
     file_path = path
@@ -216,8 +214,8 @@ def download(request, path):
     else:
         raise Http404
 
-
 def plot(request, path):
+
     html = """
     {% extends "clarityviz/header.html" %}
 
@@ -282,7 +280,7 @@ def plot(request, path):
 
     context = {'type': plot_type, 'description': description}
 
-    return render(request, 'clarityviz/plot.html', context)
+    return render(request, 'clarityviz/plot.html', context) 
 
 
 def output(request, token):
@@ -290,33 +288,33 @@ def output(request, token):
 
 
 def imgGet(inToken, ori1):
-    refToken = "ara_ccf2"  # hardcoded 'ara_ccf2' atlas until additional functionality is requested
-    refImg = imgDownload(refToken)  # download atlas
+    refToken = "ara_ccf2"                         # hardcoded 'ara_ccf2' atlas until additional functionality is requested
+    refImg = imgDownload(refToken)                # download atlas
     refAnnoImg = imgDownload(refToken, channel="annotation")
     print "reference token/atlas obtained"
-    inImg = imgDownload(inToken, resolution=5)  # store downsampled level 5 brain to memory
-    (values, bins) = np.histogram(sitk.GetArrayFromImage(inImg), bins=100, range=(0, 500))
+    inImg = imgDownload(inToken, resolution=5)    # store downsampled level 5 brain to memory
+    (values, bins) = np.histogram(sitk.GetArrayFromImage(inImg), bins=100, range=(0,500))
     print "level 5 brain obtained"
     counts = np.bincount(values)
     maximum = np.argmax(counts)
 
     lowerThreshold = maximum
-    upperThreshold = sitk.GetArrayFromImage(inImg).max() + 1
+    upperThreshold = sitk.GetArrayFromImage(inImg).max()+1
 
-    inImg = sitk.Threshold(inImg, lowerThreshold, upperThreshold, lowerThreshold) - lowerThreshold
+    inImg = sitk.Threshold(inImg,lowerThreshold,upperThreshold,lowerThreshold) - lowerThreshold
     print "applied filtering"
     rawImg = sitk.GetArrayFromImage(inImg)
-    xdimensions = len(rawImg[:, 0, 0])
-    ydimensions = len(rawImg[0, :, 0])
-    zdimensions = len(rawImg[0, 0, :])
+    xdimensions = len(rawImg[:,0,0])
+    ydimensions = len(rawImg[0,:,0])
+    zdimensions = len(rawImg[0,0,:])
     xyz = []
     for i in range(40000):
         value = 0
-        while (value == 0):
-            xval = random.sample(xrange(0, xdimensions), 1)[0]
-            yval = random.sample(xrange(0, ydimensions), 1)[0]
-            zval = random.sample(xrange(0, zdimensions), 1)[0]
-            value = rawImg[xval, yval, zval]
+        while(value == 0):
+            xval = random.sample(xrange(0,xdimensions), 1)[0]
+            yval = random.sample(xrange(0,ydimensions), 1)[0]
+            zval = random.sample(xrange(0,zdimensions), 1)[0]
+            value = rawImg[xval,yval,zval]
             if [xval, yval, zval] not in xyz and value > 300:
                 xyz.append([xval, yval, zval])
             else:
@@ -324,37 +322,35 @@ def imgGet(inToken, ori1):
     print('inToken asdfasdf:')
     print(inToken)
     rImg = claritybase(inToken + 'raw', None)
-    rImg.savePoints(None, xyz)
+    rImg.savePoints(None,xyz)
     rImg.generate_plotly_html()
     print "random sample of points above 250"
     spacingImg = inImg.GetSpacing()
     spacing = tuple(i * 50 for i in spacingImg)
     inImg.SetSpacing(spacingImg)
-    inImg_download = inImg  # Aut1367 set to default spacing
+    inImg_download = inImg    # Aut1367 set to default spacing
     inImg = imgResample(inImg, spacing=refImg.GetSpacing())
     print "resampled img"
-    Img_reorient = imgReorient(inImg, ori1, "RSA")  # reoriented Aut1367
+    Img_reorient = imgReorient(inImg, ori1, "RSA")    # reoriented Aut1367
     # Img_reorient = imgReorient(inImg, "LPS", "RSA")    # reoriented Aut1367
-    refImg_ds = imgResample(refImg, spacing=spacing)  # atlas with downsampled spacing 10x
-    inImg_ds = imgResample(Img_reorient, spacing=spacing)  # Aut1367 with downsampled spacing 10x
+    refImg_ds = imgResample(refImg, spacing=spacing)    # atlas with downsampled spacing 10x
+    inImg_ds = imgResample(Img_reorient, spacing=spacing)    # Aut1367 with downsampled spacing 10x
     print "reoriented image"
     affine = imgAffineComposite(inImg_ds, refImg_ds, iterations=100, useMI=True, verbose=True)
     inImg_affine = imgApplyAffine(Img_reorient, affine, size=refImg.GetSize())
     print "affine"
     inImg_ds = imgResample(inImg_affine, spacing=spacing)
-    (field, invField) = imgMetamorphosisComposite(inImg_ds, refImg_ds, alphaList=[0.05, 0.02, 0.01], useMI=True,
-                                                  iterations=100, verbose=True)
+    (field, invField) = imgMetamorphosisComposite(inImg_ds, refImg_ds, alphaList=[0.05, 0.02, 0.01], useMI=True, iterations=100, verbose=True)
     inImg_lddmm = imgApplyField(inImg_affine, field, size=refImg.GetSize())
     print "downsampled image"
     invAffine = affineInverse(affine)
     invAffineField = affineToField(invAffine, refImg.GetSize(), refImg.GetSpacing())
     invField = fieldApplyField(invAffineField, invField)
-    inAnnoImg = imgApplyField(refAnnoImg, invField, useNearest=True, size=Img_reorient.GetSize())
+    inAnnoImg = imgApplyField(refAnnoImg, invField,useNearest=True, size=Img_reorient.GetSize())
 
     inAnnoImg = imgReorient(inAnnoImg, "RSA", ori1)
     # inAnnoImg = imgReorient(inAnnoImg, "RSA", "LPS")
-    inAnnoImg = imgResample(inAnnoImg, spacing=inImg_download.GetSpacing(), size=inImg_download.GetSize(),
-                            useNearest=True)
+    inAnnoImg = imgResample(inAnnoImg, spacing=inImg_download.GetSpacing(), size=inImg_download.GetSize(), useNearest=True)
     print "inverse affine"
     imgName = inToken + "reorient_atlas"
     location = "img/" + imgName + ".nii"
@@ -369,16 +365,17 @@ def imgGet(inToken, ori1):
 def image_parse(inToken, ori1):
     start = time.time()
     # imgGet is where the token name changes to adding the 'reorient_atlas'
-    imgName = imgGet(inToken, ori1)
+    imgName = imgGet(inToken,ori1)
     # imgName = imgGet(inToken)
     run_time = time.time() - start
     print('imgGet time = %f' % run_time)
 
+    
     # imgName = inToken + 'reorient_atlas'
     copydir = os.path.join(os.getcwd(), os.path.dirname('img/'))
     print('copydir: %s' % copydir)
     print('imgName: %s' % imgName)
-    img = claritybase(imgName, copydir)  # initial call for clarityviz
+    img = claritybase(imgName, copydir)       # initial call for clarityviz
     print "loaded into claritybase"
     img.loadEqImg()
     print "loaded image"
@@ -399,13 +396,13 @@ def image_parse(inToken, ori1):
 
     # uncomment either (1) or (2)
 
-    # (1)
+    #(1)
     # start = time.time()
     # img.brightPoints(None,40000)
     # run_time = time.time() - start
     # print('brightPoints time = %f' % run_time)
 
-    # (2)
+    #(2)
     print "saving brightest points to csv"
     img.savePoints()
 
@@ -420,7 +417,7 @@ def image_parse(inToken, ori1):
     img.plot3d()
     run_time = time.time() - start
     print('plot3d time = %f' % run_time)
-
+    
     print "generating graphml"
     start = time.time()
     img.graphmlconvert()
@@ -429,9 +426,8 @@ def image_parse(inToken, ori1):
 
     print "generating density graph"
     img.get_brain_figure(None, imgName + ' edgecount')
-
+    
     return imgName
-
 
 def density_graph(Token):
     densg = densitygraph(Token)
@@ -439,18 +435,17 @@ def density_graph(Token):
     densg.generate_density_graph()
     print 'generated density graph'
     g = nx.read_graphml('output/' + Token + '/' + Token + '.graphml')
-    ggraph = densg.get_brain_figure(g=g, plot_title=Token)
-    plotly.offline.plot(ggraph, filename='output/' + Token + '/' + Token + '_density_pointcloud.html')
+    ggraph = densg.get_brain_figure(g = g, plot_title=Token)
+    plotly.offline.plot(ggraph, filename = 'output/' + Token + '/' + Token + '_density_pointcloud.html')
     hm = densg.generate_heat_map()
-    plotly.offline.plot(hm, filename='output/' + Token + '/' + Token + '_density_pointcloud_heatmap.html')
-
+    plotly.offline.plot(hm, filename = 'output/' + Token + '/' + Token + '_density_pointcloud_heatmap.html')
 
 def atlas_region(Token):
     atlas_img = 'output/' + Token + '/' + Token + 'localeq' + '.nii'
     atlas = nb.load(atlas_img)  # <- atlas .nii image
     atlas_data = atlas.get_data()
 
-    csvfile = 'output/' + Token + '/' + Token + 'localeq.csv'  # 'atlasexp/Control258localeq.csv'    # <- regular csv from the .nii to csv step
+    csvfile = 'output/' + Token + '/' + Token + 'localeq.csv' # 'atlasexp/Control258localeq.csv'    # <- regular csv from the .nii to csv step
 
     bright_points = genfromtxt(csvfile, delimiter=',')
 
@@ -462,8 +457,7 @@ def atlas_region(Token):
     infile = open(csvfile, 'r')
     for i, line in enumerate(infile):
         line = line.strip().split(',')
-        outfile.write(",".join(line) + "," + str(
-            regions[i]) + "\n")  # adding a 5th column to the original csv indicating its region (integer)
+        outfile.write(",".join(line) + "," + str(regions[i]) + "\n")    # adding a 5th column to the original csv indicating its region (integer)
     infile.close()
     outfile.close()
 
@@ -476,5 +470,5 @@ def atlas_region(Token):
 
     # newToken = Token + '.region'
     atlas = atlasregiongraph(Token)
-
+    
     atlas.generate_atlas_region_graph(None, numRegions)

@@ -231,7 +231,7 @@ class claritybase(object):
 
         newer_img = localimgflat.reshape(x_value, y_value, z_value)
         localeq = nib.Nifti1Image(newer_img, np.eye(4))
-        nib.save(localeq, self._token + '/' + self._token + 'localeq.nii')
+        nib.save(localeq, 'output/' + self._token + '/' + self._token + 'localeq.nii')
 
 #    def loadImg(self, path=None, info=False):
 #        """Method for loading the .img file"""
