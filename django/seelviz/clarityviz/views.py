@@ -90,6 +90,8 @@ def token_compute(request):
     fzip = shutil.make_archive('output/' + token + '/' + token, 'zip', 'output/' + token)
     fzip_abs = os.path.abspath(fzip)
 
+    print('just finished making zip')
+
     html = """
     {% extends "clarityviz/header.html" %}
 
