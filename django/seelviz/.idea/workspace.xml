@@ -20,14 +20,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/clarityviz/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="91" column="0" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
+            <state relative-caret-position="993">
+              <caret line="89" column="71" selection-start-line="89" selection-start-column="71" selection-end-line="89" selection-end-column="71" />
               <folding>
                 <element signature="e#198#233#0" expanded="true" />
-                <element signature="e#3245#3246#0" expanded="false" />
+                <element signature="e#3325#3326#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -53,7 +53,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="atlasregiongraph.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="atlasregiongraph.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/clarityviz/clarityviz/atlasregiongraph.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="297">
@@ -66,8 +66,8 @@
       <file leaf-file-name="outputs.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/clarityviz/templates/clarityviz/outputs.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="24" column="108" selection-start-line="24" selection-start-column="108" selection-end-line="24" selection-end-column="108" />
+            <state relative-caret-position="375">
+              <caret line="34" column="22" selection-start-line="34" selection-start-column="22" selection-end-line="34" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -136,9 +136,9 @@
         <option value="$PROJECT_DIR$/clarityviz/clarityviz/claritybase.py" />
         <option value="$PROJECT_DIR$/Notes" />
         <option value="$PROJECT_DIR$/clarityviz/templates/clarityviz/files.html" />
-        <option value="$PROJECT_DIR$/clarityviz/templates/clarityviz/outputs.html" />
         <option value="$PROJECT_DIR$/clarityviz/templates/clarityviz/plot.html" />
         <option value="$PROJECT_DIR$/clarityviz/views.py" />
+        <option value="$PROJECT_DIR$/clarityviz/templates/clarityviz/outputs.html" />
       </list>
     </option>
   </component>
@@ -442,7 +442,7 @@
           <caret line="384" column="17" selection-start-line="384" selection-start-column="8" selection-end-line="384" selection-end-column="17" />
           <folding>
             <element signature="e#198#233#0" expanded="true" />
-            <element signature="e#3245#3246#0" expanded="false" />
+            <element signature="e#3325#3326#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -477,7 +477,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#198#233#0" expanded="true" />
-            <element signature="e#3245#3246#0" expanded="false" />
+            <element signature="e#3325#3326#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -488,7 +488,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#198#233#0" expanded="true" />
-            <element signature="e#3245#3246#0" expanded="false" />
+            <element signature="e#3325#3326#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -583,30 +583,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/clarityviz/clarityviz/atlasregiongraph.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="39" column="64" selection-start-line="39" selection-start-column="64" selection-end-line="39" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/clarityviz/templates/clarityviz/outputs.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="24" column="108" selection-start-line="24" selection-start-column="108" selection-end-line="24" selection-end-column="108" />
+        <state relative-caret-position="375">
+          <caret line="34" column="22" selection-start-line="34" selection-start-column="22" selection-end-line="34" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/clarityviz/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="91" column="0" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
+        <state relative-caret-position="993">
+          <caret line="89" column="71" selection-start-line="89" selection-start-column="71" selection-end-line="89" selection-end-column="71" />
           <folding>
             <element signature="e#198#233#0" expanded="true" />
-            <element signature="e#3245#3246#0" expanded="false" />
+            <element signature="e#3325#3326#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/clarityviz/clarityviz/atlasregiongraph.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="39" column="64" selection-start-line="39" selection-start-column="64" selection-end-line="39" selection-end-column="64" />
+          <folding />
         </state>
       </provider>
     </entry>
