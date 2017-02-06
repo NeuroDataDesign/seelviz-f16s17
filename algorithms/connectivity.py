@@ -252,7 +252,7 @@ class SparseMatrix:
     def __str__(self):
         return str(self._vector)
 
-def plot_con_mat(con_adj_mat):
+def plot_con_mat(con_adj_mat, output_path=None, show=False):
     title = 'Connectivity Heatmap'
     data = [
         Heatmap(
@@ -267,4 +267,9 @@ def plot_con_mat(con_adj_mat):
         yaxis=dict(title='region')
     )
     fig = Figure(data=data, layout=layout)
-    iplot(fig)
+    if show:
+        iplot(fig)
+    if output_path != None:
+        plotly.offline.plot(fig, filename=output_path)
+
+    return fig
