@@ -67,8 +67,8 @@ Mathematically speaking, as long as the pixel density in the image is high enoug
 
 Unfortunately because I do not how to x-11 forward to docker image hosted by cortex and because cortex does not have a 1 tb ssd harddrive, I was unable to produce any charts. Because of this I created a docker image of ClearMap set up instead, and wrote the code needed to run through the pipeline. The docker image of ClearMap has all the parameter and settings files modified and compiled for usage with Clarity brains.
 
-Here is the jupyter notebook of the algorithms used ![](Clearmap (2).ipynb)
-Here is the jupyter notebook of basic setup parameters I used ![](ClearMap+Testing (1).ipynb)
+![Here](Clearmap (2).ipynb) is the jupyter notebook of the algorithms used.
+![Here](ClearMap+Testing (1).ipynb) is the jupyter notebook of basic setup parameters I used.
 
 
 ### how well does it work
