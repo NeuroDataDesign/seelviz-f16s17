@@ -7,6 +7,7 @@ loss: we evaluate perform via the 0-1 loss, $\delta: \mathcal{X} \times \mathcal
 statistical task: learn a classifier that minimizes expected loss
 
 desiderata: we desire an approach that:
+
     - works well in theory on certain settings
     - empirically performs well on simulations according to those settings is robust to those assumptions (assuming there are assumptions)
     - empirically performs well on the real data is fast enough is easy to use approach
