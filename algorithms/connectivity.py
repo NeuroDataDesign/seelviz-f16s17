@@ -111,6 +111,22 @@ def get_dict_real(g, se_result, regions_path):
     return se_regions, orig_dict, se_regions_nodes
 
 
+def create_connectivity_graph(orig_avg_dict, se_avg_dict):
+    g = nx.Graph()
+    for key, avg in se_avg_dict.iteritems():
+        for key2, avg2 in se_avg_dict.iteritems():
+            avg_np = np.array(avg)
+            avg2_np = np.array(avg2)
+            diff = np.linalg.norm(avg_np - avg2_np)
+            diff = 0.1 if diff > 0.1 else diff
+            g.add_edge(key, key2, weight=diff)
+
+    # Setting the coordinate attribute for each region node to the average of that region.
+    for key, avg in orig_avg_dict.iteritems():
+        g.node[key]['attr'] = avg
+
+    return g
+
 def get_connectivity_hard(eig_dict, orig_dict=None):
     eigenvector_index = 1  # the second smallest eigenvector
     avg_dict = {}
