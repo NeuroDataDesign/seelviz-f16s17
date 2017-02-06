@@ -111,14 +111,14 @@ def get_dict_real(g, se_result, regions_path):
     return se_regions, orig_dict, se_regions_nodes
 
 
-def create_connectivity_graph(orig_avg_dict, se_avg_dict):
+def create_connectivity_graph(orig_avg_dict, se_avg_dict, max_dist=0.02):
     g = nx.Graph()
     for key, avg in se_avg_dict.iteritems():
         for key2, avg2 in se_avg_dict.iteritems():
             avg_np = np.array(avg)
             avg2_np = np.array(avg2)
             diff = np.linalg.norm(avg_np - avg2_np)
-            diff = 0.02 if diff > 0.02 else diff
+            diff = max_dist if diff > max_dist else diff
             g.add_edge(key, key2, weight=diff)
 
     # Setting the coordinate attribute for each region node to the average of that region.
@@ -127,7 +127,7 @@ def create_connectivity_graph(orig_avg_dict, se_avg_dict):
 
     return g
 
-def get_connectivity_hard(eig_dict, orig_dict=None):
+def get_connectivity_hard(eig_dict, orig_dict=None, max_dist=0.02):
     """
     Uses create_connectivity_graph.
     :param eig_dict:
@@ -214,7 +214,7 @@ def get_connectivity_hard(eig_dict, orig_dict=None):
     con_dict = OrderedDict(sorted(con_dict.items()))
     orig_con_dict = OrderedDict(sorted(orig_con_dict.items()))
 
-    g = create_connectivity_graph(orig_avg_dict, avg_dict)
+    g = create_connectivity_graph(orig_avg_dict, avg_dict, max_dist)
 
     if orig_dict == None:
         return con_dict
