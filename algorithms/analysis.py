@@ -216,7 +216,7 @@ def save_points(points, output_path):
     :param points:
     :param output_path:
     :return:
-    """"
+    """
 #     pathname = 'points/Fear199.csv"
     np.savetxt(output_path, points, fmt='%d', delimiter=',')
 
