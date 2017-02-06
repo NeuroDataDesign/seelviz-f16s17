@@ -9,17 +9,17 @@ statistical task: learn a classifier that minimizes expected loss to calculate c
 desiderata: we desire an approach that:
 
 **works well in theory on certain settings**
-    -[ ] Must be useful for Ailey's brains
-    -[ ] Must work on resolution 5 images
+- [ ] Must be useful for Ailey's brains
+- [ ] Must work on resolution 5 images
     
 **empirically performs well on simulations according to those settings AND is robust to those assumptions**
 Simulations will include
-    -[ ] Fear brain (Since cells much more visible)
-    -[ ] High resolution brain data that is pre annotated and has a rough cell count
+- [ ] Fear brain (Since cells much more visible)
+- [ ] High resolution brain data that is pre annotated and has a rough cell count
     
 **empirically performs well on the real data is fast enough is easy to use approach**
-    -[ ] Must take less than 10GB of hard drive space to set up
-    -[ ] Must take less than 32GB of ram to utilize
+- [ ] Must take less than 10GB of hard drive space to set up
+- [ ] Must take less than 32GB of ram to utilize
     
 # approach
 
