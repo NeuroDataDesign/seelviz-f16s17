@@ -118,7 +118,7 @@ def create_connectivity_graph(orig_avg_dict, se_avg_dict):
             avg_np = np.array(avg)
             avg2_np = np.array(avg2)
             diff = np.linalg.norm(avg_np - avg2_np)
-            diff = 0.07 if diff > 0.07 else diff
+            diff = 0.04 if diff > 0.04 else diff
             g.add_edge(key, key2, weight=diff)
 
     # Setting the coordinate attribute for each region node to the average of that region.
@@ -128,6 +128,12 @@ def create_connectivity_graph(orig_avg_dict, se_avg_dict):
     return g
 
 def get_connectivity_hard(eig_dict, orig_dict=None):
+    """
+    Uses create_connectivity_graph.
+    :param eig_dict:
+    :param orig_dict:
+    :return:
+    """
     eigenvector_index = 1  # the second smallest eigenvector
     avg_dict = {}
     orig_avg_dict = OrderedDict()
