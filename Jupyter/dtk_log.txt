@@ -1,0 +1,25 @@
+
+
+
+************ 2/20/17 1:30 PM ************ 
+
+Steps to do:
+
+1. dti_recon "/Users/Tony/Documents/Git Folder/seelviz/Jupyter/Fear197ds" "/Users/Tony/Documents/Git Folder/seelviz/Jupyter/dti" -gm "/var/folders/5k/y0zp7k1n3m90kd2bz9n4y69m0000gn/T/dtk_tmp/matrices/gradient.txt" -b 1000 -b0 1 -iop 1 0 0 0 1 0 -p 3 -sn 1 -ot nii 
+
+2. dti_tracker "/Users/Tony/Documents/Git Folder/seelviz/Jupyter/dti" "/var/folders/5k/y0zp7k1n3m90kd2bz9n4y69m0000gn/T/dtk_tmp/track_tmp.trk" -at 35 -m "/Users/Tony/Documents/Git Folder/seelviz/Jupyter/dti_dwi.nii" -it nii
+
+3. spline_filter "/var/folders/5k/y0zp7k1n3m90kd2bz9n4y69m0000gn/T/dtk_tmp/track_tmp.trk" 1 "/Users/Tony/Documents/Git Folder/seelviz/Jupyter/dti.trk"
+
+4. trackvis "/Users/Tony/Documents/Git Folder/seelviz/Jupyter/dti.trk"
+
+--------- Launching dti_recon -----------------
+
+
+Can not find given raw data file.
+
+
+
+
+Process aborted due to error.
+
