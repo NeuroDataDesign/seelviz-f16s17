@@ -7,6 +7,7 @@ import numpy as np
 from numpy import linalg as LA
 import cv2
 import math
+import os
 
 import plotly
 from plotly.graph_objs import *
@@ -37,7 +38,28 @@ from sklearn.manifold import spectral_embedding as se
 
 import scipy.sparse as sp
 
-def register(token, orientation, resolution=5):
+def get_raw_brain(inToken, save=False, output_path=None):
+    inImg = imgDownload(inToken, resolution=5)
+    # Saving raw image
+    if output_path == None:
+        output_path = inToken + "_raw.nii"
+    if save:
+        imgWrite(inImg, str(output_path))
+
+    return inImg
+
+def get_atlas(save=False, output_path=None):
+    refToken = "ara_ccf2"
+    refImg = imgDownload(refToken)
+    # Saving annotations
+    if output_path == None:
+        output_path = "ara_ccf2.nii"
+    if save:
+        imgWrite(refImg, str(output_path))
+    return refImg
+
+
+def register(token, orientation, resolution=5, raw_im=None, atlas=None):
     """
     Saves fully registered brain as token + '_regis.nii' and annotated atlas as '_anno.nii'.
     :param token:
@@ -48,9 +70,11 @@ def register(token, orientation, resolution=5):
     refToken = "ara_ccf2"
     refImg = imgDownload(refToken)
 
-    refAnnoImg = imgDownload(refToken, channel="annotation")
+    if atlas == None:
+        refAnnoImg = imgDownload(refToken, channel="annotation")
 
-    inImg = imgDownload(token, resolution=resolution)
+    if raw_im == None:
+        inImg = imgDownload(token, resolution=resolution)
 
     # resampling CLARITY image
     inImg = imgResample(inImg, spacing=refImg.GetSpacing())
