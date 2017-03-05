@@ -42,3 +42,4 @@ RUN jupyter notebook --generate-config
 ADD jupyter_notebook_config.py /home/.jupyter/
 
 WORKDIR /home/clv-user
+USER clv-user
