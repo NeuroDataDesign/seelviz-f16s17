@@ -62,9 +62,9 @@ def get_atlas(save=False, output_path=None):
 def register(token, orientation, resolution=5, raw_im=None, atlas=None):
     """
     Saves fully registered brain as token + '_regis.nii' and annotated atlas as '_anno.nii'.
-    :param token:
-    :param orientation:
-    :param resolution:
+    :param token: The token for the brain of interest.
+    :param orientation: The orientation of the brain (e.g. LSA, RPS).
+    :param resolution: Desired resolution of the image (1 - 5).
     :return:
     """
     refToken = "ara_ccf2"
@@ -168,8 +168,8 @@ def downsample(im, num_points=10000, optimize=True):
     """
     Function to extract points data from a np array representing a brain (i.e. an object loaded
     from a .nii file).
-    :param im:
-    :param num_points:
+    :param im: The image array.
+    :param num_points: The desired number of points to be downsampled to.
     :param optimize:
     :return: The bright points in a np array.
     """
@@ -234,6 +234,13 @@ def downsample(im, num_points=10000, optimize=True):
     print("Finished")
     return points
 
+def run_pipeline(token, orientation, resolution=5):
+    register(token, orientation, resolution)
+    path = "img/" + token + "_anno.nii"
+    apply_clahe(path)
+    downsample(im, num_points)
+    
+
 def save_points(points, output_path):
     """
     Saves the points to a csv file.
@@ -247,7 +254,7 @@ def save_points(points, output_path):
 def generate_pointcloud(points_path, output_path, resolution):
     """
     Generates the plotly scatterplot html file from the csv file."
-    :param points_path:
+    :param points_path: 
     :param output_path:
     :param resolution:
     :return:
