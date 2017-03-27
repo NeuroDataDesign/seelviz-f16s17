@@ -57,13 +57,16 @@ def get_raw_brain(inToken, save=False, output_path=None):
 
 def get_atlas(save=False, output_path=None):
     """
-    Gets atlas from NeuroData servers (defaults to ara_ccf2).
+    Gets atlas from NeuroData servers (defaults to ara3).
     :param save: Boolean that determines whether to save a local copy, defaults to false
     :param output_path: Path to save a copy of the atlas image, defaults to none.
     :return refImg: The atlas image.
     """
-    refToken = "ara_ccf2"
-    refImg = imgDownload(refToken)
+    refToken = "ara3"
+    server = "dev.neurodata.io"
+    userToken = txtRead("/cis/project/clarity/code/ndreg/userToken.pem").strip()
+
+    refImg = imgDownload(refToken, channel="average", server=server, userToken=userToken)
     # Saving annotations
     if output_path == None:
         output_path = "ara_ccf2.nii"
