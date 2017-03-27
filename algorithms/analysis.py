@@ -39,6 +39,13 @@ from sklearn.manifold import spectral_embedding as se
 import scipy.sparse as sp
 
 def get_raw_brain(inToken, save=False, output_path=None):
+    """
+    Gets raw brain from inToken from NeuroData servers (must be valid token).
+    :param inToken: The token for the brain of interest, from NeuroData.
+    :param save: Boolean that determines whether to save a local copy, defaults to false
+    :param output_path: Path to save the local brain image, defaults to none.
+    :return inImg: The brain image of interest.
+    """
     inImg = imgDownload(inToken, resolution=5)
     # Saving raw image
     if output_path == None:
@@ -49,6 +56,13 @@ def get_raw_brain(inToken, save=False, output_path=None):
     return inImg
 
 def get_atlas(save=False, output_path=None):
+    """
+    Gets atlas from NeuroData servers (defaults to ara_ccf2).
+    :param save: Boolean that determines whether to save a local copy, defaults to false
+    :param output_path: Path to save a copy of the atlas image, defaults to none.
+    :return refImg: The atlas image.
+    """
+
     refToken = "ara_ccf2"
     refImg = imgDownload(refToken)
     # Saving annotations
@@ -235,6 +249,12 @@ def downsample(im, num_points=10000, optimize=True):
     return points
 
 def run_pipeline(token, orientation, resolution=5):
+    """
+    Runs each individual part of the pipeline.
+    :param token: Token name for brains in NeuroData.
+    :param orientation: Orientation of brain in NeuroData (eg: LSA, RSI)
+    :param resolution: Resolution for the brains in NeuroData (from raw image data at resolution 0 to ds levels at resolution 5)
+    """
     register(token, orientation, resolution)
     path = "img/" + token + "_anno.nii"
     apply_clahe(path)
