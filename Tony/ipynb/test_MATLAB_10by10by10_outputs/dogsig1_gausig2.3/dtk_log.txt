@@ -1,0 +1,61 @@
+
+
+
+************ 3/28/17 11:22 PM ************ 
+
+Steps to do:
+
+1. dti_tracker "/Users/Tony/Documents/Git Folder/seelviz/Tony/ipynb/test_MATLAB_10by10by10_outputs/dogsig1_gausig2.3/test_MATLAB_tensordtk_dogsig1_gausig2.3" "/Users/Tony/Documents/Git Folder/seelviz/Tony/ipynb/test_MATLAB_10by10by10_outputs/dogsig1_gausig2.3/test_MATLAB_tensordtk_dogsig1_gausig2.3.trk" -at 35 -m "/Users/Tony/Documents/Git Folder/seelviz/Tony/ipynb/test_MATLAB_10by10by10_outputs/dogsig1_gausig2.3/test_MATLAB_tensordtk_dogsig1_gausig2.3_dwi.nii" -it nii
+
+2. trackvis "/Users/Tony/Documents/Git Folder/seelviz/Tony/ipynb/test_MATLAB_10by10by10_outputs/dogsig1_gausig2.3/test_MATLAB_tensordtk_dogsig1_gausig2.3.trk"
+
+--------- Launching dti_tracker -----------------
+Volume dimension: 10 10 10
+Voxel size: 1.000 1.000 1.000
+
+Did not find image info file '/Users/Tony/Documents/Git Folder/seelviz/Tony/ipynb/test_MATLAB_10by10by10_outputs/dogsig1_gausig2.3/test_MATLAB_tensordtk_dogsig1_gausig2.3.info'. Default info being used.
+
+Threshold for mask one: 0 1
+
+Can not read file /Users/Tony/Documents/Git Folder/seelviz/Tony/ipynb/test_MATLAB_10by10by10_outputs/dogsig1_gausig2.3/test_MATLAB_tensordtk_dogsig1_gausig2.3_dwi.nii
+
+
+** ERROR (nifti_image_read): failed to find header file for '/Users/Tony/Documents/Git Folder/seelviz/Tony/ipynb/test_MATLAB_10by10by10_outputs/dogsig1_gausig2.3/test_MATLAB_tensordtk_dogsig1_gausig2.3_dwi.nii'
+** ERROR (nifti_image_read): failed to find header file for '/Users/Tony/Documents/Git Folder/seelviz/Tony/ipynb/test_MATLAB_10by10by10_outputs/dogsig1_gausig2.3/test_MATLAB_tensordtk_dogsig1_gausig2.3_dwi.nii'
+
+Can not load mask file /Users/Tony/Documents/Git Folder/seelviz/Tony/ipynb/test_MATLAB_10by10by10_outputs/dogsig1_gausig2.3/test_MATLAB_tensordtk_dogsig1_gausig2.3_dwi.nii
+
+
+
+
+Process aborted due to error.
+
+
+
+
+************ 3/28/17 11:25 PM ************ 
+
+Steps to do:
+
+1. dti_tracker "/Users/Tony/Documents/Git Folder/seelviz/Tony/ipynb/test_MATLAB_10by10by10_outputs/dogsig1_gausig2.3/test_MATLAB_tensordtk_dogsig1_gausig2.3" "/Users/Tony/Documents/Git Folder/seelviz/Tony/ipynb/test_MATLAB_10by10by10_outputs/dogsig1_gausig2.3/test_MATLAB_tensordtk_dogsig1_gausig2.3.trk" -at 35 -m "/Users/Tony/Documents/Git Folder/seelviz/Tony/ipynb/test_MATLAB_10by10by10_outputs/dogsig1_gausig2.3/test_MATLAB_tensordtk_dogsig1_gausig2.3_tensor.nii" -it nii
+
+2. trackvis "/Users/Tony/Documents/Git Folder/seelviz/Tony/ipynb/test_MATLAB_10by10by10_outputs/dogsig1_gausig2.3/test_MATLAB_tensordtk_dogsig1_gausig2.3.trk"
+
+--------- Launching dti_tracker -----------------
+Volume dimension: 10 10 10
+Voxel size: 1.000 1.000 1.000
+
+Did not find image info file '/Users/Tony/Documents/Git Folder/seelviz/Tony/ipynb/test_MATLAB_10by10by10_outputs/dogsig1_gausig2.3/test_MATLAB_tensordtk_dogsig1_gausig2.3.info'. Default info being used.
+
+Threshold for mask one: 81.1026 411.619
+
+Reading tensor data...done.
+Tracking... 100%
+Number of tracks: 0
+Time taken: 00:00:00
+
+--------- Launching trackvis -----------------
+TrackVis successfully launched.
+
+
+Total time taken: 00:00:00

@@ -33,7 +33,7 @@ for ii = 1
     
     for nn = 1 : length(chArr)
         ch = chArr{nn};
-        imgstack = single(100 .* ones(10, 10, 10)); % read image stack    
+        imgstack = single(100 .* randn(100, 100, 100)); % read image stack    
 
         for jj = 1 : length(dogsigmaArr)
             dogsigma = dogsigmaArr(jj);
@@ -88,12 +88,12 @@ for ii = 1
                 %%
                 % tensors in FSL format
                 tensorfsl = cat(4, gprrrrgauss, gprrccgauss, gprrzzgauss, gpccccgauss, gpcczzgauss, gpzzzzgauss);
-                fnTensorfsl = ['test_MATLAB_tensorfsl_dogsig' num2str(dogsigma) '_gausig' num2str(gausigma) '.nii'];
+                fnTensorfsl = ['NEWEST_test_MATLAB_tensorfsl_dogsig' num2str(dogsigma) '_gausig' num2str(gausigma) '.nii'];
                 save_nii(make_nii(tensorfsl), fullfile(dpResultGau, fnTensorfsl));
                 
                 % tensors in DTK format
                 tensordtk = cat(4, tensorfsl(:, :, :, 1:2), tensorfsl(:, :, :, 4), tensorfsl(:, :, :, 3), tensorfsl(:, :, :, 5:6));
-                fnTensordtk = ['test_MATLAB_tensordtk_dogsig' num2str(dogsigma) '_gausig' num2str(gausigma) '_tensor.nii'];
+                fnTensordtk = ['NEWEST_test_MATLAB_tensordtk_dogsig' num2str(dogsigma) '_gausig' num2str(gausigma) '_tensor.nii'];
                 save_nii(make_nii(tensordtk), fullfile(dpResultGau, fnTensordtk));
                 
             end % gausigma        
