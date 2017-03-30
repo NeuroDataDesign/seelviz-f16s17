@@ -1,12 +1,20 @@
 # A python implementation of Ailey's matlab tensor code.
 
+import os
+import numpy as np
+import math
+from scipy import ndimage
+import nibabel as nib
+from PIL import Image
+from scipy import signal
+
 def doggen(sigma):
-"""
-Helper function to generate derivatives of Gaussian kernels, in either 1D, 2D, or 3D.
-Source code in MATLAB obtained from Qiyuan Tian, Stanford University, September 2015
-:param sigma: Sigma for use (see defaults in generate_FSL_structure_tensor)
-:return: Derivative of Gaussian kernel with dimensions of sigma.
-"""
+    """
+    Helper function to generate derivatives of Gaussian kernels, in either 1D, 2D, or 3D.
+    Source code in MATLAB obtained from Qiyuan Tian, Stanford University, September 2015
+    :param sigma: Sigma for use (see defaults in generate_FSL_structure_tensor)
+    :return: Derivative of Gaussian kernel with dimensions of sigma.
+    """
     halfsize = np.ceil(3 * np.max(sigma))
     x = range(np.single(-halfsize), np.single(halfsize + 1));  # Python colon is not inclusive at end, while MATLAB is.
     dim = len(sigma);
@@ -39,12 +47,12 @@ Source code in MATLAB obtained from Qiyuan Tian, Stanford University, September 
     return np.divide(k, np.sum(np.abs(k[:])));
 
 def gaussgen(sigma):
-"""
-Function to generate Gaussian kernels, in 1D, 2D and 3D.
-Source code in MATLAB obtained from Qiyuan Tian, Stanford University, September 2015
-:param sigma: Sigma for use in generating Gaussian kernel (see defaults in generate_FSL_structure_tensor)
-:return: Gaussian kernel with dimensions of sigma.
-"""
+    """
+    Function to generate Gaussian kernels, in 1D, 2D and 3D.
+    Source code in MATLAB obtained from Qiyuan Tian, Stanford University, September 2015
+    :param sigma: Sigma for use in generating Gaussian kernel (see defaults in generate_FSL_structure_tensor)
+    :return: Gaussian kernel with dimensions of sigma.
+    """
     halfsize = np.ceil(3 * max(sigma));
     x = range(np.single(-halfsize), np.single(halfsize + 1));
 
@@ -78,14 +86,14 @@ Source code in MATLAB obtained from Qiyuan Tian, Stanford University, September 
     return np.divide(k, np.sum(np.abs(k)));
 
 
-def tiff_to_array(input_path):
-"""
-Function takes a single image (TIFF, or other also works), and returns
-the single image as a numpy array.  Called by tiff_stack_to_array.
-:param input_path: Single image file to open.
-:return: Numpy representation of image.
-"""
-    im = Image.open(input_path)
+def tiff_to_array(folder_path, input_path):
+    """
+    Function takes a single image (TIFF, or other also works), and returns
+    the single image as a numpy array.  Called by tiff_stack_to_array.
+    :param input_path: Single image file to open.
+    :return: Numpy representation of image.
+    """
+    im = Image.open(folder_path + input_path)
     # im.show()
 
     imarray = np.array(im)
@@ -95,19 +103,19 @@ the single image as a numpy array.  Called by tiff_stack_to_array.
 
 
 def tiff_stack_to_array(input_path):
-"""
-Function takes input_path, which should should lead to a directory.
-Loads all TIFFs in input_path, then generates numpy arrays from the
-TIFF stack by calling tiff_to_array helper function.  Make sure TIFF
-images are ordered in numerical order.
-:param input_path: Folder or directory containing .tiff stack.
-:return: Numpy array of tiff stack.
-"""
+    """
+    Function takes input_path, which should should lead to a directory.
+    Loads all TIFFs in input_path, then generates numpy arrays from the
+    TIFF stack by calling tiff_to_array helper function.  Make sure TIFF
+    images are ordered in numerical order.
+    :param input_path: Folder or directory containing .tiff stack.
+    :return: Numpy array of tiff stack.
+    """
     im_list = [];
     for filename in os.listdir(input_path):
         if filename.endswith(".tiff"):
             # print(os.path.join(directory, filename))
-            im_arr = tiff_to_array(filename)
+            im_arr = tiff_to_array(input_path, filename)
             im_list.append(im_arr)
         
     s = np.stack(im_list, axis=2)
@@ -115,26 +123,26 @@ images are ordered in numerical order.
     return s
 
 def generate_FSL_structure_tensor(img_data, filename, dogsigmaArr=[1], gausigmaArr=[2.3], angleArr=[25]):
-"""
-Function takes a numpy array (from TIFF_stack_to_array) and saves output
-FSL structure tensor as filename string. Allows inputting alternate dogsigmaArr,
-gausigmaArr, angleArr, although defaults to currently to parameters from MATLAB script.
-Also returns tensorfsl (the tensor fsl structure) image numpy array.
+    """
+    Function takes a numpy array (from TIFF_stack_to_array) and saves output
+    FSL structure tensor as filename string. Allows inputting alternate dogsigmaArr,
+    gausigmaArr, angleArr, although defaults to currently to parameters from MATLAB script.
+    Also returns tensorfsl (the tensor fsl structure) image numpy array.
 
-## Parameters (the script loops through all parameters and saves each result automatically)
-# dogsigmaArr = [1]; Sigma values for derivative of gaussian filter, recommended value: 0.6 - 1.3 (based on actual data)
-# gausigmaArr = [2.3]; Sigma values for gaussian filter, recommended value: 1.3 - 2.3 (based on actual data)
-# angleArr = [25]; Angle thresholds for fiber tracking, recommended value: 20 - 30.
+    ## Parameters (the script loops through all parameters and saves each result automatically)
+    # dogsigmaArr = [1]; Sigma values for derivative of gaussian filter, recommended value: 0.6 - 1.3 (based on actual data)
+    # gausigmaArr = [2.3]; Sigma values for gaussian filter, recommended value: 1.3 - 2.3 (based on actual data)
+    # angleArr = [25]; Angle thresholds for fiber tracking, recommended value: 20 - 30.
 
-Follows code from MATLAB CAPTURE scripts.
+    Follows code from MATLAB CAPTURE scripts.
 
-:param img_data: Numpy array of image, typically from tiff_stack_to_array called on a directory of TIFFs.
-:param filename: Name to save the FSL structure tensor as.
-:param dogsigmaArr: Sigma values for derivative of Gaussian filter, with recommended values between 0.6 - 1.3.
-:param gausigmaArr: Sigma values for Gaussian filter, with recommended values between 1.3 - 2.3.
-:param angleArr: Angle threshold for fiber tracking, with recommended values between 20 - 30.
-:return tensorfsl: TensorFSL format of structure tensor (upper triangular matrix)
-"""
+    :param img_data: Numpy array of image, typically from tiff_stack_to_array called on a directory of TIFFs.
+    :param filename: Name to save the FSL structure tensor as.
+    :param dogsigmaArr: Sigma values for derivative of Gaussian filter, with recommended values between 0.6 - 1.3.
+    :param gausigmaArr: Sigma values for Gaussian filter, with recommended values between 1.3 - 2.3.
+    :param angleArr: Angle threshold for fiber tracking, with recommended values between 20 - 30.
+    :return tensorfsl: TensorFSL format of structure tensor (upper triangular matrix)
+    """
     for jj in range(len(dogsigmaArr)):
         dogsigma = dogsigmaArr[jj];
         print "Start DoG Sigma on " + str(dogsigma);
