@@ -63,7 +63,10 @@ RUN sed -i "1ic.NotebookApp.open_browser = False" ~/.jupyter/jupyter_notebook_co
 RUN sed -i "1ic.NotebookApp.ip = '*'" ~/.jupyter/jupyter_notebook_config.py
 RUN cp -r ~/.jupyter .
 
+RUN mkdir clv-user
+
 RUN chown -R clv-user /home
+RUN chmod -R 777 /home
 
 WORKDIR /home/clv-user
 USER clv-user
