@@ -1,6 +1,8 @@
 FROM ubuntu:16.04
 MAINTAINER seelviz
 
+USER root
+
 RUN apt-get update
 # RUN apt-get -y install python-setuptools python-dev python-pip
 
@@ -29,25 +31,30 @@ RUN yes | pip install SimpleITK nibabel scikit-image pandas plotly networkx
 # Installing Jupyter Notebook (still need to edit the config file after)
 RUN yes | pip install jupyter notebook
 
-# WORKDIR "/home"
-# RUN git clone https://github.com/alee156/clviz.git
-# WORKDIR "/home/clviz"
-# RUN bash opencv-docker.sh
-# RUN pip install -r requirements.txt
+WORKDIR "/home"
+RUN git clone https://github.com/alee156/clviz.git
+WORKDIR "/home/clviz"
+RUN bash opencv-docker.sh
+RUN pip install -r requirements.txt
 
 WORKDIR "/home"
 RUN git clone https://github.com/jonl1096/clvizdjango.git
 RUN git clone https://github.com/neurodata/ndio.git
 RUN git clone https://github.com/neurodata/ndreg.git
 
+# RUN groupadd -r seelviz && useradd -r -m -g seelviz clv-user -d /home/
+# USER clv-user
+
 # Installing ndreg
 WORKDIR "/home/ndreg"
-RUN cmake .
-RUN make && make install
+RUN yes Y | cmake .
+RUN yes Y | make
+RUN yes Y | make install
+# RUN yes Y | ldconfig
 
 # Installing ndio
 WORKDIR "/home/ndio"
-RUN pip install .
+RUN pip install --target /usr/local/lib/python2.7/dist-packages .
 
 WORKDIR "/home"
 
@@ -67,8 +74,10 @@ RUN mkdir clv-user
 
 RUN chown -R clv-user /home
 RUN chmod -R 777 /home
+# RUN chown -R clv-user /root/.local
+# RUN chmod -R 777 /root/.local
 
-WORKDIR /home/clv-user
+WORKDIR /root/clv-user
 USER clv-user
 
 ENTRYPOINT ["/bin/bash"]
