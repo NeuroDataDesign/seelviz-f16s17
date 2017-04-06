@@ -38,6 +38,8 @@ from sklearn.manifold import spectral_embedding as se
 
 import scipy.sparse as sp
 
+original_spacing = ();
+
 def get_raw_brain(inToken, cert_path, resolution=5, save=False, output_path=None):
     """
     Gets raw brain from inToken from NeuroData servers (must be valid token).
@@ -61,11 +63,11 @@ def get_raw_brain(inToken, cert_path, resolution=5, save=False, output_path=None
 
 def get_atlas(cert_path, save=False, output_path=None):
     """
-    Gets atlas from NeuroData servers (defaults to ara3).
+    Gets average channel atlas from NeuroData servers (defaults to ara3).
     :param save: Boolean that determines whether to save a local copy, defaults to false
     :param cert_path: "/cis/project/clarity/code/ndreg/userToken.pem" Path to the pem certificate.
     :param output_path: Path to save a copy of the atlas image, defaults to none.
-    :return refImg: The atlas image.
+    :return refImg: The average atlas image.
     """
     refToken = "ara3"
     server = "dev.neurodata.io"
@@ -74,7 +76,27 @@ def get_atlas(cert_path, save=False, output_path=None):
     refImg = imgDownload(refToken, channel="average", server=server, userToken=userToken)
     # Saving annotations
     if output_path == None:
-        output_path = "ara_ccf2.nii"
+        output_path = "atlas/ara3_average.nii"
+    if save:
+        imgWrite(refImg, str(output_path))
+    return refImg
+
+def get_atlas_annotate(cert_path, save=False, output_path=None):
+    """
+    Gets annotation channel atlas from NeuroData servers (defaults to ara3).
+    :param save: Boolean that determines whether to save a local copy, defaults to false
+    :param cert_path: "/cis/project/clarity/code/ndreg/userToken.pem" Path to the pem certificate.
+    :param output_path: Path to save a copy of the annotation atlas image, defaults to none.
+    :return refImg: The annotation atlas image.
+    """
+    refToken = "ara3"
+    server = "dev.neurodata.io"
+    userToken = txtRead(cert_path).strip()
+
+    refImg = imgDownload(refToken, channel="annotation", server=server, userToken=userToken)
+    # Saving annotations
+    if output_path == None:
+        output_path = "atlas/ara3_annotation.nii"
     if save:
         imgWrite(refImg, str(output_path))
     return refImg
@@ -117,6 +139,9 @@ def register(token, cert_path, orientation, resolution=5, raw_im=None, atlas=Non
         
     print inImg.GetSize();
     print refImg.GetSize();
+
+    global original_spacing;
+    original_spacing = original_spacing + inImg.GetSpacing();
 
     inImg.SetSpacing(np.array(inImg.GetSpacing())*1000) ### wtf??
 
@@ -302,8 +327,17 @@ def run_pipeline(token, cert_path, orientation, resolution=5):
     register(token, cert_path, orientation, resolution)
     path = "img/" + token + "_anno.nii"
     apply_clahe(path)
-    downsample(im, num_points)
-    
+    output_ds = downsample(im, num_points=10000);
+    save_points(output_ds, "points/" + token + ".csv")
+    points_path = "points/" + token + ".csv";
+    generate_pointcloud(points_path, "output/" + token + "_pointcloud.html", original_spacing);
+    get_atlas_annotate(cert_path, save=True);
+    get_regions(points_path, "atlas/ara3_annotation.nii", "points/" + token + "_regions.csv");
+    g = create_graph(points_path, output_filename="graphml/" + token + "_graph.graphml");
+    plot_graphml3d(g, output_path="output/" + token + "_edgegraph.html");
+    generate_region_graph(token=token, points_path, output_path="output/" + token + "_regions.html");
+    generate_density_graph(graph_path="graphml/" + token + "_graph.graphml", output_path="output/" + token + "_density.html", plot_title="False-Color Density of " + token);
+    print("Completed pipeline...!")
 
 def save_points(points, output_path):
     """
@@ -402,8 +436,7 @@ def get_regions(points_path, anno_path, output_path):
     uniq = list(set(regions))
     numRegions = len(uniq)
     print('num unique regions: %d' % len(uniq))
-    print
-    uniq
+    print uniq
 
     p = np.genfromtxt(output_path, delimiter=',')
     return p
