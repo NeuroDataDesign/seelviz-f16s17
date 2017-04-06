@@ -1,7 +1,7 @@
 FROM ubuntu:16.04
 MAINTAINER seelviz
 
-USER root
+# USER root
 
 RUN apt-get update
 # RUN apt-get -y install python-setuptools python-dev python-pip
@@ -47,18 +47,17 @@ RUN git clone https://github.com/neurodata/ndreg.git
 
 # Installing ndreg
 WORKDIR "/home/ndreg"
-RUN yes Y | cmake .
-RUN yes Y | make
-RUN yes Y | make install
+RUN cmake .
+RUN make && make install
 # RUN yes Y | ldconfig
 
 # Installing ndio
 WORKDIR "/home/ndio"
 RUN pip install --target /usr/local/lib/python2.7/dist-packages .
 
-WORKDIR "/home"
-
 RUN groupadd -r seelviz && useradd -r -m -g seelviz clv-user -d /home/
+
+WORKDIR "/home"
 
 # Deleting install files
 # RUN rm -r clviz ndreg itk ndio
