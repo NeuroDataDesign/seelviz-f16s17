@@ -5,7 +5,8 @@ import matplotlib
 from matplotlib import pyplot as plt
 import numpy as np
 from numpy import linalg as LA
-import cv2
+#import cv2
+from skimage import exposure
 import math
 import os
 
@@ -101,6 +102,31 @@ def get_atlas_annotate(cert_path, save=False, output_path=None):
         imgWrite(refImg, str(output_path))
     return refImg
 
+def get_registered(token, cert_path):
+    """
+    Gets a copy of the already-registered brain from the NeuroData servers.  This is the equivalent of the inAnnoImg
+    that Kwame uploads after he completes registration.  Must be on this list: https://dev.neurodata.io/nd/ca/public_tokens/
+    :param token: The token for the registered brain of interest.
+    :param cert_path: Certification path for access to NeuroData.
+    :return inAnnoImg: The SITK image of inAnnoImg that results after LDDMM. 
+    """
+    
+    # Load certification and server details
+    registeredToken = token;
+    server = "dev.neurodata.io";
+    userToken = txtRead(cert_path).strip()
+    
+    print("Getting registered brain from server...");
+    
+    download = imgDownload(registeredToken, server=server, userToken=userToken);
+    
+    print("Saving local copy of registered brain...");
+    
+    # Saving registered image
+    location = "img/" + token + "_regis.nii"
+    imgWrite(download, str(location));
+    
+    return download;
 
 def register(token, cert_path, orientation, resolution=5, raw_im=None, atlas=None, annotate=None):
     """
@@ -236,9 +262,10 @@ def apply_clahe(input_path):
 
     im_flat = im.reshape(-1)
 
-    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
-
-    cl1 = clahe.apply(im_flat)
+    #clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+    #cl1 = clahe.apply(im_flat)
+    
+    c11 = exposure.equalize_adapthist(im_flat, clip_limit=2.0);
 
     im_clahe = cl1.reshape(x_value, y_value, z_value)
     #debugging:
@@ -317,16 +344,17 @@ def downsample(im, num_points=10000, optimize=True):
     print("Finished")
     return points
 
-def run_pipeline(token, cert_path, orientation, resolution=5):
+def run_pipeline(token, cert_path, resolution=5):
     """
     Runs each individual part of the pipeline.
-    :param token: Token name for brains in NeuroData.
+    :param token: Token name for REGISTERED brains in NeuroData.  (https://dev.neurodata.io/nd/ca/public_tokens/)
     :param orientation: Orientation of brain in NeuroData (eg: LSA, RSI)
     :param resolution: Resolution for the brains in NeuroData (from raw image data at resolution 0 to ds levels at resolution 5)
     """
-    register(token, cert_path, orientation, resolution)
-    path = "img/" + token + "_anno.nii"
-    apply_clahe(path)
+    #register(token, cert_path, orientation, resolution)
+    get_registered(token, cert_path);
+    path = "img/" + token + "_regis.nii"  #why _anno?  That's the refAnnoImg...
+    im = apply_clahe(path);
     output_ds = downsample(im, num_points=10000);
     save_points(output_ds, "points/" + token + ".csv")
     points_path = "points/" + token + ".csv";
@@ -335,7 +363,7 @@ def run_pipeline(token, cert_path, orientation, resolution=5):
     get_regions(points_path, "atlas/ara3_annotation.nii", "points/" + token + "_regions.csv");
     g = create_graph(points_path, output_filename="graphml/" + token + "_graph.graphml");
     plot_graphml3d(g, output_path="output/" + token + "_edgegraph.html");
-    generate_region_graph(token=token, points_path, output_path="output/" + token + "_regions.html");
+    generate_region_graph(token, points_path, output_path="output/" + token + "_regions.html");
     generate_density_graph(graph_path="graphml/" + token + "_graph.graphml", output_path="output/" + token + "_density.html", plot_title="False-Color Density of " + token);
     print("Completed pipeline...!")
 
