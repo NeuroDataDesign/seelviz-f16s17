@@ -5,7 +5,7 @@ import matplotlib
 from matplotlib import pyplot as plt
 import numpy as np
 from numpy import linalg as LA
-#import cv2
+import cv2
 from skimage import exposure
 import math
 import os
@@ -262,10 +262,10 @@ def apply_clahe(input_path):
 
     im_flat = im.reshape(-1)
 
-    #clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
-    #cl1 = clahe.apply(im_flat)
+    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+    cl1 = clahe.apply(im_flat)
     
-    c11 = exposure.equalize_adapthist(im_flat, clip_limit=2.0);
+    #c11 = exposure.equalize_adapthist(im_flat, clip_limit=2.0);
 
     im_clahe = cl1.reshape(x_value, y_value, z_value)
     #debugging:
@@ -374,6 +374,8 @@ def save_points(points, output_path):
     :param output_path:
     :return:
     """
+    if not os.path.exists('points'):
+        os.makedirs('points')
 #     pathname = 'points/Fear199.csv"
     np.savetxt(output_path, points, fmt='%d', delimiter=',')
 
