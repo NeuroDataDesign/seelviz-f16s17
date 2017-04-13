@@ -795,10 +795,10 @@ def generate_region_graph(token, points_path, output_path=None):
             mode='markers',
             name=ccf[final],
             marker=dict(
-                size=1.2,
+                size=3,
                 color=tmp_col_lit,  # 'purple',                # set color to an array/list of desired values
                 colorscale='Viridis',  # choose a colorscale
-                opacity=0.2
+                opacity=0.5
             )
         )
 
