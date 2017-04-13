@@ -1,3 +1,5 @@
+![https://github.com/NeuroDataDesign/seelviz/blob/gh-pages/AlbertImages/BatchFlow.pdf]()
+
 Started out with a docker image with my administrator AWS credentials configured.
 - Reads from s3 bucket
 - Writes to file
