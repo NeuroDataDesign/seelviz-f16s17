@@ -367,7 +367,7 @@ def run_pipeline(token, cert_path, resolution=5):
     get_atlas_annotate(cert_path, save=True);
     get_regions(points_path, "atlas/ara3_annotation.nii", "points/" + token + "_regions.csv");
     points_region_path = "points/" + token + "_regions.csv";
-    g = create_graph(points_path, output_filename="graphml/" + token + "_graph.graphml");
+    g = create_graph(points_region_path, output_filename="graphml/" + token + "_graph.graphml");
     plot_graphml3d(g, output_path="output/" + token + "_edgegraph.html");
     generate_region_graph(token, points_region_path, output_path="output/" + token + "_regions.html");
     generate_density_graph(graph_path="graphml/" + token + "_graph.graphml", output_path="output/" + token + "_density.html", plot_title="False-Color Density of " + token);
@@ -469,8 +469,7 @@ def get_regions(points_path, anno_path, output_path):
     infile.close()
     outfile.close()
 
-    print
-    len(regions)
+    print len(regions)
     #     print regions[0:10]
     uniq = list(set(regions))
     numRegions = len(uniq)
@@ -644,8 +643,14 @@ def generate_region_graph(token, points_path, output_path=None):
     # Now, to get the mm image size, we can multiply all x, y, z
     # to get the proper mm size when plotting.
 
-    """Load the CSV of the ARA with CCF v2 (see here for docs)"""
-    ccf_txt = 'natureCCFOhedited.csv'
+    """
+    Load the CSV of the ARA with CCF v3: in order to generate this we use the ARA API.
+    We can download a csv using the following URL:
+    http://api.brain-map.org/api/v2/data/query.csv?criteria=model::Structure,rma::criteria,[ontology_id$eq1],rma::options[order$eq%27structures.graph_order%27][num_rows$eqall]
+    
+    Note the change of ontology_id$eq27 to ontology_id$eq1 to get the brain atlas.
+    """
+    ccf_txt = 'latest_ccf3_csv.csv'
 
     ccf = {}
     with open(ccf_txt, 'rU') as csvfile:
