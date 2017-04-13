@@ -29,3 +29,4 @@ Questions:
   - Should I create a guest credential? 
     - What permissions would it require, is it okay if I just give it read and write access to s3 and batch?
   - Need help with aws credentials csv when making Dockerfile (how to encrypt)
+  - Any way to bypass lambda?
