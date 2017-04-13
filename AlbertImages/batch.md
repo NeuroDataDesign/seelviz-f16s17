@@ -1,4 +1,4 @@
-![Flow chart](https://github.com/NeuroDataDesign/seelviz/blob/gh-pages/AlbertImages/flow.png?raw=true)
+![Flow chart](https://github.com/NeuroDataDesign/seelviz/blob/38a788de7e517e30b87b4ca6e3cf1bf0e7ea2dbb/AlbertImages/flow.png?raw=true)
 
 Started out with a docker image with my administrator AWS credentials configured.
 - Reads from s3 bucket
