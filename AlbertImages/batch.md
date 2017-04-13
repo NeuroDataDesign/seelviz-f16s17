@@ -26,3 +26,4 @@ Questions:
 - Any way to bypass AWS credential requirements (don't know how secure it is to be logged on)
   - Should I create a guest credential? 
     - What permissions would it require, is it okay if I just give it read and write access to s3 and batch?
+  - crontask is used to run a bash script that calls the python script, is there any simpler method?
