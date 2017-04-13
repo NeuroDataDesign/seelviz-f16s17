@@ -15,7 +15,8 @@ Ideally the workflow is
 Logic for Seelviz:
 - Webservice launched with lightweight ec2
 - User types in a string token which is uploaded to s3
-- This is trigger for batch to start an ec2 instance
+- This is trigger for lambda function
+- Function submits job to batch which starts an ec2 instance
 - Docker container created and instantly launched
 - entrypoint to docker runs python script that automatically runs our pipeline
 - output zipfile is pushed to s3 (different bucket than the first)
