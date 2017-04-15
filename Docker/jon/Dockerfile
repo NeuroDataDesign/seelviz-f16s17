@@ -38,17 +38,18 @@ RUN bash opencv-docker.sh
 RUN pip install -r requirements.txt
 
 WORKDIR "/home"
-RUN git clone https://github.com/jonl1096/clvizdjango.git
-RUN git clone https://github.com/neurodata/ndio.git
-RUN git clone https://github.com/neurodata/ndreg.git
+RUN git clone https://github.com/jonl1096/clvizdjango.git \
+	&& git clone https://github.com/neurodata/ndio.git \
+	&& git clone https://github.com/neurodata/ndreg.git
 
 # RUN groupadd -r seelviz && useradd -r -m -g seelviz clv-user -d /home/
 # USER clv-user
 
 # Installing ndreg
 WORKDIR "/home/ndreg"
-RUN cmake .
-RUN make && make install
+RUN cmake . \
+	&& make \
+	&& make install
 # RUN yes Y | ldconfig
 
 # Installing ndio
@@ -64,9 +65,9 @@ WORKDIR "/home"
 
 RUN jupyter notebook --generate-config --allow-root
 # ADD jupyter_notebook_config.py /home/.jupyter/
-RUN sed -i "1ic.NotebookApp.port = 8080" ~/.jupyter/jupyter_notebook_config.py
-RUN sed -i "1ic.NotebookApp.open_browser = False" ~/.jupyter/jupyter_notebook_config.py
-RUN sed -i "1ic.NotebookApp.ip = '*'" ~/.jupyter/jupyter_notebook_config.py
+RUN sed -i "1ic.NotebookApp.port = 8080" ~/.jupyter/jupyter_notebook_config.py \
+	&& sed -i "1ic.NotebookApp.open_browser = False" ~/.jupyter/jupyter_notebook_config.py \
+	&& sed -i "1ic.NotebookApp.ip = '*'" ~/.jupyter/jupyter_notebook_config.py
 RUN cp -r ~/.jupyter .
 
 RUN mkdir clv-user
@@ -76,7 +77,8 @@ RUN chmod -R 777 /home
 # RUN chown -R clv-user /root/.local
 # RUN chmod -R 777 /root/.local
 
-WORKDIR /root/clv-user
-USER clv-user
+WORKDIR /root
+# WORKDIR /home/clv-user
+# USER clv-user
 
 ENTRYPOINT ["/bin/bash"]
