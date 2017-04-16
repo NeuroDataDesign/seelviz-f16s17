@@ -3,6 +3,8 @@
 import os
 import numpy as np
 import math
+import SimpleITK as sitk
+from scipy import misc
 from scipy import ndimage
 import nibabel as nib
 from PIL import Image
@@ -121,6 +123,30 @@ def tiff_stack_to_array(input_path):
     s = np.stack(im_list, axis=2)
     print s.shape
     return s
+
+def nii_to_tiff_stack(input_path, token):
+    """
+    Function loads an nii using SITK, then converts the nii into a folder containing a TIFF stack.
+    This function is useful later on for generating the structure tensor.
+    :param input_path: Path to .nii file.
+    :param token: Name of token.
+    """
+
+    image = sitk.ReadImage(input_path);
+
+    planes_number = image.GetDimension()[0];
+
+    ## if we have (i, j, k), we want (k, j, i)  (converts nibabel format to sitk format)
+    ##new_im = aut_1367.swapaxes(0,2) # just swap i and k
+
+    if not os.path.exists(token + "_TIFFs"):
+        os.makedirs(token + "_TIFFs");
+
+    plane = 0;
+    for plane in range(0, planes_number):
+        output = np.asarray(image[plane])
+        scipy.misc.toimage(output).save(token + str(plane) + '.tiff')
+
 
 def generate_FSL_structure_tensor(img_data, filename, dogsigmaArr=[1], gausigmaArr=[2.3], angleArr=[25]):
     """
