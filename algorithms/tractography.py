@@ -4,11 +4,14 @@ import os
 import numpy as np
 import math
 import SimpleITK as sitk
-from scipy import misc
 from scipy import ndimage
 import nibabel as nib
 from PIL import Image
+import scipy.misc
 from scipy import signal
+import warnings
+
+warnings.filterwarnings("ignore")
 
 def doggen(sigma):
     """
@@ -134,7 +137,9 @@ def nii_to_tiff_stack(input_path, token):
 
     image = sitk.ReadImage(input_path);
 
-    planes_number = image.GetDimension()[0];
+    planes_number = image.GetSize();
+    data = sitk.GetArrayFromImage(image)
+    z_dimension = planes_number[2];
 
     ## if we have (i, j, k), we want (k, j, i)  (converts nibabel format to sitk format)
     ##new_im = aut_1367.swapaxes(0,2) # just swap i and k
@@ -143,10 +148,10 @@ def nii_to_tiff_stack(input_path, token):
         os.makedirs(token + "_TIFFs");
 
     plane = 0;
-    for plane in range(0, planes_number):
-        output = np.asarray(image[plane])
-        scipy.misc.toimage(output).save(token + str(plane) + '.tiff')
 
+    for plane in range(0, z_dimension):
+        output = data[plane, :, :]
+        scipy.misc.toimage(output).save(token + "_TIFFs/" + token + "_" + str(plane) + '.tiff')
 
 def generate_FSL_structure_tensor(img_data, filename, dogsigmaArr=[1], gausigmaArr=[2.3], angleArr=[25]):
     """
@@ -223,8 +228,8 @@ def generate_FSL_structure_tensor(img_data, filename, dogsigmaArr=[1], gausigmaA
 
         #print ga[:, :, 0];
 
-        print "GA SHAPE:"
-        print ga.shape;
+        #print "GA SHAPE:"
+        #print ga.shape;
 
         # Convert numpy ndarray object to Nifti data type
         gradient_amplitudes_data = nib.Nifti1Image(ga, affine=np.eye(4));
@@ -240,8 +245,8 @@ def generate_FSL_structure_tensor(img_data, filename, dogsigmaArr=[1], gausigmaA
         gv = np.divide(gv, np.tile(ga[..., None], [1, 1, 1, 3]));
         #print gv[:, :, 0, 1];
 
-        print "GV SHAPE:"
-        print gv.shape;
+        #print "GV SHAPE:"
+        #print gv.shape;
 
         # Convert numpy ndarray object to Nifti data type
         gradient_vectors_data = nib.Nifti1Image(gv, affine=np.eye(4));
