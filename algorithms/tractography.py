@@ -1,4 +1,4 @@
-# A python implementation of Ailey's matlab tensor code.
+# A Python implementation of Ailey's matlab tensor code.
 
 import os
 import numpy as np
@@ -11,7 +11,7 @@ import scipy.misc
 from scipy import signal
 import warnings
 
-warnings.filterwarnings("ignore")
+#warnings.filterwarnings("ignore")
 
 def doggen(sigma):
     """
@@ -98,11 +98,15 @@ def tiff_to_array(folder_path, input_path):
     :param input_path: Single image file to open.
     :return: Numpy representation of image.
     """
-    im = Image.open(folder_path + input_path)
+
+    # The convert tag makes sure that we're dealing with floats, not uint8
+    # This prevents underflow.
+    im = Image.open(folder_path + input_path).convert("F")
     # im.show()
 
     imarray = np.array(im)
     # print(imarray)
+    # print(imarray.dtype)
     
     return imarray
 

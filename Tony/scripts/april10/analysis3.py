@@ -53,7 +53,7 @@ def get_raw_brain(inToken, cert_path, resolution=5, save=False, output_path=None
     server = "dev.neurodata.io"
     userToken = txtRead(cert_path).strip()
     
-    inImg = imgDownload(inToken, resolution=5, server=server, userToken=userToken)
+    inImg = imgDownload(inToken, resolution=resolution, server=server, userToken=userToken)
     # Saving raw image
     if output_path == None:
         output_path = inToken + "_raw.nii"
