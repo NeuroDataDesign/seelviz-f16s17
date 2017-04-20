@@ -1,5 +1,5 @@
 FROM jliu118/clarityviz:super-opencv
-MAINTAINER seelviz
+MAINTAINER Jonathan Liu <jliu118@jhu.edu>
 
 RUN pip install -U scikit-learn \
 	&& pip install boto3
