@@ -1,7 +1,8 @@
 FROM jliu118/clarityviz:super-opencv
 MAINTAINER seelviz
 
-RUN pip install -U scikit-learn
+RUN pip install -U scikit-learn \
+	&& pip install boto3
 
 RUN pip install clarityviz
 
