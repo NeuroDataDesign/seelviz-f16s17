@@ -6,6 +6,6 @@ RUN pip install -U scikit-learn \
 
 RUN pip install clarityviz
 
-RUN wget 'https://github.com/alee156/clviz/blob/master/utils/execute.py'
+COPY ./execute.py /
 
-
+ENTRYPOINT ["python", "execute.py", "jliu118-test", "arguments.txt"]
