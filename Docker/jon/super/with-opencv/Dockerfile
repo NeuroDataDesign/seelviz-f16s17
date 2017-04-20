@@ -47,6 +47,7 @@ RUN git clone https://github.com/jonl1096/clvizdjango.git \
 
 # Installing ndreg
 WORKDIR "/home/ndreg"
+RUN git pull
 RUN cmake . \
 	&& make \
 	&& make install
@@ -54,7 +55,10 @@ RUN cmake . \
 
 # Installing ndio
 WORKDIR "/home/ndio"
-RUN pip install --target /usr/local/lib/python2.7/dist-packages .
+RUN git fetch origin e0c2ae7cb9266408755b9e23e6a096f9895451d6:refs/remotes/origin/foo-commit
+RUN git checkout origin/foo-commit
+RUN pip install .
+# python execute.py --token s275_to_ara3 --resolution 5
 
 RUN groupadd -r seelviz && useradd -r -m -g seelviz clv-user -d /home/
 
@@ -72,10 +76,11 @@ RUN cp -r ~/.jupyter .
 
 RUN mkdir clv-user
 
-RUN chown -R clv-user /home
-RUN chmod -R 777 /home
-# RUN chown -R clv-user /root/.local
-# RUN chmod -R 777 /root/.local
+# RUN chown -R clv-user /home
+# RUN chmod -R 777 /home
+
+RUN pip install -U scikit-learn
+RUN pip install clarityviz
 
 WORKDIR /root
 # WORKDIR /home/clv-user
