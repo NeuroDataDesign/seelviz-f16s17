@@ -20,5 +20,6 @@ RUN pip install boto3
 COPY ./testentrypoint.sh /
 COPY ./testentrypoint.py /
 
+RUN chmod u+x testentrypoint.sh
 # and add it as an entrypoint
 ENTRYPOINT ["/testentrypoint.sh"]

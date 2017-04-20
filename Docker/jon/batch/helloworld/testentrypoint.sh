@@ -1,2 +1,2 @@
-python testentrypoint.py --bucket jliu118-test --data test.txt
+python testentrypoint.py jliu118-test test.txt
 
