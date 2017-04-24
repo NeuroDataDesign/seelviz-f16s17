@@ -178,6 +178,12 @@ def register(token, cert_path, orientation, resolution=5, raw_im=None, atlas=Non
 
     print("Finished data acquisition...");
     
+    print("inImg spacing:");
+    print inImg.GetSpacing();
+    
+    print("refImg spacing:");
+    print refImg.GetSpacing();
+    
     # resampling CLARITY image
     inImg = imgResample(inImg, spacing=refImg.GetSpacing())
 
@@ -448,7 +454,8 @@ def get_regions(points_path, anno_path, output_path):
     :param points_path: File path for the points csv.
     :param anno_path: File path for the annotations csv.
     :param output_path: Output file path for where to save the regions csv.
-    :return: Array with additional 5th column being the region IDs.
+    :return p: Array with additional 5th column being the region IDs.
+    :return uniq: List containing regionIDs of all unique regions 
     """
     atlas = nib.load(anno_path)  # <- atlas .nii image
     atlas_data = atlas.get_data()
@@ -476,8 +483,11 @@ def get_regions(points_path, anno_path, output_path):
     print('num unique regions: %d' % len(uniq))
     print uniq
 
+    if not os.path.exists('points'):
+        os.makedirs('points');
+    
     p = np.genfromtxt(output_path, delimiter=',')
-    return p
+    return p, uniq
 
 
 def create_graph(points_path, radius=20, output_filename=None):
@@ -821,6 +831,107 @@ def generate_region_graph(token, points_path, output_path=None):
         plotly.offline.plot(fig, filename=output_path)
 
     return fig, num_points_by_region_dict
+
+def generate_scaled_centroids_graph(token, points_path, unique_list, output_path=None):
+    """
+    Generates the plotly centroid html file with proper scaling of the centroid determined by the number of bright spots from the csv file.
+    :param token: Name of token
+    :param points_path: Filepath to region points csv (AFTER get_regions method).
+    :param output_path: Filepath for where to save output html.
+    :return:
+    """
+    
+    # Type in the path to your csv file here
+    thedata = None
+    thedata = np.genfromtxt(points_path,
+        delimiter=',', dtype='int', usecols = (0,1,2,4), names=['a','b','c', 'region'])
+    
+    # Sort the csv file by the last column (by order = 'region') using ndarray.sort
+    sort = np.sort(thedata, order = 'region');
+
+    # Save a copy of this sorted csv in the points folder
+    if not os.path.exists('points'):
+        os.makedirs('points')
+    np.savetxt('points/' + str(token) + '_regions_sorted.csv', sort, fmt='%d', delimiter=',')
+    
+    # Find the centroids of each region
+    sorted_regions = np.sort(unique_list);
+
+    current_region = sorted_regions[0];
+    i = 0;
+    x = [];
+    y = [];
+    z = [];
+    centroids = {};
+
+    for row in sort:
+        if row[3] == current_region:
+            # Append x, y, z to appropiate list
+            x.append(row[0]);
+            y.append(row[1]);
+            z.append(row[2]);
+        else:
+            # Store in centroids dictionary with key current_region the average x, y, z position.
+            # Also store the number of points.
+            centroids[current_region] = [np.average(x), np.average(y), np.average(z), len(x)];
+
+            # Increment i, change current_region
+            i = i + 1;
+            current_region = sorted_regions[i]
+
+            # Set x, y, z to new row values;
+            x = [row[0]];
+            y = [row[1]];
+            z = [row[2]];
+
+    # Store last region averages also!
+    centroids[current_region] = [np.average(x), np.average(y), np.average(z), len(x)];
+    
+    current_palette = sns.color_palette("husl", len(sorted_regions))
+    i = 0;
+
+    data = [];
+    for key in sorted_regions:
+        current_values_list = centroids[key];
+
+        tmp_col = current_palette[i];
+        tmp_col_lit = 'rgb' + str(tmp_col);
+
+        trace_scatter = Scatter3d(
+            x = [current_values_list[0]],
+            y = [current_values_list[1]],
+            z = [current_values_list[2]],
+            mode = 'markers',
+            name = key,
+            marker = dict(
+                size= np.divide(float(current_values_list[3]), 10000) * 100,
+                color = tmp_col_lit,     # set color to an array/list of desired values
+                colorscale = 'Viridis',  # choose a colorscale
+                opacity = 0.5
+            )
+        )
+
+        data.append(trace_scatter)
+        i = i + 1;
+
+    layout = Layout(
+        margin=dict(
+            l=0,
+            r=0,
+            b=0,
+            t=0
+        ),
+        paper_bgcolor='rgb(0,0,0)',
+        plot_bgcolor='rgb(0,0,0)'
+    )
+
+    fig = Figure(data=data, layout=layout)
+
+    if not os.path.exists('output'):
+        os.makedirs('output')
+
+    if output_path != None:
+        plotly.offline.plot(fig, filename=output_path)
 
 
 def generate_density_graph(graph_path, output_path=None, plot_title=""):
