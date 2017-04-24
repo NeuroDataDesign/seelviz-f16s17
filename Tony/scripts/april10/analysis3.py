@@ -28,6 +28,8 @@ import networkx as nx
 import re
 import pandas as pd
 
+import pickle
+
 import requests
 import json
 
@@ -641,7 +643,6 @@ def generate_region_graph(token, points_path, output_path=None):
     #     points_path = 'Fear199_regions.csv'
     thedata = np.genfromtxt(points_path,
         delimiter=',', dtype='int', usecols = (0,1,2,4), names=['a','b','c', 'region'])
-    # deleting the brightness column
     #thedata = np.delete(thedata, [3], axis=1)
     
     # Sort the csv file by the last column (by order = 'region') using ndarray.sort
@@ -672,9 +673,6 @@ def generate_region_graph(token, points_path, output_path=None):
         for row in csvreader:
             # row[0] is ccf atlas index, row[4] is string of full name
             ccf[row[0]] = row[4];
-            # print row[0]
-            # print row[4]
-            # print ', '.join(row)
 
     """Save counts for each region into a separate CSV"""
     unique = [];
@@ -698,7 +696,7 @@ def generate_region_graph(token, points_path, output_path=None):
 
     """
     Next we collect the names and ids of all of the regions.
-    Since our json data is a tree we can walk through it in arecursive manner.
+    Since our json data is a tree we can walk through it in a recursive manner.
     Thus starting from the root...
     """
     root = jsonDict['msg'][0]
@@ -747,7 +745,7 @@ def generate_region_graph(token, points_path, output_path=None):
     print "Total number of unique ID's:"
     print numRegionsASpecific  ## number of regions
 
-    # Store and count the bright regions in each unique region (new)
+    # Store and count the bright regions in each unique region
     dictNumElementsRegionSpecific = {}
     num_points_by_region_dict = {}
 
@@ -770,7 +768,7 @@ def generate_region_graph(token, points_path, output_path=None):
 
     from itertools import izip
 
-    with open(token + 'specific_counts.csv', 'wb') as write:
+    with open(token + '_specific_counts.csv', 'wb') as write:
         writer = csv.writer(write)
         writer.writerows(izip(region_names, number_repetitions))
 
@@ -778,8 +776,23 @@ def generate_region_graph(token, points_path, output_path=None):
 
     region_dict = OrderedDict()
 
+    for l in specificRegionsNP:
+        if str(l[3]) in ccf.keys():
+            trace = ccf[str(l[3])]
+            # trace = 'trace' + str(l[3])
+            if trace not in region_dict:
+                region_dict[trace] = np.array([[l[0], l[1], l[2], l[3]]])
+                # print 'yay'
+            else:
+                tmp = np.array([[l[0], l[1], l[2], l[3]]])
+                region_dict[trace] = np.concatenate((region_dict.get(trace, np.zeros((1, 4))), tmp), axis=0)
+                # print 'nay'
+    
     current_palette = sns.color_palette("husl", numRegionsA)
     # print current_palette
+    
+    print "key length:"
+    print len(region_dict.keys());
 
     data = []
     for i, key in enumerate(region_dict):
@@ -916,9 +929,14 @@ def generate_scaled_centroids_graph(token, points_path, unique_list, output_path
 
     # Find all unique regions of brightest points (new)
     uniqueFromSpecific = [];
+    final_specific_list = [];
 
     for l in specificRegions:
         uniqueFromSpecific.append(l[3])
+    
+    for l in sort:
+        if l[3] in uniqueFromSpecific:
+            final_specific_list.append(l)
 
     # Convert to numpy and save specific lengths
     uniqueSpecificNP = np.asarray(uniqueFromSpecific)
@@ -927,7 +945,7 @@ def generate_scaled_centroids_graph(token, points_path, unique_list, output_path
     specificRegionsNP = np.asarray(specificRegions)
 
     print "Total number of unique ID's:"
-    print numRegionsASpecific  ## number of regions
+    print numRegionsASpecific  ## number of specific regions
 
     # Save a copy of this sorted/specific csv in the points folder
     if not os.path.exists('points'):
@@ -937,16 +955,18 @@ def generate_scaled_centroids_graph(token, points_path, unique_list, output_path
     np.savetxt('points/' + str(token) + '_regions_sorted_specific.csv', specificRegionsNP, fmt='%d', delimiter=',')
     
     # Find the centroids of each region
-    sorted_regions = np.sort(unique_list);
+    sorted_regions = np.sort(allUniqueSpecific);
 
     current_region = sorted_regions[0];
+    
     i = 0;
     x = [];
     y = [];
     z = [];
     centroids = {};
+    regions_dict = {};
 
-    for row in specificRegionsNP:
+    for row in final_specific_list:
         if row[3] == current_region:
             # Append x, y, z to appropiate list
             x.append(row[0]);
@@ -969,6 +989,13 @@ def generate_scaled_centroids_graph(token, points_path, unique_list, output_path
     # Store last region averages also!
     centroids[current_region] = [np.average(x), np.average(y), np.average(z), len(x)];
     
+    print "length keys:"
+    print len(centroids.keys());
+    
+    # Save a copy of the dictionary as a pickle.
+    with open(token + '_centroids_dict.pickle', 'wb') as handle:
+        pickle.dump(centroids, handle, protocol=pickle.HIGHEST_PROTOCOL)
+    
     trace = [];
     for l in specificRegionsNP:
         if str(l[3]) in ccf.keys():
@@ -976,13 +1003,16 @@ def generate_scaled_centroids_graph(token, points_path, unique_list, output_path
     
     # Set color pallete to number of specific regions
     current_palette = sns.color_palette("husl", numRegionsA)
+    
     i = 0;
 
     data = [];
     
     for key in centroids.keys():
         if str(key) not in ccf.keys():
-            print key
+            print "Not found in ara3 leaf nodes: " + str(key);
+            i = i + 1;
+            
         else:
             current_values_list = centroids[key];
 
@@ -1004,7 +1034,7 @@ def generate_scaled_centroids_graph(token, points_path, unique_list, output_path
             )
 
             data.append(trace_scatter)
-        i = i + 1;
+            i = i + 1;
 
     layout = Layout(
         margin=dict(
