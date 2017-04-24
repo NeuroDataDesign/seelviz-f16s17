@@ -639,9 +639,13 @@ def generate_region_graph(token, points_path, output_path=None):
     matplotlib.rc('font', **font)
 
     #     points_path = 'Fear199_regions.csv'
-    thedata = np.genfromtxt(points_path, dtype=int, delimiter=',')
+    thedata = np.genfromtxt(points_path,
+        delimiter=',', dtype='int', usecols = (0,1,2,4), names=['a','b','c', 'region'])
     # deleting the brightness column
-    thedata = np.delete(thedata, [3], axis=1)
+    #thedata = np.delete(thedata, [3], axis=1)
+    
+    # Sort the csv file by the last column (by order = 'region') using ndarray.sort
+    sort = np.sort(thedata, order = 'region');
 
     # Set tupleResolution to resolution input parameter
     #     tupleResolution = resolution;
@@ -660,7 +664,7 @@ def generate_region_graph(token, points_path, output_path=None):
     
     Note the change of ontology_id$eq27 to ontology_id$eq1 to get the brain atlas.
     """
-    ccf_txt = 'latest_ccf3_csv.csv'
+    ccf_txt = 'natureCCFOhedited.csv'
 
     ccf = {}
     with open(ccf_txt, 'rU') as csvfile:
@@ -675,7 +679,7 @@ def generate_region_graph(token, points_path, output_path=None):
     """Save counts for each region into a separate CSV"""
     unique = [];
 
-    for l in thedata:
+    for l in sort:
         unique.append(l[3])
 
     uniqueNP = np.asarray(unique)
@@ -724,7 +728,7 @@ def generate_region_graph(token, points_path, output_path=None):
     ## Store most specific data
     specificRegions = [];
 
-    for l in thedata:
+    for l in sort:
         if l[3] in leafList:
             specificRegions.append(l)
 
@@ -773,18 +777,6 @@ def generate_region_graph(token, points_path, output_path=None):
     specificRegionsNP = np.asarray(specificRegions)
 
     region_dict = OrderedDict()
-
-    for l in specificRegionsNP:
-        if str(l[3]) in ccf.keys():
-            trace = ccf[str(l[3])]
-            # trace = 'trace' + str(l[3])
-            if trace not in region_dict:
-                region_dict[trace] = np.array([[l[0], l[1], l[2], l[3]]])
-                # print 'yay'
-            else:
-                tmp = np.array([[l[0], l[1], l[2], l[3]]])
-                region_dict[trace] = np.concatenate((region_dict.get(trace, np.zeros((1, 4))), tmp), axis=0)
-                # print 'nay'
 
     current_palette = sns.color_palette("husl", numRegionsA)
     # print current_palette
@@ -835,9 +827,9 @@ def generate_region_graph(token, points_path, output_path=None):
 def generate_scaled_centroids_graph(token, points_path, unique_list, output_path=None):
     """
     Generates the plotly centroid html file with proper scaling of the centroid determined by the number of bright spots from the csv file.
-    :param token: Name of token
-    :param points_path: Filepath to region points csv (AFTER get_regions method).
+    :param points_path: Filepath to points csv.
     :param output_path: Filepath for where to save output html.
+    :param resolution: Resolution for spacing (see openConnecto.me spacing)
     :return:
     """
     
@@ -846,13 +838,103 @@ def generate_scaled_centroids_graph(token, points_path, unique_list, output_path
     thedata = np.genfromtxt(points_path,
         delimiter=',', dtype='int', usecols = (0,1,2,4), names=['a','b','c', 'region'])
     
+    # Save the names of the regions
+    """
+    Load the CSV of the ARA with CCF v3: in order to generate this we use the ARA API.
+    We can download a csv using the following URL:
+    http://api.brain-map.org/api/v2/data/query.csv?criteria=model::Structure,rma::criteria,[ontology_id$eq1],rma::options[order$eq%27structures.graph_order%27][num_rows$eqall]
+    
+    Note the change of ontology_id$eq27 to ontology_id$eq1 to get the brain atlas.
+    """
+    ccf_txt = 'natureCCFOhedited.csv'
+
+    ccf = {}
+    with open(ccf_txt, 'rU') as csvfile:
+        csvreader = csv.reader(csvfile)
+        for row in csvreader:
+            # row[0] is ccf atlas index, row[4] is string of full name
+            ccf[row[0]] = row[4];
+    
     # Sort the csv file by the last column (by order = 'region') using ndarray.sort
     sort = np.sort(thedata, order = 'region');
+    
+    # Save the unique counts
+    unique = [];
 
-    # Save a copy of this sorted csv in the points folder
+    for l in sort:
+        unique.append(l[3])
+
+    uniqueNP = np.asarray(unique)
+    allUnique = np.unique(uniqueNP)
+    numRegionsA = len(allUnique)
+    
+    """
+    First we download annotation ontology from Allen Brain Atlas API.
+    It returns a JSON tree in which larger parent structures are divided into smaller children regions.
+    For example the "corpus callosum" parent is has children "corpus callosum, anterior forceps", "genu of corpus callosum", "corpus callosum, body", etc
+    """
+
+    url = "http://api.brain-map.org/api/v2/structure_graph_download/1.json"
+    jsonRaw = requests.get(url).content
+    jsonDict = json.loads(jsonRaw)
+
+    """
+    Next we collect the names and ids of all of the regions.
+    Since our json data is a tree we can walk through it in arecursive manner.
+    Thus starting from the root...
+    """
+    root = jsonDict['msg'][0]
+    """
+    ...we define a recursive function ...
+    """
+
+    leafList = []
+
+    def getChildrenNames(parent, childrenNames={}):
+        if len(parent['children']) == 0:
+            leafList.append(parent['id'])
+
+        for childIndex in range(len(parent['children'])):
+            child = parent['children'][childIndex]
+            childrenNames[child['id']] = child['name']
+
+            childrenNames = getChildrenNames(child, childrenNames)
+        return childrenNames
+
+    """
+    ... and collect all of the region names in a dictionary with the "id" field as keys.
+    """
+
+    regionDict = getChildrenNames(root)
+
+    # Store most specific data
+    specificRegions = [];
+
+    for l in sort:
+        if l[3] in leafList:
+            specificRegions.append(l)
+
+    # Find all unique regions of brightest points (new)
+    uniqueFromSpecific = [];
+
+    for l in specificRegions:
+        uniqueFromSpecific.append(l[3])
+
+    # Convert to numpy and save specific lengths
+    uniqueSpecificNP = np.asarray(uniqueFromSpecific)
+    allUniqueSpecific = np.unique(uniqueSpecificNP)
+    numRegionsASpecific = len(allUniqueSpecific)
+    specificRegionsNP = np.asarray(specificRegions)
+
+    print "Total number of unique ID's:"
+    print numRegionsASpecific  ## number of regions
+
+    # Save a copy of this sorted/specific csv in the points folder
     if not os.path.exists('points'):
         os.makedirs('points')
+        
     np.savetxt('points/' + str(token) + '_regions_sorted.csv', sort, fmt='%d', delimiter=',')
+    np.savetxt('points/' + str(token) + '_regions_sorted_specific.csv', specificRegionsNP, fmt='%d', delimiter=',')
     
     # Find the centroids of each region
     sorted_regions = np.sort(unique_list);
@@ -864,7 +946,7 @@ def generate_scaled_centroids_graph(token, points_path, unique_list, output_path
     z = [];
     centroids = {};
 
-    for row in sort:
+    for row in specificRegionsNP:
         if row[3] == current_region:
             # Append x, y, z to appropiate list
             x.append(row[0]);
@@ -887,31 +969,41 @@ def generate_scaled_centroids_graph(token, points_path, unique_list, output_path
     # Store last region averages also!
     centroids[current_region] = [np.average(x), np.average(y), np.average(z), len(x)];
     
-    current_palette = sns.color_palette("husl", len(sorted_regions))
+    trace = [];
+    for l in specificRegionsNP:
+        if str(l[3]) in ccf.keys():
+            trace = ccf[str(l[3])]
+    
+    # Set color pallete to number of specific regions
+    current_palette = sns.color_palette("husl", numRegionsA)
     i = 0;
 
     data = [];
-    for key in sorted_regions:
-        current_values_list = centroids[key];
+    
+    for key in centroids.keys():
+        if str(key) not in ccf.keys():
+            print key
+        else:
+            current_values_list = centroids[key];
 
-        tmp_col = current_palette[i];
-        tmp_col_lit = 'rgb' + str(tmp_col);
+            tmp_col = current_palette[i];
+            tmp_col_lit = 'rgb' + str(tmp_col);
 
-        trace_scatter = Scatter3d(
-            x = [current_values_list[0]],
-            y = [current_values_list[1]],
-            z = [current_values_list[2]],
-            mode = 'markers',
-            name = key,
-            marker = dict(
-                size= np.divide(float(current_values_list[3]), 10000) * 100,
-                color = tmp_col_lit,     # set color to an array/list of desired values
-                colorscale = 'Viridis',  # choose a colorscale
-                opacity = 0.5
+            trace_scatter = Scatter3d(
+                x = [current_values_list[0]],
+                y = [current_values_list[1]],
+                z = [current_values_list[2]],
+                mode = 'markers',
+                name = ccf[str(key)],
+                marker = dict(
+                    size= np.divide(float(current_values_list[3]), 10000) * 500,
+                    color = tmp_col_lit,     # set color to an array/list of desired values
+                    colorscale = 'Viridis',  # choose a colorscale
+                    opacity = 0.5
+                )
             )
-        )
 
-        data.append(trace_scatter)
+            data.append(trace_scatter)
         i = i + 1;
 
     layout = Layout(
