@@ -49,10 +49,13 @@ RUN groupadd -r seelviz && useradd -r -m -g seelviz clv-user -d /home/
 # RUN export WORKON_HOME=~/Envs
 # RUN /bin/bash -c "source /usr/local/bin/virtualenvwrapper.sh && mkvirtualenv clv-env && workon clv-env"
 
-# Installing ndio
+# Installing ndio (for now it has to be a specific commit)
 WORKDIR "/home/ndio"
+RUN git fetch origin e0c2ae7cb9266408755b9e23e6a096f9895451d6:refs/remotes/origin/foo-commit
+RUN git checkout origin/foo-commit
+RUN pip install .
 # RUN pip install .
-RUN pip install --target /usr/local/lib/python2.7/dist-packages .
+# RUN pip install --target /usr/local/lib/python2.7/dist-packages .
 
 # Installing ndreg
 WORKDIR "/home/ndreg"
@@ -84,9 +87,9 @@ RUN cp -r ~/.jupyter .
 
 RUN echo "alias jn='jupyter notebook --allow-root'" > ~/.bashrc
 
-RUN chmod -R 777 /home \ 
-	&& chmod 777 /usr/local/bin/virtualenvwrapper.sh
-RUN mkdir clv-user
+# RUN chmod -R 777 /home \ 
+	# && chmod 777 /usr/local/bin/virtualenvwrapper.sh
+# RUN mkdir clv-user
 WORKDIR /root
 # USER clv-user
 # WORKDIR /home/clv-user
