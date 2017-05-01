@@ -197,12 +197,27 @@ def generate_FSL_and_DTK_structure_tensor(img_data, filename, dogsigmaArr=[1], g
     :return tensorfsl: TensorFSL format of structure tensor (upper triangular matrix)
     :return tensordtk: TensorDTK format of structure tensor (upper triangular matrix)
     """
+    
+    # Helper function similar to MATLAB
+    def cropvol(vol, sz):
+        print np.size(vol);
+        vol[0:sz, :, :, :] = 0;
+        vol[-1-sz+1:-1, :, :, :] = 0;
+
+        vol[:, 0:sz, :, :] = 0;
+        vol[:, -1-sz+1:-1, :, :] = 0;
+
+        vol[:, :, 0:sz, :] = 0;
+        vol[:, :, -1-sz+1:-1, :] = 0;
+        return vol;
+    
     for ii in range(len(dogsigmaArr)):
         dogsigma = dogsigmaArr[ii];
         print "Start DoG Sigma on " + str(dogsigma);
 
         # Generate dog kernels
         dogkercc = doggen([dogsigma, dogsigma, dogsigma]);
+        dogkercc.astype('float32');
         dogkercc = np.transpose(dogkercc, (0, 2, 1));  # annoying
 
         #print dogkercc.shape;
@@ -217,44 +232,47 @@ def generate_FSL_and_DTK_structure_tensor(img_data, filename, dogsigmaArr=[1], g
 
         for jj in range(len(gausigmaArr)):
             gausigma = gausigmaArr[jj];
-  
+
             print "Start Gauss Sigma with gausigma = " + str(gausigma);
 
             print "Generating Gaussian kernel..."
             gaussker = np.single(gaussgen([gausigma, gausigma, gausigma]));
 
             # Generate half size kernel
-            #halfsz = (np.max(len(dogkercc[0]), len(gaussker[0])) + 1) / 2;
+            halfsz = (max(len(dogkercc), len(gaussker)) + 1) / 2;
 
             # Compute gradients
-            grr = signal.convolve(img_data, dogkerrr, 'same');
+            grr = signal.convolve((img_data).astype('float64'), dogkerrr.astype('float64'), 'same');
+            grr.astype('float64');
 
             #print grr[:, :, 0];
 
-            gcc = signal.convolve(img_data, dogkercc, 'same');
+            gcc = signal.convolve(img_data.astype('float64'), dogkercc.astype('float64'), 'same');
+            gcc.astype('float64');
 
             #print gcc[:, :, 0];
 
-            gzz = signal.convolve(img_data, dogkerzz, 'same');
+            gzz = signal.convolve(img_data.astype('float64'), dogkerzz.astype('float64'), 'same');
+            gzz.astype('float64');
 
             #print gzz[:, :, 0];
 
             # Compute gradient products
-            gprrrr = np.multiply(grr, grr);
+            gprrrr = np.multiply(grr.astype('float64'), grr.astype('float64'));
 
             #print gprrrr[:, :, 0];
 
-            gprrcc = np.multiply(grr, gcc);
+            gprrcc = np.multiply(grr.astype('float64'), gcc.astype('float64'));
 
             #print gprrcc[:, :, 0];
 
-            gprrzz = np.multiply(grr, gzz);
+            gprrzz = np.multiply(grr.astype('float64'), gzz.astype('float64'));
 
             #print gprrzz[:, :, 0]
 
-            gpcccc = np.multiply(gcc, gcc);
-            gpcczz = np.multiply(gcc, gzz);
-            gpzzzz = np.multiply(gzz, gzz);
+            gpcccc = np.multiply(gcc.astype('float64'), gcc.astype('float64'));
+            gpcczz = np.multiply(gcc.astype('float64'), gzz.astype('float64'));
+            gpzzzz = np.multiply(gzz.astype('float64'), gzz.astype('float64'));
 
             # Compute gradient amplitudes
             # print ga.dtype;
@@ -273,9 +291,9 @@ def generate_FSL_and_DTK_structure_tensor(img_data, filename, dogsigmaArr=[1], g
 
             # Compute gradient vectors
             gv = np.concatenate((grr[..., np.newaxis], gcc[..., np.newaxis], gzz[..., np.newaxis]), axis = 3);
-            
+
             #print gv[:, :, 0, 0];
-            
+
             gv = np.divide(gv, np.tile(ga[..., None], [1, 1, 1, 3]));
             #print gv[:, :, 0, 1];
 
@@ -291,18 +309,18 @@ def generate_FSL_and_DTK_structure_tensor(img_data, filename, dogsigmaArr=[1], g
             #print gaussker[:, :, 0];
 
             print "Blurring gradient products..."
-            gprrrrgauss = signal.convolve(gprrrr, gaussker, "same");
-            
+            gprrrrgauss = signal.convolve(gprrrr.astype('float64'), gaussker.astype('float64'), "same");
+
             #print gprrrrgauss[:, :, 0];
-            
-            gprrccgauss = signal.convolve(gprrcc, gaussker, "same");
-            
+
+            gprrccgauss = signal.convolve(gprrcc.astype('float64'), gaussker.astype('float64'), "same");
+
             #print gprrccgauss[:, :, 0];
-            
-            gprrzzgauss = signal.convolve(gprrzz, gaussker, "same");
-            gpccccgauss = signal.convolve(gpcccc, gaussker, "same");
-            gpcczzgauss = signal.convolve(gpcczz, gaussker, "same");
-            gpzzzzgauss = signal.convolve(gpzzzz, gaussker, "same");
+
+            gprrzzgauss = signal.convolve(gprrzz.astype('float64'), gaussker.astype('float64'), "same");
+            gpccccgauss = signal.convolve(gpcccc.astype('float64'), gaussker.astype('float64'), "same");
+            gpcczzgauss = signal.convolve(gpcczz.astype('float64'), gaussker.astype('float64'), "same");
+            gpzzzzgauss = signal.convolve(gpzzzz.astype('float64'), gaussker.astype('float64'), "same");
 
             print "Saving a copy for this Gaussian sigma..."
             tensorfsl = np.concatenate((gprrrrgauss[..., np.newaxis], gprrccgauss[..., np.newaxis], gprrzzgauss[..., np.newaxis], gpccccgauss[..., np.newaxis], gpcczzgauss[..., np.newaxis], gpzzzzgauss[..., np.newaxis]), axis = 3);
@@ -310,11 +328,11 @@ def generate_FSL_and_DTK_structure_tensor(img_data, filename, dogsigmaArr=[1], g
             tensordtk = np.concatenate((gprrrrgauss[..., np.newaxis], gprrccgauss[..., np.newaxis], gpccccgauss[..., np.newaxis], gprrzzgauss[..., np.newaxis], gpcczzgauss[..., np.newaxis], gpzzzzgauss[..., np.newaxis]), axis = 3);
 
              # Convert numpy ndarray object to Nifti data type
-            tensor_fsl_data = nib.Nifti1Image(tensorfsl, affine=np.eye(4));
-            tensor_dtk_data = nib.Nifti1Image(tensordtk, affine=np.eye(4));
+            tensor_fsl_data = nib.Nifti1Image(cropvol(tensorfsl, halfsz), affine=np.eye(4));
+            tensor_dtk_data = nib.Nifti1Image(cropvol(tensordtk, halfsz), affine=np.eye(4));
 
-            nib.save(tensor_fsl_data, str(filename) + "dogsigma_" + str(ii) + "gausigma_" + str(jj) + 'tensorfsl.nii.gz');
-            nib.save(tensor_dtk_data, str(filename) + "dogsigma_" + str(ii) + "gausigma_" + str(jj) + 'tensordtk.nii.gz');
+            nib.save(tensor_fsl_data, str(filename) + "dogsigma_" + str(dogsigma) + "gausigma_" + str(gausigma) + 'tensorfsl.nii.gz');
+            nib.save(tensor_dtk_data, str(filename) + "dogsigma_" + str(dogsigma) + "gausigma_" + str(gausigma) + 'tensordtk.nii.gz');
 
     print 'Completed computing structure tensor on ' + str(filename) + '!'
     return tensorfsl, tensordtk
