@@ -20,3 +20,7 @@ With newest python script ->
 
 
 ![](https://github.com/NeuroDataDesign/seelviz/blob/gh-pages/AlbertImages/tractnewest.png)
+
+Last python iteration ->
+
+![](
