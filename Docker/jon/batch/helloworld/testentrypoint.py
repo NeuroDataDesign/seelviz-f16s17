@@ -13,7 +13,7 @@ if __name__ == "__main__":
     s3.download_file(bucket, data, data)
     with open(data, "r") as f:
         outputFile = open("testdataoutput.txt", "w")
-        outputFile.write(str(f.readline()) + " and I say hello.")
+        outputFile.write(str(f.readline()) + "\nArguments received.")
         outputFile.close()
     key = "testdataoutput.txt"
     s3.upload_file("testdataoutput.txt", bucket, key)

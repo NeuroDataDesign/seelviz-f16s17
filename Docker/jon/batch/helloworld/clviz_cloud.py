@@ -6,6 +6,9 @@ from argparse import ArgumentParser
 import csv
 import sys
 
+# run with:
+# python clviz_cloud.py --bucket jliu118-test --credentials rootkey.csv --data test.txt
+
 sys.path.insert(0, '../')
 
 

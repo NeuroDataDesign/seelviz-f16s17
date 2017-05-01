@@ -6,6 +6,9 @@ from argparse import ArgumentParser
 import csv
 import sys
 
+# run with:
+# python clviz_cloud.py --bucket jliu118-test --credentials ../rootkey.csv --data arguments.txt
+
 sys.path.insert(0, '../')
 
 
@@ -17,7 +20,7 @@ def uploadS3(bucket, data, public_access_key, secret_access_key):
 def submitJob(bucket, data, public_access_key, secret_access_key, myJobName):
     batch = boto3.client('batch', aws_access_key_id=public_access_key, aws_secret_access_key=secret_access_key, region_name='us-east-1')
     myJobQueue = 'testqueue'
-    myJobDefinition = 'testdefinition'
+    myJobDefinition = 'uploadtest'
     myCommandOverride = [bucket, data]
     myEnvironmentOverride = [{'name': 'AWS_ACCESS_KEY_ID', 'value': public_access_key},
                              {'name': 'AWS_SECRET_ACCESS_KEY', 'value': secret_access_key},
@@ -54,7 +57,7 @@ def main():
         rowcounter = rowcounter + 1
 
     uploadS3(bucket, data, public_access_key, secret_access_key)
-    response = submitJob(bucket, data, public_access_key, secret_access_key, "testjob")
+    response = submitJob(bucket, data, public_access_key, secret_access_key, "uploadtest")
 
     jobId = response['jobId']
     print("JobID = " + jobId)
