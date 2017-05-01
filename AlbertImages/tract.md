@@ -15,3 +15,8 @@ With matlab code ->
 
 
 ![](https://github.com/NeuroDataDesign/seelviz/blob/gh-pages/AlbertImages/tractideal.png)
+
+With newest python script ->
+
+
+![](https://github.com/NeuroDataDesign/seelviz/blob/gh-pages/AlbertImages/tractnewest.png)
