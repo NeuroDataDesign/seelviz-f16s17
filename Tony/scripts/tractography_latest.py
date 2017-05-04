@@ -118,15 +118,19 @@ def tiff_stack_to_array(input_path):
     :return: Numpy array of tiff stack.
     """
     im_list = [];
+    file_list = [];
     for filename in os.listdir(input_path):
         if filename.endswith(".tiff") or filename.endswith(".tif"):
-            # print(os.path.join(directory, filename))
-            im_arr = tiff_to_array(input_path, filename)
-            im_list.append(im_arr)
-        
+            file_list.append(filename);
+
+    sorted_file_list = sorted(file_list);
+
+    for image in sorted_file_list:
+        im_arr = tiff_to_array(input_path, image)
+        im_list.append(im_arr)
+
     s = np.stack(im_list, axis=2)
-    print s.shape
-    return s
+    return s;
 
 def tiff_stack_to_nii(input_path, filesave):
     """
@@ -139,9 +143,14 @@ def tiff_stack_to_nii(input_path, filesave):
     :param filesave: Name to save the nifti stack as
     """
     im_list = [];
+    file_list = [];
     for filename in os.listdir(input_path):
         if filename.endswith(".tiff") or filename.endswith(".tif"):
-            # print(os.path.join(directory, filename))
+            file_list.append(filename);
+    
+    sorted_file_list = sorted(file_list);
+    
+    for image in sorted_file_list:
             im_arr = tiff_to_array(input_path, filename)
             im_list.append(im_arr)
         
