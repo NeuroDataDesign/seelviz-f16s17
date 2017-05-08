@@ -1,3 +1,4 @@
 *.nii
 *.img
 rootkey.csv
+nohup.out

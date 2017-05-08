@@ -25,51 +25,42 @@ RUN cmake -G "Unix Makefiles" -DITK_USE_SYSTEM_FFTW=OFF -DITK_USE_FFTWD=ON -DITK
 RUN make && make install
 
 # pip installing stuff 
-RUN yes | pip install --upgrade pip \
-	&& yes | pip install numpy scipy matplotlib pandas sympy nose \
-	&& yes | pip install SimpleITK nibabel scikit-image plotly networkx \
-	&& yes | pip install virtualenv virtualenvwrapper \
-	&& Yes | pip install jupyter notebook
+RUN yes | pip install --upgrade pip
 # NOTE: ndio used to be here, but now we install from source
+RUN yes | pip install SimpleITK nibabel scikit-image pandas plotly networkx
 # Installing Jupyter Notebook (still need to edit the config file after)
-
-RUN yes | pip install -U scikit-learn
-RUN yes | pip install --upgrade awscli
-RUN yes | pip install boto3
-# WORKDIR "/home"
-# RUN git clone https://github.com/alee156/clviz.git
-# WORKDIR "/home/clviz"
-# RUN bash opencv-docker.sh
-# RUN pip install -r requirements.txt
+RUN yes | pip install jupyter notebook
 
 WORKDIR "/home"
-# RUN git clone https://github.com/jonl1096/clvizdjango.git
-RUN git clone https://github.com/neurodata/ndio.git
-RUN git clone https://github.com/neurodata/ndreg.git
+RUN git clone https://github.com/alee156/clviz.git
+WORKDIR "/home/clviz"
+RUN bash opencv-docker.sh
+RUN pip install -r requirements.txt
 
-RUN groupadd -r seelviz && useradd -r -m -g seelviz clv-user -d /home/
+WORKDIR "/home"
+RUN git clone https://github.com/jonl1096/clvizdjango.git \
+	&& git clone https://github.com/neurodata/ndio.git \
+	&& git clone https://github.com/neurodata/ndreg.git
 
-# RUN export WORKON_HOME=~/Envs
-# RUN /bin/bash -c "source /usr/local/bin/virtualenvwrapper.sh && mkvirtualenv clv-env && workon clv-env"
+# RUN groupadd -r seelviz && useradd -r -m -g seelviz clv-user -d /home/
+# USER clv-user
 
-# Installing ndio (for now it has to be a specific commit)
+# Installing ndreg
+WORKDIR "/home/ndreg"
+RUN git pull
+RUN cmake . \
+	&& make \
+	&& make install
+# RUN yes Y | ldconfig
+
+# Installing ndio
 WORKDIR "/home/ndio"
 RUN git fetch origin e0c2ae7cb9266408755b9e23e6a096f9895451d6:refs/remotes/origin/foo-commit
 RUN git checkout origin/foo-commit
 RUN pip install .
-# RUN pip install .
-# RUN pip install --target /usr/local/lib/python2.7/dist-packages .
+# python execute.py --token s275_to_ara3 --resolution 5
 
-# Installing ndreg
-WORKDIR "/home/ndreg"
-RUN yes Y | cmake . \
-	&& yes Y | make \
-	&& yes Y | make install install_root=wherever
-	# && yes Y | ldconfig
-# && ./configure --prefix=/usr/local/lib/python2.7/dist-packages \
-# RUN yes Y | ldconfig 
-# DESTDIR="/usr/local/lib/python2.7/dist-packages"
-RUN mkdir workspace
+RUN groupadd -r seelviz && useradd -r -m -g seelviz clv-user -d /home/
 
 WORKDIR "/home"
 
@@ -83,18 +74,18 @@ RUN sed -i "1ic.NotebookApp.port = 8080" ~/.jupyter/jupyter_notebook_config.py \
 	&& sed -i "1ic.NotebookApp.ip = '*'" ~/.jupyter/jupyter_notebook_config.py
 RUN cp -r ~/.jupyter .
 
+RUN mkdir clv-user
+
 # RUN chown -R clv-user /home
 # RUN chmod -R 777 /home
-# RUN chown -R clv-user /root/.local
-# RUN chmod -R 777 /root/.local
+
+RUN pip install -U scikit-learn
+RUN pip install clarityviz
+
+WORKDIR /root
+# WORKDIR /home/clv-user
+# USER clv-user
 
 RUN echo "alias jn='jupyter notebook --allow-root'" > ~/.bashrc
-
-# RUN chmod -R 777 /home \ 
-	# && chmod 777 /usr/local/bin/virtualenvwrapper.sh
-# RUN mkdir clv-user
-WORKDIR /root
-# USER clv-user
-# WORKDIR /home/clv-user
 
 ENTRYPOINT ["/bin/bash"]
