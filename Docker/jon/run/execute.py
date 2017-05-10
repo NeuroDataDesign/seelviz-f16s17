@@ -18,13 +18,14 @@ if __name__ == "__main__":
 
     # pushing indicator file to s3
     f = open('file.txt','w')
-    f.write('About to start pipeline')
+    message = 'About to start pipeline for token: ' + token
+    f.write(message)
     f.close()
     key = 'file.txt'
     s3.upload_file('file.txt', bucket, key)
 
     if token != 'test':
-        clv.analysis.run_pipeline(args[0], int(args[1]))
+        clv.analysis.run_pipeline(token, 5)
     else:
         # Run test pipeline that generates dummy html's and to be uploaded
         html_str = """
