@@ -3,8 +3,6 @@ from plotly.graph_objs import *
 from plotly import tools
 import plotly
 
-import csv,gc  # garbage memory collection :)
-
 import numpy as np
 from numpy import linalg as LA
 from sklearn.manifold import spectral_embedding as se
@@ -12,7 +10,6 @@ from sklearn.manifold import spectral_embedding as se
 import re
 import matplotlib
 import seaborn as sns
-
 import networkx as nx
 import math
 
