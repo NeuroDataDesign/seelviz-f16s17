@@ -422,7 +422,7 @@ def generate_pointcloud(points_path, output_path):
         z = [x for x in thedata['c']],
         mode='markers',
         marker=dict(
-            size=1.2,
+            size=3,
             color='cyan',                # set color to an array/list of desired values
             colorscale='Viridis',   # choose a colorscale
             opacity=0.15
