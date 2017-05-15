@@ -1,4 +1,4 @@
-FROM jliu118/clarityviz:super-opencv
+FROM jliu118/clarityviz:anno
 MAINTAINER Jonathan Liu <jliu118@jhu.edu>
 RUN pip install clarityviz
 

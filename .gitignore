@@ -1,4 +1,6 @@
 *.nii
 *.img
 rootkey.csv
+accessKeys.csv
+env_out.json
 nohup.out
