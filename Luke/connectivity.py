@@ -6,6 +6,7 @@ import plotly
 import numpy as np
 from numpy import linalg as LA
 from sklearn.manifold import spectral_embedding as se
+from collections import OrderedDict
 
 import re
 import matplotlib
