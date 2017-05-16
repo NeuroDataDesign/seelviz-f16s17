@@ -11,7 +11,7 @@ import clarityviz as clv
 
 sys.path.insert(0, '../')
 
-def run_pipeline(token, resolution=5, points_path='', regis_path=''):
+def run_pipeline(token, resolution=5, num_points=10000, points_path='', regis_path=''):
     """
     Runs each individual part of the pipeline.
     :param token: Token name for REGISTERED brains in NeuroData.  (https://dev.neurodata.io/nd/ca/public_tokens/)
@@ -20,7 +20,6 @@ def run_pipeline(token, resolution=5, points_path='', regis_path=''):
     :param points_path: The path to the csv of points, skipping downloading, registration, and clahe
     :param regis_path: The path to the nii of the registered brain, skipping downloading.
     """
-    path = ''
     if points_path == '':
         if regis_path == '':
             clv.analysis.get_registered(token)
@@ -28,22 +27,35 @@ def run_pipeline(token, resolution=5, points_path='', regis_path=''):
         else:
             path = regis_path
         im = clv.analysis.apply_clahe(path);
-        output_ds = clv.analysis.downsample(im, num_points=10000);
-        clv.analysis.save_points(output_ds, "points/" + token + ".csv")
-        points_path = "points/" + token + ".csv";
-    clv.analysis.generate_pointcloud(points_path, "output/" + token + "_pointcloud.html");
-    # clv.analysis.get_atlas_annotate(save=True);
-    clv.analysis.get_regions(points_path, "atlas/ara3_annotation.nii", "points/" + token + "_regions.csv");
-    points_region_path = "points/" + token + "_regions.csv";
-    g = clv.analysis.create_graph(points_region_path, output_filename="graphml/" + token + "_graph.graphml");
-    clv.analysis.plot_graphml3d(g, output_path="output/" + token + "_edgegraph.html");
-    clv.analysis.generate_region_graph(token, points_region_path, output_path="output/" + token + "_regions.html");
-    clv.analysis.generate_density_graph(graph_path="graphml/" + token + "_graph.graphml", output_path="output/" + token + "_density.html", plot_title="False-Color Density of " + token);
+        output_ds = clv.analysis.extract_bright_points(im, num_points=num_points);
+        clv.analysis.save_points(output_ds, "points/" + token + "_" + str(num_points) + ".csv")
+        points_path = "points/" + token + "_" + str(num_points) + ".csv";
+
+    # Generating the pointcloud.
+    clv.analysis.generate_pointcloud(points_path, "output/" + token + "_pointcloud_" + str(num_points) + ".html");
+    clv.analysis.get_atlas_annotate(save=True);
+    # Generating the regions csv.
+    clv.analysis.get_regions(points_path, "atlas/ara3_annotation.nii", "points/" + token + "_regions_" + str(num_points) + ".csv");
+    points_region_path = "points/" + token + "_regions_" + str(num_points) + ".csv";
+
+    # Generating the graphml.
+    g = clv.analysis.create_graph(points_region_path, radius=35, output_filename="graphml/" + token + "_graph_" + str(num_points) + ".graphml");
+    # Generating the edge graph.
+    clv.analysis.plot_graphml3d(g, output_path="output/" + token + "_edgegraph_" + str(num_points) + ".html");
+    # Generating the region graph.
+    clv.analysis.generate_region_graph(token, points_region_path, output_path="output/" + token + "_regions_" + str(num_points) + ".html");
+    # Generating the density graph + density heatmap.
+    clv.analysis.generate_density_graph(graph_path="graphml/" + token + "_graph_" + str(num_points) + ".graphml", output_path="output/" + token + "_density_" + str(num_points) + ".html", plot_title="False-Color Density of " + token);
+    # Generating scaled centroids graph.
+    clv.analysis.generate_scaled_centroids_graph(token, points_region_path, output_path='output/' + token + '_centroids_' + str(num_points) + '.html')
+    # Generating the two connectivity things.
+    clv.connectivity.estimate_connectivity("graphml/"+token+"_graph_"+str(num_points)+".graphml", 'output', token, num_points)
     print("Completed pipeline...!")
 
 if __name__ == "__main__":
     bucket = sys.argv[1]
     token = sys.argv[2] # token, if token == 'test' then it runs a test pipeline
+    num_points = sys.argv[3]
     s3 = boto3.client('s3')
 
     # pushing indicator file to s3
@@ -55,7 +67,7 @@ if __name__ == "__main__":
     s3.upload_file('file.txt', bucket, key)
 
     if token != 'test':
-        run_pipeline(token, 5)
+        run_pipeline(token, num_points=num_points)
     else:
         # Run test pipeline that generates dummy html's and to be uploaded
         html_str = """
