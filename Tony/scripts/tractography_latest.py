@@ -1,5 +1,3 @@
-# A Python implementation of Ailey's matlab tensor code.
-
 import os
 import numpy as np
 import math
@@ -9,6 +7,10 @@ import nibabel as nib
 from PIL import Image
 import scipy.misc
 from scipy import signal
+import yt
+import matplotlib.pylab as pl
+from yt.visualization.api import Streamlines
+from mpl_toolkits.mplot3d import Axes3D
 
 def doggen(sigma):
     """
@@ -393,6 +395,7 @@ def plot_rgb(im):
     return fig
 
 
+##  Not sure if working
 def fiber_stream(f):
     test = f
     print len(test)
@@ -415,13 +418,14 @@ def fiber_stream(f):
     fig.savefig('tensor_streamlines.png')
 
 
-def tensor2tract(struct_tensor, is_fsl):
+def tensor2tract(struct_tensor, is_fsl = False):
     if is_fsl:
         tmp = np.copy(struct_tensor[:,:,:,3])
         struct_tensor[:,:,:,3] = struct_tensor[:,:,:,2]
         struct_tensor[:,:,:,2] = tmp
     output = from_lower_triangular(struct_tensor)
-
+    #output = output[300:500, 250:350, 400:800, :, :]
+    
     evals, evecs = decompose_tensor(output)
 
     FA = fractional_anisotropy(evals)
@@ -429,8 +433,8 @@ def tensor2tract(struct_tensor, is_fsl):
     RGB = color_fa(FA, evecs)
     # nb.save(nb.Nifti1Image(np.array(255 * RGB, 'uint8'), result.get_affine()), 'fsl_tensor_rgb_upper.nii.gz')
 
-    affine = result.get_affine()
-    fa = nb.Nifti1Image(np.array(255 * RGB, 'uint8'), affine)
+    #affine = struct_tensor.get_affine()
+    fa = nib.Nifti1Image(np.array(255 * RGB, 'uint8'), affine)
     im = fa.get_data()
 
     fig = plot_rgb(im)
@@ -442,3 +446,14 @@ def tensor2tract(struct_tensor, is_fsl):
     eu = EuDX(FA.astype('f8'), peak_indices, seeds=50000, odf_vertices = sphere.vertices, a_low=0.2)
     tensor_streamlines = [streamline for streamline in eu]
     return tensor_streamlines
+
+#streamlines = fibs
+
+def streamplot(streamlines):
+    fig=pl.figure()
+    ax = Axes3D(fig)
+    for stream in streamlines:
+         #stream = stream[np.all(stream != 0.0, axis=1)]
+         ax.plot3D(stream[:,0], stream[:,1], stream[:,2], alpha=0.1)
+    pl.savefig('streamlines.png')
+    return fig
